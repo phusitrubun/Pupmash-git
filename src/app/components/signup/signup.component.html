@@ -1,0 +1,32 @@
+<app-header2></app-header2>
+<div class="container">
+  <div class="login">
+    <div class="log">Sign Up</div>
+    <div class="avatar-upload">
+      <div class="avatar-edit">
+        <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" (change)="onFileSelected($event)" />
+        <label for="imageUpload"></label>
+      </div>
+      <div class="avatar-preview">
+        <div id="imagePreview" [style.background-image]="'url(' + imageUrl + ')'">
+        </div>
+      </div>
+    </div>
+
+    <div class="input">
+      <input type="text" placeholder="Name" maxlength="20">
+    </div>
+    <div class="input">
+      <input type="email" placeholder="Email" maxlength="30">
+      <input type="password" placeholder="Password" maxlength="20">
+    </div>
+    <div class="bt">
+    <button>Sign Up</button>
+    </div>
+
+    <div class="span">
+      <span class="s1">Or</span>
+      <span class="s2">Sign In</span>
+    </div>
+  </div>
+</div>
