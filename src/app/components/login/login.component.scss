@@ -1,0 +1,84 @@
+// @import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@300&display=swap');
+// *{
+//   font-family: 'M PLUS Rounded 1c', sans-serif;
+// }
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 5vw;
+
+}
+
+.login {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  width: 30vw;
+  height: 70vh;
+  background-color: rgba(254, 250, 169, 0.553);
+  margin-left: 15vw;
+}
+.log{
+  font-size: 3.5vw;
+  margin-bottom: 30px;
+}
+.input{
+  display: flex;
+  flex-direction: column;
+}
+input[type="email"],
+input[type="password"]{
+width: 20vw;
+height: 5vh;
+border-radius: 50px;
+border: none;
+outline: none;
+border: #ffe344 solid 2px;
+text-indent: 30px;
+caret-color: #ffe344;
+color: #000000;
+font-weight: 600;
+margin-top: 20px;
+margin-bottom: 10px;
+}
+button{
+  width: 10vw;
+  height: 5vh;
+  border-radius: 50px;
+  border: none;
+  font-size: 1.5vw;
+  font-weight: 600;
+  margin-top: 20px;
+  background-color: #ffffff;
+  color:#ffe344;
+  transform: 0.3s;
+  cursor: pointer;
+  outline: #ffdf27;
+  border: #ffe344 solid 2px;
+}
+button:hover{
+  border: #ffe344 solid 2px;
+  background-color: #ffe344;
+  color: #ffffff;
+}
+::placeholder{
+  color: #ffe344;
+}
+.span{
+  display: flex;
+  flex-direction: row;
+  margin-top: 30px;
+}
+.s1{
+  font-weight: 500;
+  margin-right: 8px;
+}
+.s2{
+  color: #f8d200;
+  font-weight: 700;
+  text-decoration: underline;
+  cursor: pointer;
+}
