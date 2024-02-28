@@ -7,6 +7,7 @@ import { Main2Component } from './components/main2/main2.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { UserslistComponent } from './components/userslist/userslist.component';
 import { RanksComponent } from './components/ranks/ranks.component';
+import { ChartComponent } from './components/chart/chart.component';
 
 export const routes: Routes = [
   { path: 'main1', component: MainComponent },
@@ -15,6 +16,7 @@ export const routes: Routes = [
   { path: 'signup', component: SignupComponent },
   { path: 'profile', component: ProfileComponent },
   {path: 'userslist', component:UserslistComponent},
-  {path: 'ranks' ,component:RanksComponent}
+  {path: 'ranks' ,component:RanksComponent},
+  {path: 'chart' ,component:ChartComponent}
   
 ];
