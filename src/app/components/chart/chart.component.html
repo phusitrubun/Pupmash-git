@@ -1,0 +1,13 @@
+<app-header3></app-header3>
+
+<div style="width: 80%; height: 75%; margin-left: auto; margin-right: auto; margin-top: 2%; justify-content: center;">
+  <canvas
+    baseChart
+    [type]="'scatter'"
+    [data]="scatterChartData"
+    [options]="scatterChartOptions"
+    [legend]="scatterChartLegend"
+    [plugins]="scatterChartPlugins ? scatterChartPlugins : []"
+  >
+  </canvas>
+</div>
