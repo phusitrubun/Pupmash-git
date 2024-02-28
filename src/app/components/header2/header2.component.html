@@ -1,13 +1,13 @@
 <div class="container">
   <div class="nav">
     <div class="LO">
-      <li class="nav1"><a>Home</a></li>
-      <li class="nav1"><a>Mash</a></li>
-      <li class="nav1"><a>Rank</a></li>
-      <li class="nav1"><img src="../../../assets/Puppy/happy.png" alt="" /></li>
-      <li class="nav1"><a>Graph</a></li>
-      <li class="nav1"><a>Upload</a></li>
-      <li class="nav1"><a>Sign In</a></li>
+      <li class="nav1"routerLink=""><a>Home</a></li>
+      <li class="nav1"routerLink=""><a>Mash</a></li>
+      <li class="nav1"routerLink=""><a>Rank</a></li>
+      <li class="nav1"routerLink=""><img src="../../../assets/Puppy/happy.png" alt="" /></li>
+      <li class="nav1"routerLink=""><a>Graph</a></li>
+      <li class="nav1"routerLink=""><a>Upload</a></li>
+      <li class="nav1"routerLink="/login"><a>Sign In</a></li>
     </div>
     <div class="action">
       <div class="profile" (click)="toggleMenu()">
@@ -17,7 +17,7 @@
       <div class="menu" [ngClass]="{ 'active': isMenuActive }">
           <h3>PUPPY <br> <span>Profile</span></h3>
         <ul style="display: flex; flex-direction: column; justify-content: flex-start;width: -40px;">
-          <li><img src="../../../assets/user (1).png" alt="" /><span>PhusitRubun</span></li>
+          <li routerLink="/profilem" style="cursor: pointer;"><img src="../../../assets/user (1).png" alt="" /><span>PhusitRubun</span></li>
           <li><img src="../../../assets/email.png" alt="" /><span>Phusit&commat;gmail.com</span></li>
         </ul>
       </div>
