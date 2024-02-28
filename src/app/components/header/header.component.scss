@@ -1,5 +1,5 @@
 .container {
-  border: solid red 2px;
+  // border: solid red 2px;
   width: 90%;
   margin: 0 auto;
   // height: 90vh;
@@ -49,8 +49,9 @@ img{
  right: 190px;
 
 }
+
 .action .profile{
-  // position: relative;
+  position: relative;
   width: 60px;
   height: 60px;
   border-radius: 50%;
@@ -59,7 +60,7 @@ img{
   background-color: rgb(255, 208, 0);
 }
 .action .profile img{
-  // position: absolute;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
