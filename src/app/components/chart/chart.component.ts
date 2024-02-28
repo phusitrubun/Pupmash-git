@@ -14,6 +14,7 @@ import { Header3Component } from '../header3/header3.component';
 export class ChartComponent implements OnInit {
   dates: string[] = [];
   ngOnInit(): void {
+    
     // get the last 7 days
     for (let i = 8; i >= 1; i--) {
       const date = new Date();
@@ -276,7 +277,8 @@ export class ChartComponent implements OnInit {
         min: 0.6,
         max: 7.3,
         ticks: {
-          color: '#f0f',
+          // color of date
+          color: '#000',
           font: {
             size: 10,
             weight: 700,
@@ -289,7 +291,8 @@ export class ChartComponent implements OnInit {
       },
       y: {
         ticks: {
-          color: '#f00',
+          // color of score
+          color: '#000',
           font: {
             size: 10,
             weight: 700,
@@ -301,7 +304,7 @@ export class ChartComponent implements OnInit {
       title: {
         display: true,
         text: 'Score vs Date',
-        color: '#fff',
+        color: '#000',
         font: {
           size: 20,
           weight: 700,
