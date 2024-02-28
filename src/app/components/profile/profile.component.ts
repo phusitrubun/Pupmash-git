@@ -1,13 +1,16 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Header3Component } from "../header3/header3.component";
+import { HeaderComponent } from "../header/header.component";
+import { MatIconModule } from '@angular/material/icon';
+import { RouterLink } from '@angular/router';
+
 
 @Component({
     selector: 'app-profile',
     standalone: true,
     templateUrl: './profile.component.html',
     styleUrl: './profile.component.scss',
-    imports: [CommonModule, Header3Component]
+    imports: [CommonModule, HeaderComponent, MatIconModule, RouterLink]
 })
 export class ProfileComponent {
 
