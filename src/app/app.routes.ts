@@ -6,6 +6,7 @@ import { SignupComponent } from './components/signup/signup.component';
 import { Main2Component } from './components/main2/main2.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { UserslistComponent } from './components/userslist/userslist.component';
+import { RanksComponent } from './components/ranks/ranks.component';
 
 export const routes: Routes = [
   { path: 'main1', component: MainComponent },
@@ -13,6 +14,7 @@ export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'profile', component: ProfileComponent },
-  {path: 'userslist', component:UserslistComponent}
+  {path: 'userslist', component:UserslistComponent},
+  {path: 'ranks' ,component:RanksComponent}
   
 ];
