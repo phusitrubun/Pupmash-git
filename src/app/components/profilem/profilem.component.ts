@@ -19,7 +19,6 @@ export class ProfilemComponent {
       this.readURL(file);
     }
   }
- 
   readURL(file: File) {
     const reader = new FileReader();
     reader.onload = (e: any) => {

@@ -14,7 +14,7 @@ import { Header3Component } from '../header3/header3.component';
 export class ChartComponent implements OnInit {
   dates: string[] = [];
   ngOnInit(): void {
-    
+
     // get the last 7 days
     for (let i = 8; i >= 1; i--) {
       const date = new Date();
