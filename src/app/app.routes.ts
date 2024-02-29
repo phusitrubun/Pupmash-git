@@ -1,8 +1,8 @@
 import { Routes } from '@angular/router';
 import { MainComponent } from './components/main/main.component';
 // import { HeaderComponent } from './components/header/header.component';
-import { LoginComponent } from './components/login/login.component';
-import { SignupComponent } from './components/signup/signup.component';
+import { LoginComponent } from './components/authen/login/login.component';
+import { SignupComponent } from './components/authen/signup/signup.component';
 import { Main2Component } from './components/main2/main2.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { UserslistComponent } from './components/userslist/userslist.component';

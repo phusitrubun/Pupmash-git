@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { HeaderComponent } from "../header/header.component";
-import { Header2Component } from "../header2/header2.component";
+import { HeaderComponent } from "../../all-header/header/header.component";
+import { Header2Component } from "../../all-header/header2/header2.component";
 import { RouterLink } from '@angular/router';
 
 @Component({

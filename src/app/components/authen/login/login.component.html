@@ -4,9 +4,9 @@
     <div class="log">Login</div>
     <div class="input">
       <input type="email" placeholder="Email"  maxlength="30" #email>
-      <input type="password" placeholder="Password" maxlength="20" #password>
+      <input type="password" placeholder="Password" maxlength="20" #password (keyup.enter)="userLogin(email.value , password.value)">
     </div>
-    <button type="submit" (click)="userLogin(email.value , password.value)">Login</button>
+    <button type="submit" (click)="userLogin(email.value , password.value)" >Login</button>
     <div class="span">
       <span class="s1">Or</span>
       <span class="s2" routerLink="/signup">Sign Up</span>

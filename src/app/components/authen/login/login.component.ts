@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
-import { HeaderComponent } from "../header/header.component";
-import { UserGetResponse } from '../../model/UserGetResponse';
-import { AuthenService } from '../../services/api/authen.service';
+import { HeaderComponent } from "../../all-header/header/header.component";
+import { UserGetResponse } from '../../../model/UserGetResponse';
+import { AuthenService } from '../../../services/api/authen.service';
 import * as bcrypt from 'bcryptjs';
 
 @Component({
@@ -31,20 +31,18 @@ export class LoginComponent {
                 if (hashPass) {
                     // console.log(true);
                     this.router.navigate(['profile']);
+                    localStorage.setItem('userID', this.user.userID.toString());
                 }
                 else{
                     console.log(false);
-                    
                 }
             }
             else{
                 console.log("Not have user na!");
-                
             }
         }
         else{
             throw console.error();
-            
         }
     }
 

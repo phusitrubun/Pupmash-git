@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgChartsModule } from 'ng2-charts';
 
 import { ChartConfiguration, ChartOptions, PluginChartOptions } from 'chart.js';
-import { Header3Component } from '../header3/header3.component';
+import { Header3Component } from '../all-header/header3/header3.component';
 
 @Component({
   selector: 'app-chart',

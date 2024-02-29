@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { Header3Component } from "../header3/header3.component";
-import { HeaderComponent } from "../header/header.component";
+import { Header3Component } from "../all-header/header3/header3.component";
+import { HeaderComponent } from "../all-header/header/header.component";
 
 @Component({
     selector: 'app-main',
