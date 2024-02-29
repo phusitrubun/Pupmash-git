@@ -8,6 +8,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { UserslistComponent } from './components/userslist/userslist.component';
 import { RanksComponent } from './components/ranks/ranks.component';
 import { ChartComponent } from './components/chart/chart.component';
+import { UploadComponent } from './components/upload/upload.component';
 
 export const routes: Routes = [
   { path: 'main1', component: MainComponent },
@@ -17,6 +18,6 @@ export const routes: Routes = [
   { path: 'profile', component: ProfileComponent },
   {path: 'userslist', component:UserslistComponent},
   {path: 'ranks' ,component:RanksComponent},
-  {path: 'chart' ,component:ChartComponent}
-  
+  {path: 'chart' ,component:ChartComponent},
+  {path: 'upload' ,component:UploadComponent}
 ];
