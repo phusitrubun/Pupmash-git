@@ -8,15 +8,20 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { UserslistComponent } from './components/userslist/userslist.component';
 import { RanksComponent } from './components/ranks/ranks.component';
 import { ChartComponent } from './components/chart/chart.component';
+import { ProfilemComponent } from './components/profilem/profilem.component';
 
 export const routes: Routes = [
   { path: 'main1', component: MainComponent },
   { path: '', component: Main2Component },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
+
   { path: 'profile', component: ProfileComponent },
   {path: 'userslist', component:UserslistComponent},
   {path: 'ranks' ,component:RanksComponent},
-  {path: 'chart' ,component:ChartComponent}
-  
-];
+  {path: 'chart' ,component:ChartComponent},
+  { path: 'profile2', component: ProfilemComponent },
+  { path: 'profile', component:ProfileComponent },
+
+
+]

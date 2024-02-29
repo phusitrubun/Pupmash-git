@@ -1,0 +1,48 @@
+<app-header3></app-header3>
+<div class="container">
+  <div class="pro">
+    <div class="prode" style="width: 40%;">
+      <div class="bio">
+        <div class="avatar-upload">
+          <div class="avatar-edit">
+            <input
+              type="file"
+              id="imageUpload"
+              accept=".png, .jpg, .jpeg"
+              (change)="onFileSelected($event)"
+            />
+            <label for="imageUpload"></label>
+          </div>
+          <div class="avatar-preview">
+            <div
+              id="imagePreview"
+              [style.background-image]="'url(' + imageUrl + ')'"
+            ></div>
+          </div>
+        </div>
+      </div>
+      <div class="man">
+        <textarea class="biode">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur cumque totam,
+            laudantium ut dolores rerum voluptas, dolore illum perspiciatis voluptatum minima numquam necessitatibus
+            nisi est quod. Dicta, corrupti. Cumque, harum? 
+        </textarea>
+      </div>
+    </div>
+    <div class="input" style="width: 50%; ">
+      <div class="allinput">
+        <input type="email" placeholder="Email" />
+      <input type="name" placeholder="Name" />
+      <div class="pass">
+        <input type="text" placeholder="Password" />
+        <input type="text" placeholder="Confirm Password" />
+      </div>
+      <div style="width: 35vw; display: flex; justify-content: flex-end;">
+        <button type="submit">Login</button>
+      </div>
+      </div>
+
+
+    </div>
+  </div>
+</div>
