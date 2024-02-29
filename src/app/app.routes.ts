@@ -10,6 +10,7 @@ import { RanksComponent } from './components/ranks/ranks.component';
 import { ChartComponent } from './components/chart/chart.component';
 import { ProfilemComponent } from './components/profilem/profilem.component';
 import { UploadComponent } from './components/upload/upload.component';
+import { MashComponent } from './components/mash/mash.component';
 
 export const routes: Routes = [
   { path: 'main1', component: MainComponent },
@@ -23,6 +24,7 @@ export const routes: Routes = [
   {path: 'chart' ,component:ChartComponent},
   { path: 'profile2', component: ProfilemComponent },
   { path: 'profile', component:ProfileComponent },
-  {path: 'upload' ,component:UploadComponent}
+  {path: 'upload' ,component:UploadComponent},
+  {path: 'mash' ,component:MashComponent}
 
 ];
