@@ -12,6 +12,6 @@ export const routes: Routes = [
   { path: '', component: Main2Component },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
-  { path: 'profilem', component: ProfilemComponent },
-  { path: 'profile', component:ProfileComponent },
+  { path: 'profile2', component: ProfilemComponent },
+  { path: 'profile', component:ProfileComponent }, 
 ];
