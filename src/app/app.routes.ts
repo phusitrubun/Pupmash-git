@@ -18,12 +18,11 @@ export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
 
-  { path: 'profile', component: ProfileComponent },
+  { path: 'profile/:userid', component: ProfileComponent },
   {path: 'userslist', component:UserslistComponent},
   {path: 'ranks' ,component:RanksComponent},
   {path: 'chart' ,component:ChartComponent},
   { path: 'profile2', component: ProfilemComponent },
-  { path: 'profile', component:ProfileComponent },
   {path: 'upload' ,component:UploadComponent},
   {path: 'mash' ,component:MashComponent}
 

@@ -34,5 +34,7 @@ export class ProfileComponent implements OnInit {
     
     async getUser(id : number){
         this.userprofile = await this.authenService.getUser(id);
+        console.log(this.userprofile);
+        
     }
 }
