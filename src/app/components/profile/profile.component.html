@@ -6,17 +6,17 @@
         <span class="material-symbols-outlined" style="font-size: 5vw;"><img  src="../../../assets/arrow-left.svg" alt=""></span>
       </div>
       <div style="margin-top: -7rem;">
-        <img src="https://t1.blockdit.com/photos/2022/01/61f17400b0d3b7b013b31f0a_800x0xcover_2BeCt6zH.jpg" alt="avater"
-          style="width: 15vw;" class="profileimg">
+        <img src="{{userprofile?.image}}" alt="avater"
+          class="profileimg">
+          <!-- <img src="{{userprofile?.image}}" alt="avater"
+          style="width: 15vw;" class="profileimg"> -->
       </div>
       <div style="margin-left: 1rem; margin-top: 3.5rem;">
         <div class="namefiled" style="display: flex; align-items: center; text-align: center; justify-content: center;">
           <h1>{{userprofile?.name}}</h1>
         </div>
         <div style="background-color: white; width: 40vw; height: 10rem; border-radius: 1.25rem; display: flex; align-items: center; text-align: center; justify-content: center; margin-top: 5%;">
-          <h3 class="descibe">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur cumque totam,
-            laudantium ut dolores rerum voluptas, dolore illum perspiciatis voluptatum minima numquam necessitatibus
-            nisi est quod. Dicta, corrupti. Cumque, harum?</h3>
+          <h3 class="descibe">{{userprofile?.bio}}</h3>
         </div>
       </div>
     </div>
