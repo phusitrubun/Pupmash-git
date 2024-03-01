@@ -47,26 +47,26 @@ export class MashComponent implements OnInit {
 
     console.log(this.loserId);
     console.log(this.winnerId);
-    
+
     this.getImage();
-    
+
   }
 
-  async calculate(winnerId : number, loserId : number){
-        const elo = new Elo();
+  // async calculate(winnerId : number, loserId : number){
+  //       const elo = new Elo();
 
-        const Player1 = await this.mashImageService.getImage(winnerId);
+  //       const Player1 = await this.mashImageService.getImage(winnerId);
 
-        
-        const expectedOutcome = elo.expected(winnerId, loserId);
 
-        
-        const updatedRatings = elo.updateRating(expectedOutcome, 1, winnerId);
+  //       const expectedOutcome = elo.expected(winnerId, loserId);
 
-        // Log the updated ratings
-        console.log('Player 1 new rating:', updatedRatings[0]); 
-        console.log('Player 2 new rating:', updatedRatings[1]); 
-  }
 
-  
+  //       const updatedRatings = elo.updateRating(expectedOutcome, 1, winnerId);
+
+  //       // Log the updated ratings
+  //       console.log('Player 1 new rating:', updatedRatings[0]);
+  //       console.log('Player 2 new rating:', updatedRatings[1]);
+  // }
+
+
 }

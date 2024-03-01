@@ -14,14 +14,14 @@ export class AuthenService {
   public async checkUser(email: string){
     const url = `${this.constants.API_ENDPOINT}authen?email=${email}`;
     const response = await lastValueFrom(this.http.get(url));
-    // console.log(response);
+    console.log(response);
     return response as UserGetResponse;
   }
 
   public async getUser(id : number){
     const url = `${this.constants.API_ENDPOINT}authen/${id}`;
     const response = await lastValueFrom(this.http.get(url));
-    // console.log(response);
+    console.log(response);
     return response as UserGetResponse;
   }
 
