@@ -13,20 +13,22 @@
       </div>
     </div>
 
-    <div class="input">
-      <input type="text" placeholder="Name" maxlength="20">
-    </div>
-    <div class="input">
-      <input type="email" placeholder="Email" maxlength="30">
-      <input type="password" placeholder="Password" maxlength="20">
-    </div>
-    <div class="bt">
-    <button>Sign Up</button>
-    </div>
 
-    <div class="span">
-      <span class="s1">Or</span>
-      <span class="s2" routerLink="/login">Sign In</span>
-    </div>
-  </div>
+   <!-- Test Field -->
+<div class="input">
+  <input type="text" placeholder="Name" maxlength="20" [(ngModel)]="name">
+</div>
+<div class="input">
+  <input type="email" placeholder="Email" maxlength="30" [(ngModel)]="email">
+  <input type="password" placeholder="Password" maxlength="20" [(ngModel)]="password">
+</div>
+<div class="bt">
+  <button (click)="signUp()">Sign Up</button> 
+</div>
+
+<div class="span">
+  <span class="s1">Or</span>
+  <span class="s2" routerLink="/login">Sign In</span>
+</div>
+
 </div>

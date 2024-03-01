@@ -24,4 +24,11 @@ export class AuthenService {
     // console.log(response);
     return response as UserGetResponse;
   }
+
+
+  public async InsertUser(data : any){
+    const url = `${this.constants.API_ENDPOINT}authen`;
+    const response = await lastValueFrom(this.http.post(url, data));
+    return response;
+  }
 }
