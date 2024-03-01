@@ -25,4 +25,14 @@ export class MashImageService {
     
     return response as ImageGetResponse;
   }
+
+  public async calculateElo(winnerId : number , loserId : number){
+    const url = `${this.constants.API_ENDPOINT}mash/elo/${winnerId}/${loserId}`;
+    const response = await lastValueFrom(this.http.put(url, { }));
+    console.log(response);
+
+    return response
+  }
+
+
 }

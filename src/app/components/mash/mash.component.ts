@@ -5,6 +5,7 @@ import { ImageGetResponse } from '../../model/ImageGetResponse';
 import { CommonModule } from '@angular/common';
 import Elo from '@studimax/elo';
 import { AuthenService } from '../../services/api/authen.service';
+import { Times } from '../../model/Times';
 
 
 @Component({
@@ -25,6 +26,8 @@ export class MashComponent implements OnInit {
 
   player1: ImageGetResponse | undefined;
   player2: ImageGetResponse | undefined;
+  lastWinnerId: number = 0;
+  lastWinnerTimestamp : number | undefined;
 
 
   constructor(private mashImageService: MashImageService, private authenService: AuthenService) {}
@@ -49,6 +52,10 @@ export class MashComponent implements OnInit {
 
 
   async winner(winnerId : number) {
+
+    this.lastWinnerId = winnerId;
+    this.lastWinnerTimestamp = Date.now();      
+
     this.loser = this.images.find((image) => image.imageID != winnerId)
     this.winnerId = winnerId;
     this.loserId = this.loser!.imageID;
@@ -58,21 +65,21 @@ export class MashComponent implements OnInit {
 
 
     this.getImage();
-    this.calculate(winnerId, this.loserId);
+    this.mashImageService.calculateElo(this.winnerId, this.loserId);    
 
 }
 
-async calculate(winnerId: number, loserId: number) {
-    const elo = new Elo();
+// async calculate(winnerId: number, loserId: number) {
+//     const elo = new Elo();
 
-    this.player1 = await this.mashImageService.getImage(winnerId);
-    this.player2 = await this.mashImageService.getImage(loserId);
+//     this.player1 = await this.mashImageService.getImage(winnerId);
+//     this.player2 = await this.mashImageService.getImage(loserId);
 
-    const {Ra, Rb} = elo.calculateRating(this.player1.score, this.player2.score, 1);
+//     const {Ra, Rb} = elo.calculateRating(this.player1.score, this.player2.score, 1);
 
-    // Log the updated ratings
-    console.log('Player 1 new rating:', Ra);
-    console.log('Player 2 new rating:', Rb);
-  }
+//     // Log the updated ratings
+//     console.log('Player 1 new rating:', Ra);
+//     console.log('Player 2 new rating:', Rb);
+//   }
 
 }
