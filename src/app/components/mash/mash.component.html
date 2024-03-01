@@ -1,11 +1,12 @@
 <app-header3></app-header3>
-<div class="container">
-  <div class="detail">
+<div class="container" >
+  <div class="detail" >
+
     <div class="m2">
       <div class="m1">
-        <img src="../../../assets/image.jpg" alt="">
+        <img src="{{imageleft?.url}}" alt="imageLefft" (click)="winner(imageleft!.imageID)">
       </div>
-      <span>name</span>
+      <span>{{imageleft?.name}}</span>
     </div>
 
     <div class="or">
@@ -13,10 +14,10 @@
     </div>
     <div class="m2">
       <div class="m1">
-        <img src="../../../assets/image.jpg" alt="">
+        <img src="{{imageRight?.url}}" alt="imageRight" (click)="winner(imageRight!.imageID)">
       </div>
-      <span>name</span>
+      <span>{{imageRight?.name}}</span>
     </div>
-
   </div>
+
 </div>

@@ -31,10 +31,10 @@ export class Header3Component {
     const userIdString = localStorage.getItem('userID');
     if (userIdString) {
       this.id = parseInt(userIdString);
-      console.log('User : ', this.id);
+      // console.log('User : ', this.id);
     }
     this.getUser(this.id);
-    console.log(this.id);
+    // console.log(this.id);
   }
   
   async getUser(id: number) {
