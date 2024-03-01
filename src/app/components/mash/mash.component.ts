@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import Elo from '@studimax/elo';
 import { AuthenService } from '../../services/api/authen.service';
 
+
 @Component({
   selector: 'app-mash',
   standalone: true,
@@ -18,10 +19,13 @@ export class MashComponent implements OnInit {
   imageleft: ImageGetResponse | undefined;
   imageRight: ImageGetResponse | undefined;
   image: ImageGetResponse | undefined;
-
   loser:ImageGetResponse | undefined;
   winnerId : number = 0;
   loserId : number = 0
+
+  player1: ImageGetResponse | undefined;
+  player2: ImageGetResponse | undefined;
+  
 
   constructor(private mashImageService: MashImageService, private authenService: AuthenService) {}
 
@@ -31,7 +35,9 @@ export class MashComponent implements OnInit {
 
   async getImage() {
     this.images = await this.mashImageService.random();
+
     console.log(this.images);
+    
     if (this.images.length > 0) {
       this.image = this.images[0];
       if (this.images.length > 1) {
@@ -40,7 +46,9 @@ export class MashComponent implements OnInit {
       }
     }
   }
-  winner(winnerId : number) {
+
+
+  async winner(winnerId : number) {
     this.loser = this.images.find((image) => image.imageID != winnerId)
     this.winnerId = winnerId;
     this.loserId = this.loser!.imageID;
@@ -48,25 +56,23 @@ export class MashComponent implements OnInit {
     console.log(this.loserId);
     console.log(this.winnerId);
     
-    this.getImage();
     
+    this.getImage();
+    this.calculate(winnerId, this.loserId);
+    
+}
+
+async calculate(winnerId: number, loserId: number) {
+    const elo = new Elo();
+    
+    this.player1 = await this.mashImageService.getImage(winnerId);
+    this.player2 = await this.mashImageService.getImage(loserId);
+    
+    const {Ra, Rb} = elo.calculateRating(this.player1.score, this.player2.score, 1);
+
+    // Log the updated ratings
+    console.log('Player 1 new rating:', Ra);
+    console.log('Player 2 new rating:', Rb);
   }
-
-  async calculate(winnerId : number, loserId : number){
-        const elo = new Elo();
-
-        const Player1 = await this.mashImageService.getImage(winnerId);
-
-        
-        const expectedOutcome = elo.expected(winnerId, loserId);
-
-        
-        const updatedRatings = elo.updateRating(expectedOutcome, 1, winnerId);
-
-        // Log the updated ratings
-        console.log('Player 1 new rating:', updatedRatings[0]); 
-        console.log('Player 2 new rating:', updatedRatings[1]); 
-  }
-
   
 }

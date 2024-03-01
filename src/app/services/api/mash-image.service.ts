@@ -19,9 +19,10 @@ export class MashImageService {
   }
 
   public async getImage(id : number){
-    const url = `${this.constants.API_ENDPOINT}`;
+    const url = `${this.constants.API_ENDPOINT}mash/${id}`;
     const response = await lastValueFrom(this.http.get(url));
-        
+    // console.log(response);
+    
     return response as ImageGetResponse;
   }
 }
