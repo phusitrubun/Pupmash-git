@@ -7,7 +7,11 @@
       <li class="nav1" routerLink=""><img src="../../../assets/Puppy/happy.png" alt="" /></li>
       <li class="nav1" routerLink="/chart"><a>Graph</a></li>
       <li class="nav1" routerLink="/upload"><a>Upload</a></li>
+      
+      <!-- <li class="nav1"  *ngIf="localStorage.getItem('userID')"  routerLink="" (click)="detroyLocalStrorage()"><a>Log Out</a></li> -->
       <li class="nav1" routerLink="" (click)="detroyLocalStrorage()"><a>Log Out</a></li>
+
+
     </div>
     <div class="action">
       <div class="profile" (click)="toggleMenu()">
