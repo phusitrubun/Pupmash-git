@@ -66,6 +66,8 @@ img{
   height: 100%;
   object-fit: cover;
 }
+// .menu{
+// }
 .action .menu{
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
   position: absolute;
@@ -82,6 +84,7 @@ img{
 .action .menu.active{
   visibility: visible;
   opacity: 1;
+
 }
 .action .menu::before{
 content: '';

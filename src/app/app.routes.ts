@@ -13,7 +13,7 @@ import { UploadComponent } from './components/upload/upload.component';
 import { MashComponent } from './components/mash/mash.component';
 
 export const routes: Routes = [
-  { path: '', component: Main2Component },
+  { path: 'main', component: Main2Component },
   { path: 'main1', component: MainComponent },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
