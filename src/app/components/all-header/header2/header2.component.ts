@@ -34,7 +34,7 @@ userId: any;
       console.log('User : ', this.id);
     }
     this.getUser(this.id);
-    console.log(this.id);
+    // console.log(this.id);
   }
 
   async getUser(id: number) {

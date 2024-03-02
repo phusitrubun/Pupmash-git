@@ -6,6 +6,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AuthenService } from '../../../services/api/authen.service';
 import * as bcrypt from "bcryptjs";
+import { UploadImageService } from '../../../services/api/upload-image.service';
+import { lastValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-signup',
@@ -27,31 +29,37 @@ export class SignupComponent implements OnInit {
   password: string = '';
   user: any;
   id: number | undefined;
+  someurl:string = '';
 
-  constructor(private authenService: AuthenService, private router : Router) {}
+  constructor(private authenService: AuthenService, private router : Router, private uploadimageService : UploadImageService) {}
 
   ngOnInit(): void {
-    // console.log(this.imageUrl);
+
     
   }
-
+  
   onFileSelected(event: any) {
     const file = event.target.files[0];
     if (file) {
       this.readURL(file);
     }
   }
-
+  
   readURL(file: File) {
     const reader = new FileReader();
-    reader.onload = (e: any) => {
+    reader.onload = async (e: any) => {
       this.imageUrl = e.target.result;
+      this.someurl =await this.uploadimageService.urlImage(file);
+      // console.log(this.someurl);
+      
     };
-    reader.readAsDataURL(file);  
+    reader.readAsDataURL(file);
   }
-
+  
 
   async signUp() {
+    // console.log(this.imageUrl);
+    
     const dbemail = await this.authenService.checkUser(this.email);
     if (!dbemail) {
         const saltRound = 10;
@@ -60,19 +68,17 @@ export class SignupComponent implements OnInit {
             name: this.name,
             email: this.email,
             password: hashedPassword,
-            image: this.imageUrl,
+            image: this.someurl,
             type: 1,
         };
 
-        // Insert user data into the database
         await this.authenService.InsertUser(data);
 
-        // Fetch the inserted user data to get the user ID
         const user = await this.authenService.checkUser(this.email);
         if (user) {
             const userId = user.userID;
             localStorage.setItem('userID', userId.toString());
-            // Navigate to the profile page using the retrieved user ID
+            
             this.router.navigate(['profile', userId]);
         }
     }

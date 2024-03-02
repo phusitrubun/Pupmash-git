@@ -7,3 +7,7 @@ export interface ImageGetResponse {
     score:      number;
     userID:     number;
 }
+
+export interface URL {
+    file: string;
+}
