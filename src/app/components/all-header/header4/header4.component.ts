@@ -15,13 +15,19 @@ import { AuthenService } from '../../../services/api/authen.service';
 })
 export class Header4Component {
   isMenuActive: boolean = false;
-
+  isSettingMenuActive: boolean = false;
 
   @Output() menuToggle = new EventEmitter<void>();
+  @Output() settingMenuToggle = new EventEmitter<void>();
 
   toggleMenu(): void {
     this.isMenuActive = !this.isMenuActive;
     this.menuToggle.emit();
+  }
+
+  toggleSettingMenu(): void {
+    this.isSettingMenuActive = !this.isSettingMenuActive;
+    this.settingMenuToggle.emit();
   }
 
   user: UserGetResponse | undefined;
