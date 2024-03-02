@@ -9,7 +9,7 @@
       <li class="nav1"routerLink="/upload"><a>Upload</a></li>
       <li class="nav1"routerLink="/login"><a>Sign In</a></li>
     </div>
-    <div class="action">
+    <div class="action" *ngIf="userId">
       <div class="profile" (click)="toggleMenu()">
         <img src="" alt="" />
 
