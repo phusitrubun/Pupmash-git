@@ -77,4 +77,19 @@
     text-align: start;
     color: #81E478;
 }
+.imgrank{
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.imgrank span{
+  background-color: rgb(255, 255, 255);
+  border-radius: 50px;
+  padding: 10px;
+  font-size: 30px;
+  position: relative;
+  margin-top: -30px;
+  font-weight: 700;
 
+}
