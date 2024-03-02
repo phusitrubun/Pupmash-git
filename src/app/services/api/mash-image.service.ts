@@ -11,6 +11,7 @@ export class MashImageService {
 
   constructor(private constants:Constants, private http:HttpClient) { }
 
+  // to random image
   public async random(){
     const url = `${this.constants.API_ENDPOINT}mash/random`;
     const response = await lastValueFrom(this.http.get(url));
@@ -18,6 +19,7 @@ export class MashImageService {
     return response as ImageGetResponse[];
   }
 
+  // getImage
   public async getImage(id : number){
     const url = `${this.constants.API_ENDPOINT}mash/${id}`;
     const response = await lastValueFrom(this.http.get(url));
@@ -26,12 +28,23 @@ export class MashImageService {
     return response as ImageGetResponse;
   }
 
+  // elo calculate
   public async calculateElo(winnerId : number , loserId : number){
     const url = `${this.constants.API_ENDPOINT}mash/elo/${winnerId}/${loserId}`;
     const response = await lastValueFrom(this.http.put(url, { }));
     console.log(response);
 
     return response
+  }
+
+
+  // ranks
+  public async getRanks(){
+    const url = `${this.constants.API_ENDPOINT}mash`;
+    const response = await lastValueFrom(this.http.get(url));
+    console.log(response);
+
+    return response as ImageGetResponse[];
   }
 
 
