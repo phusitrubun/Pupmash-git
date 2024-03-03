@@ -1,96 +1,26 @@
-<app-header3></app-header3>
 <div class="container">
-  <div class="detail">
-    <div class="deta1">
-
-      <div class="avatar-upload"
-        style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
-        <div class="avatar-edit">
-          <input type='file' id="imageUpload1" accept=".png, .jpg, .jpeg"
-            (change)="onFileSelected($event, 'imagePreview1')" />
-          <label for="imageUpload1"></label>
-
+  <div>
+    <div class="popup-container" id="popupContainer" *ngIf="showPopup">
+      <div class="popup">
+        <p>คุณได้เลือกรูปภาพแล้ว คุณต้องการยืนยันการอัปโหลดหรือไม่?</p>
+        <div class="button-container">
+          <button class="confirm-button" (click)="confirmUpload()">ตกลง</button>
+          <button class="cancel-button" (click)="cancelUpload()">ยกเลิก</button>
         </div>
-        <span (click)="deleteImage('imagePreview1')"><i class="fa-solid fa-trash" style="color: white;"></i></span>
-        <div class="avatar-preview" style="margin-bottom: 20px;">
-          <div id="imagePreview1" [style.background-image]="'url(' + imageUrl1 + ')'">
-          </div>
-        </div>
-        <input type="text" placeholder="Name" />
       </div>
-
-      <div class="avatar-upload"
-        style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
-        <div class="avatar-edit">
-          <input type='file' id="imageUpload2" accept=".png, .jpg, .jpeg"
-            (change)="onFileSelected($event, 'imagePreview2')" />
-          <label for="imageUpload2"></label>
-
-        </div>
-        <span (click)="deleteImage('imagePreview2')"><i class="fa-solid fa-trash" style="color: white;"></i></span>
-        <div class="avatar-preview" style="margin-bottom: 20px;">
-          <div id="imagePreview2" [style.background-image]="'url(' + imageUrl2 + ')'">
-          </div>
-        </div>
-        <input type="text" placeholder="Name" />
-      </div>
-
-      <div class="avatar-upload"
-        style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
-        <div class="avatar-edit">
-          <input type='file' id="imageUpload3" accept=".png, .jpg, .jpeg"
-            (change)="onFileSelected($event, 'imagePreview3')" />
-          <label for="imageUpload3"></label>
-
-        </div>
-        <span (click)="deleteImage('imagePreview3')"><i class="fa-solid fa-trash" style="color: white;"></i></span>
-        <div class="avatar-preview" style="margin-bottom: 20px;">
-          <div id="imagePreview3" [style.background-image]="'url(' + imageUrl3 + ')'">
-          </div>
-        </div>
-        <input type="text" placeholder="Name" />
-      </div>
-
-
-
-
     </div>
-    <div class="deta">
-      <div class="avatar-upload"
-        style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
-        <div class="avatar-edit">
-          <input type='file' id="imageUpload4" accept=".png, .jpg, .jpeg"
-            (change)="onFileSelected($event, 'imagePreview4')" />
-          <label for="imageUpload4"></label>
-
-        </div>
-        <span (click)="deleteImage('imagePreview4')"><i class="fa-solid fa-trash" style="color: white;"></i></span>
-        <div class="avatar-preview" style="margin-bottom: 20px;">
-          <div id="imagePreview4" [style.background-image]="'url(' + imageUrl4 + ')'">
-          </div>
+    <div class="detail" style="border: solid; width: 1400px; height: 80vh; display: flex; justify-content: center; align-items: center; flex-wrap: wrap;">
+      <div class="img" *ngFor="let imageUrl of imageUrls">
+        <div class="preview">
+          <span (click)="deleteImage(imageUrl)"><i class="fa-solid fa-trash" style="color: white;"></i></span>
+          <img [src]="imageUrl" alt="Preview Image">
         </div>
         <input type="text" placeholder="Name" />
+        <button *ngIf="showUploadButton" class="confirm" (click)="uploadImage()">Upload Image</button>
       </div>
-      <div class="avatar-upload"
-        style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
-        <div class="avatar-edit">
-          <input type='file' id="imageUpload5" accept=".png, .jpg, .jpeg"
-            (change)="onFileSelected($event, 'imagePreview5')" />
-          <label for="imageUpload5"></label>
-
-        </div>
-        <span (click)="deleteImage('imagePreview5')"><i class="fa-solid fa-trash" style="color: white;"></i></span>
-        <div class="avatar-preview" style="margin-bottom: 20px;">
-          <div id="imagePreview5" [style.background-image]="'url(' + imageUrl5 + ')'">
-          </div>
-        </div>
-        <input type="text" placeholder="Name" />
-      </div>
-
-
     </div>
-
-
-    <button class="button">Upload Image</button>
   </div>
+
+  <input type="file" accept="image/*" #fileInput hidden (change)="previewImages($event)">
+  <button class="button" (click)="fileInput.click()">Upload Image</button>
 </div>
