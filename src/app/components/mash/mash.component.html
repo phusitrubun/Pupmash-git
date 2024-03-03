@@ -4,7 +4,8 @@
 
     <div class="m2">
       <div class="m1">
-        <img [src]="imageleft!.url" alt="imageLeft" (click)="openWinnerDialog(imageleft!.imageID)">
+        <!-- <img [src]="imageleft!.url" alt="imageLeft" (click)="openWinnerDialog(imageleft!.imageID, imageRight!.imageID)"> -->
+        <img src="{{imageleft?.url}}" alt="imageLeft" (click)="openWinnerDialog(imageleft!.imageID, imageRight!.imageID)">
       </div>
       <span>{{imageleft?.name}}</span>
     </div>
@@ -14,9 +15,10 @@
     </div>
     <div class="m2">
       <div class="m1">
-        <img [src]="imageRight!.url" alt="imageRight" (click)="openWinnerDialog(imageRight!.imageID)">
+        <!-- <img [src]="imageRight!.url" alt="imageRight" (click)="openWinnerDialog(imageRight!.imageID, imageleft!.imageID)"> -->
+        <img src="{{imageRight?.url}}"  alt="imageRight" (click)="openWinnerDialog(imageRight!.imageID, imageleft!.imageID)">
       </div>
-      <span>{{imageRight!.name}}</span>
+      <span>{{imageRight?.name}}</span>
     </div>
   </div>
 </div>

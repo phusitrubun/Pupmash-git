@@ -38,7 +38,7 @@ export class MashComponent implements OnInit {
     async getImage() {
       this.images = await this.mashImageService.random();
   
-      console.log(this.images);
+    //   console.log(this.images);
   
       if (this.images.length > 0) {
         this.image = this.images[0];
@@ -64,20 +64,21 @@ export class MashComponent implements OnInit {
   
   
       this.getImage();
-      this.mashImageService.calculateElo(this.winnerId, this.loserId);    
-  
-  }
-  
-   openWinnerDialog(imageID: any) {
-      const dialogRef = this.dialog.open(WinnerDialogComponent, {
-        width: '60vw',
-        height: '60vh',
-        data: { imageID: imageID }
-      });
-  
-      dialogRef.afterClosed().subscribe(result => {
-        console.log('The dialog was closed');
-      });
+      
+    }
+    
+    openWinnerDialog(winnerId : number, loserId: number) {
+        const dialogRef = this.dialog.open(WinnerDialogComponent, {
+            width: '60vw',
+            height: '60vh',
+            data: { winnerId: winnerId , loserId: loserId}
+        });
+        
+        dialogRef.afterClosed().subscribe(result => {
+            console.log('The dialog was closed');
+        });
+        this.getImage();
+        this.mashImageService.calculateElo(winnerId, loserId);    
     }
   }
 
