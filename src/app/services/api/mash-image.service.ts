@@ -31,8 +31,8 @@ export class MashImageService {
   // elo calculate
   public async calculateElo(winnerId : number , loserId : number){
     const url = `${this.constants.API_ENDPOINT}mash/elo/${winnerId}/${loserId}`;
-    const response = await lastValueFrom(this.http.put(url, { }));
-    console.log(response);
+    const response = await lastValueFrom(this.http.put(url, {}));
+    // console.log(response);
 
     return response
   }
@@ -42,10 +42,19 @@ export class MashImageService {
   public async getRanks(){
     const url = `${this.constants.API_ENDPOINT}mash`;
     const response = await lastValueFrom(this.http.get(url));
-    console.log(response);
+    // console.log(response);
 
     return response as ImageGetResponse[];
   }
+
+  // add to vote table
+  public async recordVote(data : any){
+    const url = `${this.constants.API_ENDPOINT}vote`;
+    const response = await lastValueFrom(this.http.put(url, data));
+
+    return response ;
+  }
+
 
 
 }

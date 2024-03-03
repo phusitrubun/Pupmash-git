@@ -3,6 +3,9 @@
         <img src="../../../../assets/crown/Group 87.svg" alt="crown" width="50" style="margin-right: 1rem;">
         <h1>Winner is {{player1?.name}}</h1>
     </div>
+    <div  style="display: grid; place-items: center;">
+        <img src="{{player1?.url}}" alt="winner" style="border-radius: 50rem; width: 15vw; height: 15vw; object-fit: cover; ">
+    </div>
     <div  style="display: grid; place-items: center; margin-top: 0%; flex-direction: column;">
         <h3 style="margin: 0%;">Old Score : {{player1?.score}}</h3>
         <div style="display: flex; flex-direction: row;" *ngIf="diff >= 0; else minus">
@@ -19,6 +22,7 @@
                
     </div>
     <div>
+        <hr style="width: 80%;">
         <div style="margin-left: 2rem; margin-right: auto;">
             <h1>Elo Rating</h1>
             <div>
