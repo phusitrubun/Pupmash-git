@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" *ngIf="!userId">
   <div>
     <div class="popup-container" id="popupContainer" *ngIf="showPopup">
       <div class="popup">
@@ -26,3 +26,7 @@
   <input type="file" accept="image/*" #fileInput hidden (change)="previewImages($event)">
   <button class="button" (click)="fileInput.click()">Upload Image</button>
 </div>
+
+<ng-template #forguest >
+ 
+</ng-template>
