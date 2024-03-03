@@ -18,23 +18,24 @@
         </div>
       </li>
       <li class="nav1">
-        <a>Sign Out</a>
+        <a routerLink="" (click)="detroyLocalStrorage()">Log out</a>
       </li>
     </div>
+    
     <div class="action">
       <div class="profile" (click)="toggleMenu()">
-        <img src="" alt="" />
+        <img src="{{userprofile?.image}}" alt="" />
       </div>
       <div class="menu" [ngClass]="{ 'active': isMenuActive }">
         <h3>PUPPY <br> <span>Profile</span></h3>
         <ul style="display: flex; flex-direction: column; justify-content: flex-start;width: -40px;">
           <li routerLink="/profile2" style="cursor: pointer;">
-            <img src="../../../assets/user (1).png" alt="" />
-            <span>PhusitRubun</span>
+            <img src="{../../../assets/user (1).png}" alt="" />
+            <span>{{userprofile?.name}}</span>
           </li>
           <li>
             <img src="../../../assets/email.png" alt="" />
-            <span>Phusit&commat;gmail.com</span>
+            <span>{{userprofile?.email}}</span>
           </li>
         </ul>
       </div>

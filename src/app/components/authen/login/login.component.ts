@@ -30,8 +30,14 @@ export class LoginComponent {
                 const hashPass = await bcrypt.compare(password, this.user.password);
                 if (hashPass) {
                     // console.log(true);
+                    const type = this.user.type; 
                     localStorage.setItem('userID', this.user.userID.toString());
-                    this.router.navigate(['profile', this.user.userID]);
+                    
+                    if(type == 1){
+                        this.router.navigate(['mash']);
+                    }else{
+                        this.router.navigate(['userslist', this.user.userID]);
+                    }
                 }
                 else{
                     console.log(false);

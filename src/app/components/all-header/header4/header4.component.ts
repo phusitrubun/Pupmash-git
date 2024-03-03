@@ -48,4 +48,9 @@ export class Header4Component {
   async getUser(id: number) {
     this.userprofile = await this.authenService.getUser(id);
   }
+
+  // clear localStroge
+  detroyLocalStrorage() {
+    localStorage.removeItem('userID');
+  }
 }

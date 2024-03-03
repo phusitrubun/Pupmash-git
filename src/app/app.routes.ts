@@ -13,16 +13,16 @@ import { UploadComponent } from './components/upload/upload.component';
 import { MashComponent } from './components/mash/mash.component';
 
 export const routes: Routes = [
-  { path: 'main', component: Main2Component },
+  { path: '', component: Main2Component },
   { path: 'main1', component: MainComponent },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
 
-  { path: 'profile/:userid', component: ProfileComponent },
-  {path: 'userslist', component:UserslistComponent},
+  { path: 'profile/:id', component: ProfileComponent },
   {path: 'ranks' ,component:RanksComponent},
   {path: 'chart' ,component:ChartComponent},
-  { path: 'profile2', component: ProfilemComponent },
+  { path: 'profile2/:userid', component: ProfilemComponent },
+  {path: 'userslist', component:UserslistComponent},
   {path: 'upload' ,component:UploadComponent},
   {path: 'mash' ,component:MashComponent}
 
