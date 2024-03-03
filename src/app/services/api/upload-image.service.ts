@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Constants } from '../../confic/constansts';
 import { HttpClient } from '@angular/common/http';
 import { Observable, catchError, lastValueFrom } from 'rxjs';
-import { URL } from '../../model/ImageGetResponse';
+
 
 @Injectable({
   providedIn: 'root'

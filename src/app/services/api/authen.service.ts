@@ -18,7 +18,7 @@ export class AuthenService {
     return response as UserGetResponse;
   }
 
-  public async getUser(id : number){
+  public async getUser(id : any){
     const url = `${this.constants.API_ENDPOINT}authen/${id}`;
     const response = await lastValueFrom(this.http.get(url));
     // console.log(response);

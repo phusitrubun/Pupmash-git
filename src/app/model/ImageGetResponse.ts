@@ -8,6 +8,17 @@ export interface ImageGetResponse {
     userID:     number;
 }
 
-export interface URL {
-    file: string;
+export interface ImageUserUpload {
+    userID:     number;
+    name:       string;
+    bio:        string;
+    email:      string;
+    password:   string;
+    image:      string;
+    type:       number;
+    imageID:    number;
+    url:        string;
+    updateDate: string;
+    uploadDate: string;
+    score:      number;
 }

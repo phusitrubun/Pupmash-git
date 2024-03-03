@@ -4,89 +4,17 @@
         <div style="margin-left: 5%; margin-top: 5%;">
             <h1>USERS LIST</h1>
             <div style="height: 50vh; overflow-y: scroll;">
-                <div class="listbg" >
+                <div class="listbg"  *ngFor="let user of users">
                     <div class="list">
-                        <img class="profile" src="https://t1.blockdit.com/photos/2022/01/61f17400b0d3b7b013b31f0a_800x0xcover_2BeCt6zH.jpg" alt="picture">
-                        <h2 class="name">Phusitrubn nannnana</h2>                 
+                        <img class="profile" src="{{user.image}}" alt="picture">
+                        <h2 class="name">{{user.name}}</h2>                 
                         <!-- <mat-icon class="icon" fontIcon="person_search"></mat-icon>                     -->
                         <div style="width: 20%; margin-top: 0.5rem;">
-                            <img [routerLink]="['/profile']" class="iconpng" src="../../../assets/user 6.png" alt="icon">
+                            <img [routerLink]="['/profile', user.userID]" class="iconpng" src="../../../assets/user 6.png" alt="icon">
                         </div>
                         
                     </div>
                 </div>
-                <div class="listbg" >
-                    <div class="list">
-                        <img class="profile" src="https://t1.blockdit.com/photos/2022/01/61f17400b0d3b7b013b31f0a_800x0xcover_2BeCt6zH.jpg" alt="picture">
-                        <h2 class="name">Phusitrubn nannnana</h2>                 
-                        <!-- <mat-icon class="icon" fontIcon="person_search"></mat-icon>                     -->
-                        <div style="width: 20%; margin-top: 0.5rem;">
-                            <img [routerLink]="['/profile']" class="iconpng" src="../../../assets/user 6.png" alt="icon">
-                        </div>
-                        
-                    </div>
-                </div>
-                <div class="listbg" >
-                    <div class="list">
-                        <img class="profile" src="https://t1.blockdit.com/photos/2022/01/61f17400b0d3b7b013b31f0a_800x0xcover_2BeCt6zH.jpg" alt="picture">
-                        <h2 class="name">Phusitrubn nannnana</h2>                 
-                        <!-- <mat-icon class="icon" fontIcon="person_search"></mat-icon>                     -->
-                        <div style="width: 20%; margin-top: 0.5rem;">
-                            <img class="iconpng" src="../../../assets/user 6.png" alt="">
-                        </div>
-                    </div>
-                </div>
-                <div class="listbg" >
-                    <div class="list">
-                        <img class="profile" src="https://t1.blockdit.com/photos/2022/01/61f17400b0d3b7b013b31f0a_800x0xcover_2BeCt6zH.jpg" alt="picture">
-                        <h2 class="name">Phusitrubn nannnana</h2>                 
-                        <!-- <mat-icon class="icon" fontIcon="person_search"></mat-icon>                     -->
-                        <div style="width: 20%; margin-top: 0.5rem;">
-                            <img class="iconpng" src="../../../assets/user 6.png" alt="">
-                        </div>
-                    </div>
-                </div>
-                <div class="listbg" >
-                    <div class="list">
-                        <img class="profile" src="https://t1.blockdit.com/photos/2022/01/61f17400b0d3b7b013b31f0a_800x0xcover_2BeCt6zH.jpg" alt="picture">
-                        <h2 class="name">Phusitrubn nannnana</h2>                 
-                        <!-- <mat-icon class="icon" fontIcon="person_search"></mat-icon>                     -->
-                        <div style="width: 20%; margin-top: 0.5rem;">
-                            <img class="iconpng" src="../../../assets/user 6.png" alt="">
-                        </div>
-                    </div>
-                </div>
-                <div class="listbg" >
-                    <div class="list">
-                        <img class="profile" src="https://t1.blockdit.com/photos/2022/01/61f17400b0d3b7b013b31f0a_800x0xcover_2BeCt6zH.jpg" alt="picture">
-                        <h2 class="name">Phusitrubn nannnana</h2>                 
-                        <!-- <mat-icon class="icon" fontIcon="person_search"></mat-icon>                     -->
-                        <div style="width: 20%; margin-top: 0.5rem;">
-                            <img class="iconpng" src="../../../assets/user 6.png" alt="">
-                        </div>
-                    </div>
-                </div>
-                <div class="listbg" >
-                    <div class="list">
-                        <img class="profile" src="https://t1.blockdit.com/photos/2022/01/61f17400b0d3b7b013b31f0a_800x0xcover_2BeCt6zH.jpg" alt="picture">
-                        <h2 class="name">Phusitrubn nannnana</h2>                 
-                        <!-- <mat-icon class="icon" fontIcon="person_search"></mat-icon>                     -->
-                        <div style="width: 20%; margin-top: 0.5rem;">
-                            <img class="iconpng" src="../../../assets/user 6.png" alt="">
-                        </div>
-                    </div>
-                </div>
-                <div class="listbg" >
-                    <div class="list">
-                        <img class="profile" src="https://t1.blockdit.com/photos/2022/01/61f17400b0d3b7b013b31f0a_800x0xcover_2BeCt6zH.jpg" alt="picture">
-                        <h2 class="name">Phusitrubn nannnana</h2>                 
-                        <!-- <mat-icon class="icon" fontIcon="person_search"></mat-icon>                     -->
-                        <div style="width: 20%; margin-top: 0.5rem;">
-                            <img class="iconpng" src="../../../assets/user 6.png" alt="">
-                        </div>
-                    </div>
-                </div>
-                
             </div>
         </div>
     </div>
