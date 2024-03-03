@@ -10,13 +10,15 @@
       </div>
     </div>
     <div class="detail" style="border: solid; width: 1400px; height: 80vh; display: flex; justify-content: center; align-items: center; flex-wrap: wrap;">
-      <div class="img" *ngFor="let imageUrl of imageUrls">
+      <div class="img" *ngFor="let imageUrl of imageUrls;let i = index">
         <div class="preview">
           <span (click)="deleteImage(imageUrl)"><i class="fa-solid fa-trash" style="color: white;"></i></span>
           <img [src]="imageUrl" alt="Preview Image">
         </div>
         <input type="text" placeholder="Name" />
-        <button *ngIf="showUploadButton" class="confirm" (click)="uploadImage()">Upload Image</button>
+        <!-- <button *ngIf="showUploadButton" class="confirm" (click)="uploadImage(i)">Upload Image {{i}}</button> -->
+        <button *ngIf="showUploadButton[i]" class="confirm" (click)="uploadImage(i)">Upload Image {{i}}</button>
+
       </div>
     </div>
   </div>
