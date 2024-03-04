@@ -5,3 +5,10 @@ export interface VoteResponse {
     winner:   number;
     loserID:  number;
 }
+
+export interface StatisticResponse {
+    sid:      number;
+    score:    number;
+    DateTime: string;
+    imageID:  number;
+}
