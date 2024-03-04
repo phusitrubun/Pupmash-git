@@ -14,6 +14,7 @@
   border-radius: 50rem;
   margin-top: 5%;
   object-fit: cover;
+  cursor: pointer;
 }
 
 .Top1 {
@@ -21,7 +22,10 @@
   height: 18vw;
   border-radius: 50rem;
   object-fit: cover;
+  cursor: pointer;
 }
+
+
 
 .lists {
   display: flex;
@@ -29,7 +33,9 @@
   margin-left: auto;
   margin-right: auto;
   width: 35%;
-  margin-top: 0.5%;
+  // margin-top: 0.5%;
+  margin-bottom: 0.5rem;
+
 }
 
 .list {

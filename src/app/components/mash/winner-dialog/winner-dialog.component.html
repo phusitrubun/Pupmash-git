@@ -1,16 +1,17 @@
 <div>
     <div style="display: flex; flex-direction: row; justify-content: center;">
         <img src="../../../../assets/crown/Group 87.svg" alt="crown" width="50" style="margin-right: 1rem;">
-        <h1>Winner is {{player1?.name}}</h1>
+        <h1>Winner is </h1>
+        <h1 style="color: yellow; margin-left: 1rem">{{player1?.name}}</h1>
     </div>
     <div  style="display: grid; place-items: center;">
         <img src="{{player1?.url}}" alt="winner" style="border-radius: 50rem; width: 15vw; height: 15vw; object-fit: cover; ">
     </div>
     <div  style="display: grid; place-items: center; margin-top: 0%; flex-direction: column;">
         <h3 style="margin: 0%;">Old Score : {{player1?.score}}</h3>
-        <div style="display: flex; flex-direction: row;" *ngIf="diff >= 0; else minus">
+        <div style="display: flex; flex-direction: row;" *ngIf="diff <= oldScore; else minus">
             <h3 style="margin: 0%; display: inline;">New Score : {{Ra}}</h3>
-            <h3 style="margin: 0%; display: inline; color: greenyellow;"> + {{diff}}</h3>
+            <h3 style="margin: 0%; display: inline; color: greenyellow; margin-left: 1rem;"> + {{diff}}</h3>
         </div>
         <ng-template #minus >
             <div style="display: flex; flex-direction: row;">
@@ -18,6 +19,7 @@
                 <h3 style="margin: 0%; display: inline; color: red;">{{diff}}</h3>
             </div>
         </ng-template>
+        
         
                
     </div>
@@ -43,11 +45,11 @@
                 
             </div>
             <div style="margin-left: 2rem; display: flex; flex-direction: row;">
-                <p>Winner Score: {{player1?.score}} + K(1 - {{Ea}})  = {{ Ra }}   </p>
+                <p>Winner Score: {{player1?.score}} + 32(1 - {{Ea}})  = {{ Ra }}   </p>
                 <p style="font-weight: bold;">(New Rating !)</p>
             </div>
             <div style="margin-left: 2rem; display: flex; flex-direction: row;">
-                <p>Loser Score: {{player2?.score}} + K(1 - {{Eb}}) =  {{ Rb }} </p>
+                <p>Loser Score: {{player2?.score}} + 32(1 - {{Eb}}) =  {{ Rb }} </p>
                 <p style="font-weight: bold;">(New Rating !)</p>   
             </div>
         </div>

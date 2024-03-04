@@ -79,7 +79,7 @@ export class SignupComponent implements OnInit {
             const userId = user.userID;
             localStorage.setItem('userID', userId.toString());
             
-            this.router.navigate(['profile', userId]);
+            this.router.navigate(['mash']);
         }
     }
 }
