@@ -1,13 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { Header3Component } from '../all-header/header3/header3.component';
 import { CommonModule, NgIf } from '@angular/common';
+import { UploadTableImage } from '../../services/api/upload-taimage.service';
+import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-upload',
   standalone: true,
   templateUrl: './upload.component.html',
   styleUrl: './upload.component.scss',
-  imports: [Header3Component, NgIf, CommonModule],
+  imports: [Header3Component, NgIf, CommonModule,FormsModule],
 })
 export class UploadComponent implements OnInit {
   imageUrls: (string | ArrayBuffer)[] = [];
@@ -15,7 +19,10 @@ export class UploadComponent implements OnInit {
   showUploadButton: boolean[] = []; // เริ่มต้นปุ่มไม่แสดง
   index: number = -1;
   userId: any;
-  
+  name: string = '';
+  someurl:string = '';
+  constructor(private uploadtableimage : UploadTableImage,private router:Router,private http:HttpClient){  }
+
   ngOnInit(): void {
     this.userId = localStorage.getItem('userID');
   }
@@ -27,9 +34,13 @@ export class UploadComponent implements OnInit {
       for (let i = 0; i < filesToAdd; i++) {
         const file = files[i];
         const reader = new FileReader();
-        reader.onload = () => {
+        reader.onload =  () => {
+          // this.someurl = this.uploadtableimage.urlImage(file);
+          // console.log(this.someurl);
           this.imageUrls.push(reader.result as string | ArrayBuffer);
           this.showUploadButton[this.index] = true; // เมื่อมีรูปใหม่เพิ่มเข้ามาให้แสดงปุ่ม
+
+
         };
         reader.readAsDataURL(file);
         this.index++;
@@ -42,20 +53,20 @@ export class UploadComponent implements OnInit {
     }
   }
 
-  confirmUpload(): void {
-    // ทำการอัปโหลดรูปภาพต่อไป
-    this.showPopup = false;
-    this.showUploadButton[this.index] = false; // ซ่อนปุ่ม Upload Image
-  }
+  // confirmUpload(): void {
+  //   // ทำการอัปโหลดรูปภาพต่อไป
+  //   this.showPopup = false;
+  //   this.showUploadButton[this.index] = false; // ซ่อนปุ่ม Upload Image
+  // }
 
-  cancelUpload(): void {
-    // ยกเลิกการอัปโหลดรูปภาพที่เพิ่งเลือก
-    this.imageUrls.pop();
-    if (this.imageUrls.length === 0) {
-      this.showUploadButton[this.index] = false; // ถ้าไม่มีรูปใหม่แล้วให้ซ่อนปุ่ม
-    }
-    this.showPopup = false;
-  }
+  // cancelUpload(): void {
+  //   // ยกเลิกการอัปโหลดรูปภาพที่เพิ่งเลือก
+  //   this.imageUrls.pop();
+  //   if (this.imageUrls.length === 0) {
+  //     this.showUploadButton[this.index] = false; // ถ้าไม่มีรูปใหม่แล้วให้ซ่อนปุ่ม
+  //   }
+  //   this.showPopup = false;
+  // }
 
   deleteImage(imageUrl: string | ArrayBuffer): void {
     if (typeof imageUrl === 'string') {
@@ -66,7 +77,7 @@ export class UploadComponent implements OnInit {
     }
   }
 
-  uploadImage(index: number): void {
+  async uploadImage(index: number) {
     console.log(index);
 
     if (confirm('คุณต้องการยืนยันการอัปโหลดหรือไม่?')) {
