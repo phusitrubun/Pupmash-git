@@ -1,3 +1,4 @@
+<app-header3></app-header3>
 <div class="container" >
   <div>
     <div class="popup-container" id="popupContainer" *ngIf="showPopup">
@@ -9,7 +10,7 @@
         </div>
       </div>
     </div>
-    <div class="detail" style="border: solid; width: 1400px; height: 80vh; display: flex; justify-content: center; align-items: center; flex-wrap: wrap;">
+    <div class="detail" style="border: solid; width: 1200px; height: 80vh; display: flex; justify-content: center; align-items: center; flex-wrap: wrap;">
       <div class="img" *ngFor="let imageUrl of imageUrls;let i = index">
         <div class="preview">
           <span (click)="deleteImage(imageUrl)"><i class="fa-solid fa-trash" style="color: white;"></i></span>
@@ -28,5 +29,5 @@
 </div>
 
 <ng-template #forguest >
- 
+
 </ng-template>
