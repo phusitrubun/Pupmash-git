@@ -3,6 +3,7 @@ import { NgChartsModule } from 'ng2-charts';
 
 import { ChartConfiguration, ChartOptions, PluginChartOptions } from 'chart.js';
 import { Header3Component } from '../all-header/header3/header3.component';
+import { MashImageService } from '../../services/api/mash-image.service';
 
 @Component({
   selector: 'app-chart',
@@ -13,10 +14,16 @@ import { Header3Component } from '../all-header/header3/header3.component';
 })
 export class ChartComponent implements OnInit {
   dates: string[] = [];
+  userId: any;
+
+  constructor(private mashImageService: MashImageService){}
   ngOnInit(): void {
+    this.userId = localStorage.getItem('userId');
+
+    // this.Images = this.mashImageService.stattistic();
 
     // get the last 7 days
-    for (let i = 8; i >= 1; i--) {
+    for (let i = 7; i >= 1; i--) {
       const date = new Date();
       date.setDate(date.getDate() - i);
       this.dates.push(date.toDateString());

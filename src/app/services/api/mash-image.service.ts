@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Constants } from '../../confic/constansts';
 import { lastValueFrom } from 'rxjs';
 import { ImageGetResponse } from '../../model/ImageGetResponse';
+import { StatisticResponse } from '../../model/voteResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -31,7 +32,7 @@ export class MashImageService {
   // elo calculate
   public async calculateElo(winnerId : number , loserId : number){
     const url = `${this.constants.API_ENDPOINT}mash/elo/${winnerId}/${loserId}`;
-    const response = await lastValueFrom(this.http.put(url, {}));
+    const response = await lastValueFrom(this.http.post(url, {}));
     // console.log(response);
 
     return response
@@ -47,6 +48,7 @@ export class MashImageService {
     return response as ImageGetResponse[];
   }
 
+
   // add to vote table
   public async recordVote(data : any){
     const url = `${this.constants.API_ENDPOINT}vote`;
@@ -54,6 +56,15 @@ export class MashImageService {
 
     return response ;
   }
+
+  // to statistic
+  public async stattistic(){
+    const url = `${this.constants.API_ENDPOINT}vote/stat`;
+    const response = await lastValueFrom(this.http.get(url));
+
+    return response as StatisticResponse;
+  }
+
 
 
 
