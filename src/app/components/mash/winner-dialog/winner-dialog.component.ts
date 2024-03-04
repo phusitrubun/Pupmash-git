@@ -21,14 +21,12 @@ export class WinnerDialogComponent implements OnInit{
   Rb: number | undefined;
 
   diff : number = 0;
+  oldScore:number = 0;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, private mashImageService: MashImageService){}
   
   
   ngOnInit(): void {
-    console.log(this.data);
-    // this.getImage(this.data.winnerId);
-    // console.log(this.image);
     this.calculate(this.data.winnerId, this.data.loserId);
     
   }
@@ -47,12 +45,11 @@ export class WinnerDialogComponent implements OnInit{
 
     const {Ra, Rb} = elo.calculateRating(this.player1.score, this.player2.score, 1);
 
-    
-    
     this.Ra = Ra; // กำหนดค่า Ra
     this.Rb = Rb; // กำหนดค่า Rb
 
-    this.diff = Math.floor(this.player1.score - this.Ra);
+    this.diff = Math.floor(this.Ra - this.player1.score);
+    this.oldScore = this.player1.score;
     
     this.rating(this.Ra, this.Rb);
     
@@ -67,11 +64,8 @@ export class WinnerDialogComponent implements OnInit{
     this.Ea = 1 / (1 + Math.pow(10, (Rb - Ra) / 400));
     this.Eb = 1 / (1 + Math.pow(10, (Ra - Rb) / 400));
 
-    console.log(this.Ea);
-    console.log(this.Eb);
-    
-    
-    
+    // console.log(this.Ea);
+    // console.log(this.Eb);
   }
 
     

@@ -11,14 +11,14 @@
       <li class="nav1" routerLink="" *ngIf="id" (click)="detroyLocalStrorage()"><a>Log Out</a></li>
     <li class="nav1" *ngIf="!id" routerLink="/signup"><a>Sign Up</a></li>
     </div>
-    <div class="action"  *ngIf="id">
+    <div class="action"  *ngIf="id && !gurstID">
       <div class="profile" (click)="toggleMenu()">
         <img src="{{userprofile?.image}}" alt="" />
       </div>
       <div class="menu" [ngClass]="{ 'active': isMenuActive }">
         <h3>PUPPY <br> <span>Profile</span></h3>
         <ul style="display: flex; flex-direction: column; justify-content: flex-start;width: -40px;">
-          <li routerLink="/profile2" style="cursor: pointer;"><img src="../../../assets/user (1).png"
+          <li routerLink="/profile2/{{userprofile?.userID}}" style="cursor: pointer;"><img src="../../../assets/user (1).png"
               alt="" /><span>{{userprofile?.name}}</span></li>
           <li><img src="../../../assets/email.png" alt="" /><span>{{userprofile?.email}}</span></li>
         </ul>
