@@ -16,7 +16,7 @@ export class WinnerDialogComponent implements OnInit{
   player1: ImageGetResponse | undefined;
   player2: ImageGetResponse | undefined;
   image : ImageGetResponse | undefined;
-
+  
   Ra: number | undefined;
   Rb: number | undefined;
 
@@ -24,17 +24,17 @@ export class WinnerDialogComponent implements OnInit{
   oldScore:number = 0;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, private mashImageService: MashImageService){}
-  
-  
+
+
   ngOnInit(): void {
     this.calculate(this.data.winnerId, this.data.loserId);
-    
+
   }
 
 
   async getImage(id : any){
     this.image = await this.mashImageService.getImage(id);
-    console.log(this.image); 
+    console.log(this.image);
   }
 
   async calculate(winnerId: number, loserId: number) {
@@ -50,9 +50,9 @@ export class WinnerDialogComponent implements OnInit{
 
     this.diff = Math.floor(this.Ra - this.player1.score);
     this.oldScore = this.player1.score;
-    
+
     this.rating(this.Ra, this.Rb);
-    
+
     // console.log("winner score : ", Ra);
     // console.log("loser score : ", Rb);
   }
@@ -68,6 +68,6 @@ export class WinnerDialogComponent implements OnInit{
     // console.log(this.Eb);
   }
 
-    
+
 }
 

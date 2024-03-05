@@ -1,22 +1,14 @@
 <app-header3></app-header3>
 <div class="container" >
   <div>
-    <div class="popup-container" id="popupContainer" *ngIf="showPopup">
-      <div class="popup">
-        <p>คุณได้เลือกรูปภาพแล้ว คุณต้องการยืนยันการอัปโหลดหรือไม่?</p>
-        <div class="button-container">
-          <button class="confirm-button" (click)="confirmUpload()">ตกลง</button>
-          <button class="cancel-button" (click)="cancelUpload()">ยกเลิก</button>
-        </div>
-      </div>
-    </div>
+
     <div class="detail" style="border: solid; width: 1200px; height: 80vh; display: flex; justify-content: center; align-items: center; flex-wrap: wrap;">
       <div class="img" *ngFor="let imageUrl of imageUrls;let i = index">
         <div class="preview">
           <span (click)="deleteImage(imageUrl)"><i class="fa-solid fa-trash" style="color: white;"></i></span>
           <img [src]="imageUrl" alt="Preview Image">
         </div>
-        <input type="text" placeholder="Name" />
+        <input type="text" placeholder="Name" [(ngModel)]="name" />
         <!-- <button *ngIf="showUploadButton" class="confirm" (click)="uploadImage(i)">Upload Image {{i}}</button> -->
         <button *ngIf="showUploadButton[i]" class="confirm" (click)="uploadImage(i)">Upload Image</button>
 
@@ -29,5 +21,13 @@
 </div>
 
 <ng-template #forguest >
-
 </ng-template>
+  <!-- <div class="popup-container" id="popupContainer" *ngIf="showPopup">
+      <div class="popup">
+        <p>คุณได้เลือกรูปภาพแล้ว คุณต้องการยืนยันการอัปโหลดหรือไม่?</p>
+        <div class="button-container">
+          <button class="confirm-button" (click)="confirmUpload()">ตกลง</button>
+          <button class="cancel-button" (click)="cancelUpload()">ยกเลิก</button>
+        </div>
+      </div>
+    </div> -->
