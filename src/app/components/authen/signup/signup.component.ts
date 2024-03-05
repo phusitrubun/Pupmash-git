@@ -29,37 +29,36 @@ export class SignupComponent implements OnInit {
   password: string = '';
   user: any;
   id: number | undefined;
-  someurl:string = '';
+  someurl: any;
 
   constructor(private authenService: AuthenService, private router : Router, private uploadimageService : UploadImageService) {}
 
   ngOnInit(): void {
 
-    
+
   }
-  
+
   onFileSelected(event: any) {
     const file = event.target.files[0];
     if (file) {
       this.readURL(file);
     }
   }
-  
+
   readURL(file: File) {
     const reader = new FileReader();
     reader.onload = async (e: any) => {
       this.imageUrl = e.target.result;
       this.someurl =await this.uploadimageService.urlImage(file);
       // console.log(this.someurl);
-      
+
     };
     reader.readAsDataURL(file);
   }
-  
+
 
   async signUp() {
-    // console.log(this.imageUrl);
-    
+
     const dbemail = await this.authenService.checkUser(this.email);
     if (!dbemail) {
         const saltRound = 10;
@@ -78,10 +77,10 @@ export class SignupComponent implements OnInit {
         if (user) {
             const userId = user.userID;
             localStorage.setItem('userID', userId.toString());
-            
+
             this.router.navigate(['mash']);
         }
     }
-}
+  }
 
 }
