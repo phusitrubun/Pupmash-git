@@ -49,7 +49,7 @@ export class SignupComponent implements OnInit {
     const reader = new FileReader();
     reader.onload = async (e: any) => {
       this.imageUrl = e.target.result;
-      this.someurl =await this.uploadimageService.urlImage(file);
+      this.someurl = await this.uploadimageService.urlImage(file);
       // console.log(this.someurl);
 
     };

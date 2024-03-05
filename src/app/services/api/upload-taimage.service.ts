@@ -11,14 +11,24 @@ import { ImageGetResponse } from "../../model/ImageGetResponse";
 export class UploadTableImage{
 constructor(private constants:Constants,private http:HttpClient){}
 
-public async urlImage(file:ImageGetResponse){
-  // const formData = new FormData();
-  // formData.append('file',file);
+public async urlImage(file : File){
+  const formData = new FormData();
+  formData.append('file', file);
+  // console.log(formData);
 
-  const url = `${this.constants.API_ENDPOINT}uploadimage/uploadim`;
-  // const response :any = await lastValueFrom(this.http.post(url,formData));
+  const url = `${this.constants.API_ENDPOINT}uploadimage/`;
+  const response = await lastValueFrom( this.http.post(url, FormData));
   // console.log(response);
 
-  // return response.file as string;
+  return response;
+
+}
+
+public async uploadDB(data : any){
+  const url = `${this.constants.API_ENDPOINT}uploadimage/uploadDB`;
+  const response = await lastValueFrom(this.http.post(url, data));
+  console.log(response);
+  
+  return response;
 }
 }

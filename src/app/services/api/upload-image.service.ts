@@ -14,7 +14,7 @@ export class UploadImageService {
   public async urlImage(file: File) {
     const formData = new FormData();
     formData.append('file', file);
-    console.log(formData);
+    // console.log(formData);
 
     const url = `${this.constants.API_ENDPOINT}upload/`;
     const response = await lastValueFrom( this.http.post(url, FormData));
