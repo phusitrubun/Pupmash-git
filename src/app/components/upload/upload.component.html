@@ -8,9 +8,9 @@
           <span (click)="deleteImage(imageUrl)"><i class="fa-solid fa-trash" style="color: white;"></i></span>
           <img [src]="imageUrl" alt="Preview Image">
         </div>
-        <input type="text" placeholder="Name" [(ngModel)]="name" />
+        <input  type="text" placeholder="Name" #name />
         <!-- <button *ngIf="showUploadButton" class="confirm" (click)="uploadImage(i)">Upload Image {{i}}</button> -->
-        <button *ngIf="showUploadButton[i]" class="confirm" (click)="uploadImage(i)">Upload Image</button>
+        <button *ngIf="showUploadButton[i]" class="confirm" (click)="uploadImage(i,name)">Upload Image</button>
 
       </div>
     </div>

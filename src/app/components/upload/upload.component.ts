@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { UploadImageService } from '../../services/api/upload-image.service';
 import { UploadTableImage } from '../../services/api/upload-taimage.service';
+import { Keep } from '../../model/ImageGetResponse';
 
 @Component({
   selector: 'app-upload',
@@ -22,15 +23,19 @@ export class UploadComponent implements OnInit {
   userId: any;
   name: string = '';
   someurl: any;
-  files: File [] = [];
+  files: File[] = [];
+  keep: Keep[] = [];
 
   constructor(
     private router: Router,
     private tableUploadImage: UploadTableImage
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.userId = localStorage.getItem('userID');
+    this.keepupload()
+    console.log(this.keep);
+
   }
   async previewImages(event: any): Promise<void> {
     const files = event.target.files;
@@ -45,12 +50,18 @@ export class UploadComponent implements OnInit {
         const reader = new FileReader();
         reader.onload = async () => {
           this.imageUrls.push(reader.result as string | ArrayBuffer);
+          this.index = this.imageUrls.length - 1; // กำหนดค่า index ใหม่
           this.showUploadButton[this.index] = true; // เมื่อมีรูปใหม่เพิ่มเข้ามาให้แสดงปุ่ม
         };
         reader.readAsDataURL(file);
-        this.someurl = await this.tableUploadImage.urlImage(file);
-        console.log(this.someurl);
-        this.index++;
+
+        // ส่งรูปภาพไปยัง Angular service เพื่ออัปโหลดลงใน Firebase Storage
+        await this.tableUploadImage.urlImage(file).then((url: string) => {
+          this.someurl = url;
+        }).catch((error: any) => {
+          console.error('Error uploading image:', error);
+          // Handle error
+        });
       }
       if (files.length > remainingSlots) {
         alert(
@@ -61,24 +72,33 @@ export class UploadComponent implements OnInit {
   }
 
 
-  async uploadImage(index: number) {
-    if (confirm('คุณต้องการยืนยันการอัปโหลดหรือไม่?')) {
-      const data = {
-        url: this.someurl,
-        name: this.name,
-        score: 1000,
-        userID: this.userId,
-      };
-      await this.tableUploadImage.uploadDB(data);
 
-    
-      alert('อัปโหลดไฟล์เรียบร้อยแล้ว');
-      this.showUploadButton[index] = false; // ซ่อนปุ่ม Upload Image ด้วยการเซ็ต showUploadButton ที่ index ให้เป็น false
+  async uploadImage(index: number,name:HTMLInputElement) {
+    if (confirm('คุณต้องการยืนยันการอัปโหลดหรือไม่?')) {
+      if (this.someurl) {
+        const data = {
+          url: this.someurl,
+          name: name.value,
+          score: 1000,
+          userID: this.userId,
+        };
+        await this.tableUploadImage.uploadDB(data).then(() => {
+          alert('อัปโหลดไฟล์เรียบร้อยแล้ว');
+          this.showUploadButton[index] = false;
+        }).catch((error: any) => {
+          console.error('Error uploading image:', error);
+          // Handle error
+          alert('เกิดข้อผิดพลาดในการอัปโหลดไฟล์');
+        });
+      } else {
+        alert('กรุณาเลือกรูปภาพก่อนทำการอัปโหลด');
+      }
     } else {
-      // ถ้าผู้ใช้กดยกเลิก
       alert('การอัปโหลดไฟล์ถูกยกเลิก');
     }
   }
+
+
 
   deleteImage(imageUrl: string | ArrayBuffer): void {
     if (typeof imageUrl === 'string') {
@@ -88,9 +108,14 @@ export class UploadComponent implements OnInit {
       }
     }
   }
-  // confirmUpload(): void {
-}
 
+  async keepupload(){
+this.keep=await this.tableUploadImage.keepupload();
+
+  }
+
+}
+// confirmUpload(): void {
 //   // ทำการอัปโหลดรูปภาพต่อไป
 //   this.showPopup = false;
 //   this.showUploadButton[this.index] = false; // ซ่อนปุ่ม Upload Image
