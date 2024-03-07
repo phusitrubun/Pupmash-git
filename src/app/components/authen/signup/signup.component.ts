@@ -30,6 +30,7 @@ export class SignupComponent implements OnInit {
   user: any;
   id: number | undefined;
   someurl: any;
+  file!: File;
 
   constructor(private authenService: AuthenService, private router : Router, private uploadimageService : UploadImageService) {}
 
@@ -46,15 +47,14 @@ export class SignupComponent implements OnInit {
   }
 
   readURL(file: File) {
+    this.file = file;
     const reader = new FileReader();
     reader.onload = async (e: any) => {
       this.imageUrl = e.target.result;
-      this.someurl = await this.uploadimageService.urlImage(file);
-      // console.log(this.someurl);
-
     };
     reader.readAsDataURL(file);
   }
+
 
 
   async signUp() {
@@ -62,12 +62,13 @@ export class SignupComponent implements OnInit {
     const dbemail = await this.authenService.checkUser(this.email);
     if (!dbemail) {
         const saltRound = 10;
+        this.someurl = await this.uploadimageService.urlImage(this.file);
         const hashedPassword = await bcrypt.hash(this.password, saltRound);
         const data = {
             name: this.name,
             email: this.email,
             password: hashedPassword,
-            image: this.someurl,
+            image: this.someurl.file,
             type: 1,
         };
 
