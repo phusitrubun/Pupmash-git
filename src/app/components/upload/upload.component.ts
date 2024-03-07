@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Header3Component } from '../all-header/header3/header3.component';
 import { CommonModule, NgIf } from '@angular/common';
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+// import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { UploadImageService } from '../../services/api/upload-image.service';
+// import { UploadImageService } from '../../services/api/upload-image.service';
 import { UploadTableImage } from '../../services/api/upload-taimage.service';
-import { Keep } from '../../model/ImageGetResponse';
+import { ImageGetResponse, Keep } from '../../model/ImageGetResponse';
 
 @Component({
   selector: 'app-upload',
@@ -25,6 +25,7 @@ export class UploadComponent implements OnInit {
   someurl: any;
   files: File[] = [];
   keep: Keep[] = [];
+  imagekeep: ImageGetResponse[] = [];
 
   constructor(
     private router: Router,
@@ -110,7 +111,8 @@ export class UploadComponent implements OnInit {
   }
 
   async keepupload(){
-this.keep=await this.tableUploadImage.keepupload();
+    this.imagekeep = await this.tableUploadImage.keepupload();
+    console.log(this.imagekeep);
 
   }
 

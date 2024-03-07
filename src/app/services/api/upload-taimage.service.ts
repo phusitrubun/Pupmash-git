@@ -39,7 +39,7 @@ export class UploadTableImage {
     const url =`${this.constants.API_ENDPOINT}uploadimage/${localStorage.getItem("userID")}`;
     const response = await lastValueFrom(this.http.get(url));
 
-    return response as Keep[];
+    return response as ImageGetResponse[];
   }
 }
 
