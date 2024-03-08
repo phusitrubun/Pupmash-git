@@ -14,19 +14,19 @@
 
       </div>
     </div>
-
+<!--
     <div class="detail" style="border: solid; width: 1200px; height: 80vh; display: flex; justify-content: center; align-items: center; flex-wrap: wrap;">
       <div class="img" *ngFor="let imageUrl of imagekeep">
-        <div class="preview">
+        <div class="preview"> -->
           <!-- <span (click)="deleteImage(imageUrl)"><i class="fa-solid fa-trash" style="color: white;"></i></span> -->
-          <img src="{{imageUrl.url}}" alt="Preview Image">
-        </div>
-        <input  type="text" placeholder="Name" #name />
+          <!-- <img src="{{imageUrl.url}}" alt="Preview Image"> -->
+        <!-- </div> -->
+        <!-- <input  type="text" placeholder="Name" #name /> -->
         <!-- <button *ngIf="showUploadButton" class="confirm" (click)="uploadImage(i)">Upload Image {{i}}</button> -->
         <!-- <button *ngIf="showUploadButton[i]" class="confirm" (click)="uploadImage(i,name)">Upload Image</button> -->
-
+<!--
       </div>
-    </div>
+    </div> -->
   </div>
 
   <input type="file" accept="image/*" #fileInput hidden (change)="previewImages($event)">
