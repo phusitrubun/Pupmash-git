@@ -33,7 +33,7 @@ export class WinnerDialogComponent implements OnInit{
   
   async getImage(id : any){
     this.image = await this.mashImageService.getImage(id);
-    console.log(this.image);
+    // console.log(this.image);
   }
   
   async calculate(winnerId: number, loserId: number) {
@@ -69,7 +69,7 @@ export class WinnerDialogComponent implements OnInit{
   }
   
   async recordStat(winnerId: number, loserId: number, Ra: number, Rb: number){
-    console.log(Ra, Rb);
+    // console.log(Ra, Rb);
     
     let date = new Date();
     date.setHours(date.getHours() + 7);

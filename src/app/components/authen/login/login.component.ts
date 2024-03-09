@@ -36,7 +36,7 @@ export class LoginComponent {
                     if(type == 1){
                         this.router.navigate(['mash']);
                     }else{
-                        this.router.navigate(['userslist', this.user.userID]);
+                        this.router.navigate(['userslist']);
                     }
                 }
                 else{
