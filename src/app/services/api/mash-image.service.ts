@@ -20,12 +20,12 @@ export class MashImageService {
     return response as ImageGetResponse[];
   }
 
-  public async randomexcept(id: any){
-    const url = `${this.constants.API_ENDPOINT}mash/random/:id`;
-    const response = await lastValueFrom(this.http.get(url));
+  // public async randomexcept(id: any){
+  //   const url = `${this.constants.API_ENDPOINT}mash/random/:id`;
+  //   const response = await lastValueFrom(this.http.get(url));
 
-    return response as ImageGetResponse[];
-  }
+  //   return response as ImageGetResponse[];
+  // }
 
   // getImage
   public async getImage(id : number){
@@ -39,7 +39,7 @@ export class MashImageService {
   // elo calculate
   public async calculateElo(winnerId : number , loserId : number){
     const url = `${this.constants.API_ENDPOINT}mash/elo/${winnerId}/${loserId}`;
-    const response = await lastValueFrom(this.http.put(url, {}));
+    const response = await lastValueFrom(this.http.post(url, {}));
     console.log(response);
 
     return response
@@ -59,7 +59,7 @@ export class MashImageService {
   // add to vote table
   public async recordVote(data : any){
     const url = `${this.constants.API_ENDPOINT}vote`;
-    const response = await lastValueFrom(this.http.put(url, data));
+    const response = await lastValueFrom(this.http.post(url, data));
 
     return response ;
   }
@@ -69,7 +69,13 @@ export class MashImageService {
     const url = `${this.constants.API_ENDPOINT}vote/stat/${id}`;
     const response = await lastValueFrom(this.http.get(url));
     // console.log(response);
-    
+    return response;
+  }
+
+  public async recordStat(data : any){
+    const url = `${this.constants.API_ENDPOINT}vote/stat`;
+    const response = await lastValueFrom(this.http.post(url, data));
+    // console.log(response);
     return response;
   }
 

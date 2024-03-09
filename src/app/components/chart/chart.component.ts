@@ -242,9 +242,7 @@ export class ChartComponent implements OnInit {
   public async getImgage() {
     try {
       this.Images = await this.mashImageService.stattistic(this.id);
-      console.log(this.Images); // Optionally log the retrieved data
-      // console.log(this.Images[1].ScoreArray);
-      
+      console.log(this.Images); 
   
       this.updateScatterChartData();
     } catch (error) {
@@ -252,45 +250,50 @@ export class ChartComponent implements OnInit {
     }
   }
   
-  private updateScatterChartData() {
-    // Initialize datasets array
+ private updateScatterChartData() {
     const datasets: { data: { x: number; y: any; }[]; label: any; fill: boolean; tension: number; borderColor: string; backgroundColor: string; pointStyle: HTMLCanvasElement; pointRadius: number; pointHoverRadius: number; showLine: boolean; }[] = [];
   
-    this.Images.forEach((image: { score: any[]; name: any; imageURL: string; ScoreArray: any[] }) => {
-      let scoreArray = image.ScoreArray; 
-  
+    this.Images.forEach((image: { ScoreArray: string; name: any; url: string;}) => {
+      let scoreArray: number[] = JSON.parse(image.ScoreArray);
       console.log(scoreArray);
+      // console.log(typeof(scoreArray));
       
-      // Check if scoreArray is an array
-      if (Array.isArray(scoreArray)) {
-        console.log('Array');
+        if (scoreArray) {
+          const data: { x: number; y: any; }[] = [];
+          for (let index = 7; index >= 0; index--) {
+            const scoreIndex = scoreArray.length - 1 - index; // Calculate the index of the scoreArray in reverse order
+            if (scoreIndex >= 0) {
+                data.push({ x: 7 - index, y: scoreArray[scoreIndex] });
+            }
+        }
         
-        const data: { x: number; y: any; }[] = [];
-        scoreArray.forEach((score, index) => {
-          data.push({ x: index + 1, y: score });
-        });
-  
-        const dataset = {
-          data: data,
-          label: image.name,
-          fill: false,
-          tension: 0.5,
-          borderColor: this.getRandomColor(),
-          backgroundColor: 'rgba(255,0,0,0.3)',
-          pointStyle: this.createCanvas(image.imageURL),
-          pointRadius: 10,
-          pointHoverRadius: 30,
-          showLine: true,
-        };
-        datasets.push(dataset);
-      } else {
-        console.error('Invalid score data for image:', image);
-      }
+
+            const dataset = {
+                data: data,
+                label: image.name,
+                fill: false,
+                tension: 0.5,
+                borderColor: this.getRandomColor(),
+                backgroundColor: 'rgba(255,0,0,0.3)',
+                pointStyle: this.createCanvas( image.url),
+                pointRadius: 10,
+                pointHoverRadius: 30,
+                showLine: true,
+            };
+            
+            datasets.push(dataset); // Push the dataset object once after iterating through all scores
+        } else {
+            console.error('Invalid format for image score data:', image.name, image.ScoreArray);
+            console.log(image);
+        }
     });
   
-    // Update scatterChartData with datasets
+   console.log(datasets);
+   
     this.scatterChartData = { datasets: datasets };
-  }
+}
+
+
   
   
   
