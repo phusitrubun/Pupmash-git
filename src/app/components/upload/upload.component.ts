@@ -1,19 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { Header3Component } from '../all-header/header3/header3.component';
 import { CommonModule, NgIf } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 // import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 // import { UploadImageService } from '../../services/api/upload-image.service';
 import { UploadTableImage } from '../../services/api/upload-taimage.service';
-import { ImageGetResponse, Keep } from '../../model/ImageGetResponse';
+import { ImageGetResponse } from '../../model/ImageGetResponse';
+import { ImageService } from '../../services/api/image.service';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-upload',
   standalone: true,
   templateUrl: './upload.component.html',
   styleUrl: './upload.component.scss',
-  imports: [Header3Component, NgIf, CommonModule, FormsModule],
+  imports: [Header3Component, NgIf, CommonModule, FormsModule, RouterLink, MatProgressSpinnerModule],
 })
 export class UploadComponent implements OnInit {
   imageUrls: (string | ArrayBuffer)[] = [];
@@ -24,20 +26,23 @@ export class UploadComponent implements OnInit {
   name: string = '';
   someurl: any;
   files: File[] = [];
-  keep: Keep[] = [];
+  keep: ImageGetResponse[]  = [];
   imagekeep: ImageGetResponse[] = [];
 
   constructor(
     private router: Router,
-    private tableUploadImage: UploadTableImage
+    private tableUploadImage: UploadTableImage,
+    private imageservice : ImageService
   ) { }
 
   ngOnInit(): void {
     this.userId = localStorage.getItem('userID');
     this.keepupload()
-    console.log(this.keep);
-
+    
   }
+
+  uploading: boolean = false;
+
   async previewImages(event: any): Promise<void> {
     const files = event.target.files;
 
@@ -55,50 +60,61 @@ export class UploadComponent implements OnInit {
           this.showUploadButton[this.index] = true; // เมื่อมีรูปใหม่เพิ่มเข้ามาให้แสดงปุ่ม
         };
         reader.readAsDataURL(file);
+        this.uploading = true;
 
-        // ส่งรูปภาพไปยัง Angular service เพื่ออัปโหลดลงใน Firebase Storage
-        await this.tableUploadImage.urlImage(file).then((url: string) => {
-          this.someurl = url;
-        }).catch((error: any) => {
-          console.error('Error uploading image:', error);
-          // Handle error
-        });
+        console.log(this.index);
+        console.log(this.imagekeep.length + 1);
+        
+        if (this.imagekeep.length + 1 <= 5) {
+          // ส่งรูปภาพไปยัง Angular service เพื่ออัปโหลดลงใน Firebase Storage
+          this.tableUploadImage.urlImage(file).then((url: string) => {
+            this.someurl = url;
+            console.log(this.someurl);
+            
+          }).catch((error: any) => {
+            console.error('Error uploading image:', error);
+          });
+        }
       }
       if (files.length > remainingSlots) {
         alert(
           'ไม่สามารถเพิ่มรูปภาพเพิ่มเติมได้ เนื่องจากคุณมีรูปภาพอยู่แล้วสูงสุด 5 รูป'
         );
       }
+
+      
     }
   }
 
+  
 
-
-  async uploadImage(index: number,name:HTMLInputElement) {
+async uploadImage(index: number, name: HTMLInputElement) {
     if (confirm('คุณต้องการยืนยันการอัปโหลดหรือไม่?')) {
-      if (this.someurl) {
-        const data = {
-          url: this.someurl,
-          name: name.value,
-          score: 1000,
-          userID: this.userId,
-        };
-        await this.tableUploadImage.uploadDB(data).then(() => {
-          alert('อัปโหลดไฟล์เรียบร้อยแล้ว');
-          this.showUploadButton[index] = false;
-        }).catch((error: any) => {
-          console.error('Error uploading image:', error);
-          // Handle error
-          alert('เกิดข้อผิดพลาดในการอัปโหลดไฟล์');
-        });
-      } else {
-        alert('กรุณาเลือกรูปภาพก่อนทำการอัปโหลด');
-      }
+        this.uploading = true; // เริ่มแสดงแถบความคืบหน้า
+        if (this.someurl) {
+          this.uploading = false; // ปิดแถบความคืบหน้า
+            const data = {
+                url: this.someurl,
+                name: name.value,
+                score: 1000,
+                userID: this.userId,
+            };
+            try {
+                await this.tableUploadImage.uploadDB(data);
+                alert('อัปโหลดไฟล์เรียบร้อยแล้ว');
+                this.showUploadButton[index] = false;
+                this.keepupload();
+            } catch (error) {
+                console.error('Error uploading image:', error);
+                // Handle error
+                alert('เกิดข้อผิดพลาดในการอัปโหลดไฟล์');
+            } 
+        } 
     } else {
-      alert('การอัปโหลดไฟล์ถูกยกเลิก');
+        alert('การอัปโหลดไฟล์ถูกยกเลิก');
+        this.uploading = false; // ปิดแถบความคืบหน้า
     }
-  }
-
+}
 
 
   deleteImage(imageUrl: string | ArrayBuffer): void {
@@ -114,7 +130,12 @@ export class UploadComponent implements OnInit {
     this.imagekeep = await this.tableUploadImage.keepupload();
     console.log(this.imagekeep);
 
-  }
+    if (this.imagekeep.length > 0) {
+        this.keep = this.imagekeep;
+        console.log('Keep = >',this.keep);
+    }
+}
+
 
 }
 // confirmUpload(): void {

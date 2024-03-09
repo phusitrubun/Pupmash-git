@@ -1,7 +1,6 @@
 <app-header3></app-header3>
-<div class="container" >
+<div class="container" *ngIf="userId; else forguest" >
   <div>
-
     <div class="detail" style="border: solid; width: 1200px; height: 80vh; display: flex; justify-content: center; align-items: center; flex-wrap: wrap;">
       <div class="img" *ngFor="let imageUrl of imageUrls;let i = index">
         <div class="preview">
@@ -11,36 +10,46 @@
         <input  type="text" placeholder="Name" #name />
         <!-- <button *ngIf="showUploadButton" class="confirm" (click)="uploadImage(i)">Upload Image {{i}}</button> -->
         <button *ngIf="showUploadButton[i]" class="confirm" (click)="uploadImage(i,name)">Upload Image</button>
-
+      </div>
+      
+      <!-- Show images from 'this.keep' -->
+      <mat-progress-spinner *ngIf="uploading" diameter="30" mode="indeterminate"></mat-progress-spinner>
+      <div class="img" *ngFor="let image of keep; let i = index">
+        <div class="preview">
+          <span (click)="deleteImage(this.keep[i].url)"><i class="fa-solid fa-trash" style="color: white;"></i></span>
+          <img [src]="this.keep[i].url" alt="Preview Image">
+        </div>
+        <input type="text" placeholder="Name" [(ngModel)]="this.keep[i].name" />
+        <button class="confirm" disabled>Save edit</button>
       </div>
     </div>
-<!--
-    <div class="detail" style="border: solid; width: 1200px; height: 80vh; display: flex; justify-content: center; align-items: center; flex-wrap: wrap;">
+
+    <!-- <div class="detail" style="border: solid; width: 1200px; height: 80vh; display: flex; justify-content: center; align-items: center; flex-wrap: wrap;">
       <div class="img" *ngFor="let imageUrl of imagekeep">
-        <div class="preview"> -->
-          <!-- <span (click)="deleteImage(imageUrl)"><i class="fa-solid fa-trash" style="color: white;"></i></span> -->
-          <!-- <img src="{{imageUrl.url}}" alt="Preview Image"> -->
-        <!-- </div> -->
-        <!-- <input  type="text" placeholder="Name" #name /> -->
-        <!-- <button *ngIf="showUploadButton" class="confirm" (click)="uploadImage(i)">Upload Image {{i}}</button> -->
-        <!-- <button *ngIf="showUploadButton[i]" class="confirm" (click)="uploadImage(i,name)">Upload Image</button> -->
-<!--
+        <div class="preview">
+          <span (click)="deleteImage(imageUrl)"><i class="fa-solid fa-trash" style="color: white;"></i></span>
+          <img src="{{imageUrl.url}}" alt="Preview Image">
+        </div>
+        <input  type="text" placeholder="Name" #name />
+        <button *ngIf="showUploadButton" class="confirm" (click)="uploadImage(i)">Upload Image {{i}}</button>
+        <button *ngIf="showUploadButton[i]" class="confirm" (click)="uploadImage(i,name)">Upload Image</button>
       </div>
     </div> -->
-  </div>
-
+  
+  </div >
   <input type="file" accept="image/*" #fileInput hidden (change)="previewImages($event)">
-  <button class="button" (click)="fileInput.click()">Upload Image</button>
+  <p>{{this.imagekeep.length}}</p>
+  <button class="button" *ngIf="this.imagekeep.length< 5;" (click)="fileInput.click()">Upload Image</button>
+
+
 </div>
 
 <ng-template #forguest >
+  <div style="display: flex; justify-content: center; align-items: center; height: 80vh;">
+    <div>
+      <h1>Please login to upload</h1>
+      <button class="button" [routerLink]="['/login']">Login</button>
+    </div>
+  </div>
+  
 </ng-template>
-  <!-- <div class="popup-container" id="popupContainer" *ngIf="showPopup">
-      <div class="popup">
-        <p>คุณได้เลือกรูปภาพแล้ว คุณต้องการยืนยันการอัปโหลดหรือไม่?</p>
-        <div class="button-container">
-          <button class="confirm-button" (click)="confirmUpload()">ตกลง</button>
-          <button class="cancel-button" (click)="cancelUpload()">ยกเลิก</button>
-        </div>
-      </div>
-    </div> -->

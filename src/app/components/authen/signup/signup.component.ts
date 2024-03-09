@@ -58,7 +58,6 @@ export class SignupComponent implements OnInit {
 
 
   async signUp() {
-
     const dbemail = await this.authenService.checkUser(this.email);
     if (!dbemail) {
         const saltRound = 10;
