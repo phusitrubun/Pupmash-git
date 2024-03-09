@@ -15,12 +15,18 @@ import { MashImageService } from '../../services/api/mash-image.service';
 export class ChartComponent implements OnInit {
   dates: string[] = [];
   userId: any;
+  id:number = 0;
+  Images: any = '';
 
   constructor(private mashImageService: MashImageService){}
   ngOnInit(): void {
-    this.userId = localStorage.getItem('userId');
-
-    // this.Images = this.mashImageService.stattistic();
+    const userIdString = localStorage.getItem('userID');
+        if (userIdString) {
+            this.id = parseInt(userIdString);
+            console.log("User : ",this.id);
+    
+        }
+        this.getImgage();
 
     // get the last 7 days
     for (let i = 7; i >= 1; i--) {
@@ -228,53 +234,66 @@ export class ChartComponent implements OnInit {
     img.src = src;
     return canvas;
   }
+  
+  // Images: any[] = []; // Initialize Images with an empty array
 
-  Images = [
-    {
-      name: 'bulldog',
-      imageURL: 'https://dooplearn.com/wp-content/uploads/2023/01/pitbull-terrier-007.webp',
-      score: Array.from({ length: 7 }, () => Math.floor(Math.random() * 10000)),
-    },
-    {
-      name: 'samoyed',
-      imageURL: 'https://t1.blockdit.com/photos/2022/01/61f17400b0d3b7b013b31f0a_800x0xcover_2BeCt6zH.jpg',
-      score: Array.from({ length: 7 }, () => Math.floor(Math.random() * 10000)),
-    },
-    {
-      name: 'french-bulldog',
-      imageURL: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQJmk0zj6MyBQ_yjQmBvTyW2gsmmGI95k9UfAWRvomBC0uhts2',
-      score: Array.from({ length: 7 }, () => Math.floor(Math.random() * 10000)),
-    },
-    {
-      name: 'test4',
-      imageURL: 'https://s.isanook.com/ca/0/ud/281/1406195/mayormax1_182115849_324778162.jpg?ip/resize/w728/q80/jpg',
-      score: Array.from({ length: 7 }, () => Math.floor(Math.random() * 10000)),
-    },
-    {
-      name: 'test5',
-      imageURL: 'https://assets-global.website-files.com/61c1522cd03553569e619b01/649bea677ec0e0d990ac1b90_%E0%B8%A3%E0%B8%A7%E0%B8%A1%203%20%E0%B8%AA%E0%B8%B2%E0%B8%A2%E0%B8%9E%E0%B8%B1%E0%B8%99%E0%B8%98%E0%B8%B8%E0%B9%8C%E0%B8%99%E0%B9%89%E0%B8%AD%E0%B8%87%E0%B8%AB%E0%B8%A1%E0%B8%B2%E0%B8%97%E0%B8%B5%E0%B9%88%E0%B9%83%E0%B8%84%E0%B8%A3%20%E0%B9%86%20%E0%B9%80%E0%B8%AB%E0%B9%87%E0%B8%99%E0%B9%80%E0%B8%9B%E0%B9%87%E0%B8%99%E0%B8%95%E0%B9%89%E0%B8%AD%E0%B8%87%E0%B8%AB%E0%B8%A5%E0%B8%87%E0%B8%A3%E0%B8%B1%E0%B8%81-01.jpg',
-      score: Array.from({ length: 7 }, () => Math.floor(Math.random() * 10000)),
+  public scatterChartData: ChartConfiguration<'scatter'>['data'] | undefined;
+
+  public async getImgage() {
+    try {
+      this.Images = await this.mashImageService.stattistic(this.id);
+      console.log(this.Images); // Optionally log the retrieved data
+      // console.log(this.Images[1].ScoreArray);
+      
+  
+      this.updateScatterChartData();
+    } catch (error) {
+      console.error('Error fetching images:', error);
     }
-  ];
-
-  public scatterChartData: ChartConfiguration<'scatter'>['data'] = {
-    datasets: this.Images.map((image) => {
-      return {
-        data: image.score.map((score, index) => {
-          return { x: index + 1, y: score };
-        }),
-        label: image.name,
-        fill: false,
-        tension: 0.5,
-        borderColor: this.getRandomColor(),
-        backgroundColor: 'rgba(255,0,0,0.3)',
-        pointStyle: this.createCanvas(image.imageURL),
-        pointRadius: 10,
-        pointHoverRadius: 30,
-        showLine: true,
-      };
-    }),
-  };
+  }
+  
+  private updateScatterChartData() {
+    // Initialize datasets array
+    const datasets: { data: { x: number; y: any; }[]; label: any; fill: boolean; tension: number; borderColor: string; backgroundColor: string; pointStyle: HTMLCanvasElement; pointRadius: number; pointHoverRadius: number; showLine: boolean; }[] = [];
+  
+    this.Images.forEach((image: { score: any[]; name: any; imageURL: string; ScoreArray: any[] }) => {
+      let scoreArray = image.ScoreArray; 
+  
+      console.log(scoreArray);
+      
+      // Check if scoreArray is an array
+      if (Array.isArray(scoreArray)) {
+        console.log('Array');
+        
+        const data: { x: number; y: any; }[] = [];
+        scoreArray.forEach((score, index) => {
+          data.push({ x: index + 1, y: score });
+        });
+  
+        const dataset = {
+          data: data,
+          label: image.name,
+          fill: false,
+          tension: 0.5,
+          borderColor: this.getRandomColor(),
+          backgroundColor: 'rgba(255,0,0,0.3)',
+          pointStyle: this.createCanvas(image.imageURL),
+          pointRadius: 10,
+          pointHoverRadius: 30,
+          showLine: true,
+        };
+        datasets.push(dataset);
+      } else {
+        console.error('Invalid score data for image:', image);
+      }
+    });
+  
+    // Update scatterChartData with datasets
+    this.scatterChartData = { datasets: datasets };
+  }
+  
+  
+  
 
   public scatterChartOptions: ChartOptions<'scatter'> = {
     responsive: true,
