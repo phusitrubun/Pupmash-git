@@ -7,8 +7,13 @@ export interface VoteResponse {
 }
 
 export interface StatisticResponse {
-    sid:      number;
-    score:    number;
-    DateTime: string;
-    imageID:  number;
+    imageID:    number;
+    url:        string;
+    updateDate: string;
+    uploadDate: string;
+    name:       string;
+    score:      number;
+    userID:     number;
+    ScoreArray: string;
+    Date:       string;
 }

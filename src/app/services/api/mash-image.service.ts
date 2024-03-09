@@ -65,11 +65,12 @@ export class MashImageService {
   }
 
   // to statistic
-  public async stattistic(){
-    const url = `${this.constants.API_ENDPOINT}vote/stat`;
+  public async stattistic(id : number){
+    const url = `${this.constants.API_ENDPOINT}vote/stat/${id}`;
     const response = await lastValueFrom(this.http.get(url));
-
-    return response as StatisticResponse;
+    // console.log(response);
+    
+    return response;
   }
 
 
