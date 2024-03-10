@@ -38,7 +38,7 @@
   
   </div >
   <input type="file" accept="image/*" #fileInput hidden (change)="previewImages($event)">
-  <p>{{this.imagekeep.length}}</p>
+  <!-- <p>{{this.imagekeep.length}}</p>    -->
   <button class="button" *ngIf="this.imagekeep.length< 5;" (click)="fileInput.click()">Upload Image</button>
 
 

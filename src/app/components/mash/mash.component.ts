@@ -125,8 +125,6 @@ export class MashComponent implements OnInit {
       }
       console.log(this.images[0].name , " " , this.images[1].name);
 
-      
-  
   }
   
 

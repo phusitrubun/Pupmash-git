@@ -293,11 +293,6 @@ export class ChartComponent implements OnInit {
     this.scatterChartData = { datasets: datasets };
 }
 
-
-  
-  
-  
-
   public scatterChartOptions: ChartOptions<'scatter'> = {
     responsive: true,
     scales: {

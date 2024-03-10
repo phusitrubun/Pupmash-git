@@ -23,16 +23,14 @@
       </div>
       <div class="man">
         <textarea class="biode">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur cumque totam,
-            laudantium ut dolores rerum voluptas, dolore illum perspiciatis voluptatum minima numquam necessitatibus
-            nisi est quod. Dicta, corrupti. Cumque, harum?
+          {{userprofile?.bio}}
         </textarea>
       </div>
     </div>
     <div class="input" style="width: 50%; ">
       <div class="allinput">
-        <input type="email" placeholder="Email" />
-      <input type="name" placeholder="Name" />
+        <input type="email" placeholder="{{userprofile?.email}}" />
+      <input type="name" placeholder="{{userprofile?.name}}" />
       <div class="pass">
         <input type="text" placeholder="Password" />
         <input type="text" placeholder="Confirm Password" />
