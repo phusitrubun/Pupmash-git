@@ -47,8 +47,12 @@
 <ng-template #forguest >
   <div style="display: flex; justify-content: center; align-items: center; height: 80vh;">
     <div>
-      <h1>Please login to upload</h1>
+      <h1 style="text-align: center;">Please login to upload</h1>
       <button class="button" [routerLink]="['/login']">Login</button>
+      <div style="display: flex; flex-direction: row;">
+          <h3>If you don't have an account, </h3>
+          <h3 style="margin-left: 1rem;"><a routerLink="/signup">click here</a></h3>
+      </div>
     </div>
   </div>
   
