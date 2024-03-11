@@ -70,13 +70,8 @@ export class MashComponent implements OnInit {
   isVoted: boolean = false;
   
   openWinnerDialog(winnerId: number, loserId: number) {
-    // ตรวจสอบว่ารูปนี้ถูกโหวตไปแล้วหรือไม่
-    if (this.votedImageIds.includes(winnerId)) {
-      console.log('You have already voted for this image.');
-    //   this.getImage();
-    }
-    
-    // เพิ่มรหัสรูปภาพที่โหวตไปแล้วลงในอาร์เรย์
+     
+   // เพิ่มรหัสรูปภาพที่โหวตไปแล้วลงในอาร์เรย์
     this.votedImageIds.push(winnerId);
     
     const dialogRef = this.dialog.open(WinnerDialogComponent, {
@@ -99,14 +94,6 @@ export class MashComponent implements OnInit {
       }else{
         this.getImage();
       }
-      
-      setTimeout(() => {
-        this.isVoted = false; // เมื่อครบเวลา 30 วินาที ตั้งค่า flag เป็น false
-        // ขยับ votedImageIds ไปตามจำนวนรูปที่โหวตแล้ว
-        for (let i = 0; i < this.images.length; i++) {
-            this.votedImageIds.shift();
-             }
-        }, 30000);
     
     });
   }

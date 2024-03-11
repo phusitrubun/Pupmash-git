@@ -29,7 +29,7 @@ export class UploadTableImage {
 
   public async uploadDB(data: any) {
     const url = `${this.constants.API_ENDPOINT}uploadimage/uploadDB`;
-    const response = await lastValueFrom(this.http.post<any>(url, data)); // แก้ไขตรงนี้
+    const response = await lastValueFrom(this.http.post(url, data)); // แก้ไขตรงนี้
     console.log(response);
 
     return response;
@@ -40,6 +40,20 @@ export class UploadTableImage {
     const response = await lastValueFrom(this.http.get(url));
 
     return response as ImageGetResponse[];
+  }
+
+  public async deleteImage(id : number){
+    const url = `${this.constants.API_ENDPOINT}uploadimage/delete/${id}`;
+    const response = await lastValueFrom(this.http.put(url, {}));
+    console.log(response);
+    return response;
+  }
+
+  public async editData(data : any){
+    const url = `${this.constants.API_ENDPOINT}uploadimage/edit`;
+    const response = await lastValueFrom(this.http.put(url, data));
+    console.log(response);
+    return response;
   }
 }
 
