@@ -29,8 +29,6 @@ export class UploadImageService {
     }
   }
 
-  // public async GetUserImage(uid: number) {
-  //   const response = await lastValueFrom(this.http.get(`${this.constants.API_ENDPOINT}uploadimage/${uid}`));
-  //   return response as ImageGetResponse[];
-  // }
+  
+
 }

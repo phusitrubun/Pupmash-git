@@ -8,7 +8,8 @@ import { FormsModule } from '@angular/forms';
 import { UploadTableImage } from '../../services/api/upload-taimage.service';
 import { ImageGetResponse } from '../../model/ImageGetResponse';
 import { ImageService } from '../../services/api/image.service';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner'; 
+import { UploadImageService } from '../../services/api/upload-image.service';
 
 @Component({
   selector: 'app-upload',
@@ -28,16 +29,34 @@ export class UploadComponent implements OnInit {
   files: File[] = [];
   keep: ImageGetResponse[]  = [];
   imagekeep: ImageGetResponse[] = [];
+  id : number = 0;
+  guestID: boolean = false;
+  imageID : number = 0;
+  nameEdit :string[] = [];
 
   constructor(
     private router: Router,
     private tableUploadImage: UploadTableImage,
-    private imageservice : ImageService
+    private imageservice : ImageService,
   ) { }
 
   ngOnInit(): void {
-    this.userId = localStorage.getItem('userID');
+    const userIdString = localStorage.getItem('userID');
+    let guestID = false;
+
+    if (userIdString) {
+      console.log('userID String : ', userIdString);
+
+      if (userIdString.length > 5) {
+        guestID = true;
+        console.log('guestID: ', guestID);
+      } else {
+        this.id = parseInt(userIdString);
+      }
+    }
     this.keepupload()
+  console.log(guestID);
+  
     
   }
 
@@ -97,7 +116,7 @@ async uploadImage(index: number, name: HTMLInputElement) {
                 url: this.someurl,
                 name: name.value,
                 score: 1000,
-                userID: this.userId,
+                userID: this.id,
             };
             try {
                 await this.tableUploadImage.uploadDB(data);
@@ -116,24 +135,64 @@ async uploadImage(index: number, name: HTMLInputElement) {
     }
 }
 
-
-  deleteImage(imageUrl: string | ArrayBuffer): void {
-    if (typeof imageUrl === 'string') {
-      this.imageUrls = this.imageUrls.filter((url) => url !== imageUrl);
-      if (this.imageUrls.length === 0) {
-        this.showUploadButton[this.index] = false; // ถ้าไม่มีรูปใหม่แล้วให้ซ่อนปุ่ม
-      }
-    }
+async keepupload(){
+  this.imagekeep = await this.tableUploadImage.keepupload();
+  // console.log(this.imagekeep);
+  
+  if (this.imagekeep.length > 0) {
+    this.keep = this.imagekeep;
+    console.log('Keep = >',this.keep);
   }
+}
 
-  async keepupload(){
-    this.imagekeep = await this.tableUploadImage.keepupload();
-    console.log(this.imagekeep);
 
-    if (this.imagekeep.length > 0) {
-        this.keep = this.imagekeep;
-        console.log('Keep = >',this.keep);
-    }
+async deleteImage(imageID: number) {
+  console.log('THisthis');
+  console.log(imageID);
+
+  // Ask for confirmation before deleting
+  const confirmed = confirm("ยืนยันการลบรูปภาพ?");
+  if (!confirmed) {
+    return; // If the user cancels, do nothing
+  }
+  
+  const imageIndex = this.imagekeep.findIndex(image => image.imageID === imageID);
+  if (imageIndex !== -1) {
+      const deletedImageUrl = this.imagekeep[imageIndex].url;
+      this.imageUrls = this.imageUrls.filter(url => url !== deletedImageUrl);
+      
+      this.imagekeep.splice(imageIndex, 1);
+      
+      if (this.imageUrls.length === 0) {
+          this.showUploadButton[this.index] = false; // If no new images are left, hide the button
+      }
+      await this.tableUploadImage.deleteImage(imageID);
+      console.log('Image deleted successfully.'); // Log deletion success
+  }
+}
+
+currentDate: string = new Date().toISOString().slice(0, 19).replace('T', ' ');
+async editData(imageID: number) {
+  console.log(imageID);
+
+  const imageIndex = this.imagekeep.findIndex(image => image.imageID === imageID);
+  
+  if (imageIndex !== -1 && imageIndex < this.nameEdit.length) {
+    const editedName = this.nameEdit[imageIndex];
+
+    const data = {
+      name: editedName,
+      updateDate: this.currentDate, 
+      imageID: imageID
+    };
+
+    
+    console.log(data);
+
+    await this.tableUploadImage.editData(data);
+  } else {
+    console.error('Now Its current Data!');
+  }
 }
 
 

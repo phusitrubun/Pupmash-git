@@ -14,19 +14,25 @@ import { CommonModule } from '@angular/common';
 })
 export class RanksComponent implements OnInit {
   Puppy : ImageGetResponse [] = [];
-
-
+  currentDate: Date = new Date();
+  
+  
   constructor(private mashImageService: MashImageService){}
-
-
+  
+  
   ngOnInit(): void {
     this.getPuppy();
+
+    // Update current date every second
+    setInterval(() => {
+      this.currentDate = new Date();
+    }, 1000);
   }
 
   async getPuppy(){
     this.Puppy = await this.mashImageService.getRanks();
     console.log(this.Puppy);
     
-  }
+  }  
 
 }
