@@ -44,7 +44,6 @@ export class RanksComponent implements OnInit {
       item.currentRank = item.yesterday_rank - item.today_rank  ;
       console.log(`Current rank for ${item.name}: ${item.currentRank}`);
     }
-
   }
 
   // async voteshow() {
