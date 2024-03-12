@@ -51,7 +51,6 @@ export class MashComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
-
       this.getUserId(); // Call getUserId to retrieve or generate userIdString
       this.getImage();
     }
@@ -106,6 +105,7 @@ export class MashComponent implements OnInit {
     this.Ra = Ra;
     this.Rb = Rb;
 
+    this.mashImageService.calculateElo(winnerId, loserId);
     if (!this.hidecalculate) {
       const dialogRef = this.dialog.open(WinnerDialogComponent, {
         width: '40vw',
@@ -115,7 +115,6 @@ export class MashComponent implements OnInit {
       // this.selectedImages.push(winnerId);
       dialogRef.afterClosed().subscribe(async (result) => {
         console.log('The dialog was closed');
-        this.mashImageService.calculateElo(winnerId, loserId);
 
       });
     } else {

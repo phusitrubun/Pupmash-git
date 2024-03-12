@@ -263,7 +263,8 @@ export class ChartComponent implements OnInit {
   
     this.Images.forEach((image: { ScoreArray: string; name: any; url: string;}) => {
       let scoreArray: number[] = JSON.parse(image.ScoreArray);
-      console.log(scoreArray);
+      // scoreArray.sort();
+      // console.log(scoreArray.sort());
       // console.log(typeof(scoreArray));
       
         if (scoreArray) {

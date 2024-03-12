@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Constants } from '../../confic/constansts';
 import { HttpClient } from '@angular/common/http';
-import { lastValueFrom } from 'rxjs';
+import { first, firstValueFrom, lastValueFrom } from 'rxjs';
 import { UserGetResponse } from '../../model/UserGetResponse';
 import { ImageUserUpload } from '../../model/ImageGetResponse';
+import { Times } from '../../model/Times';
 
 @Injectable({
   providedIn: 'root'
@@ -22,9 +23,26 @@ export class AdminService {
   public async getImageUser(id : any){
     const url = `${this.constants.API_ENDPOINT}user/upload/${id}`;
     const response = await lastValueFrom(this.http.get(url));
-  
+    // console.log(response);
     return response as ImageUserUpload[];
   }
+
+  public async getTimeSetting(){
+    const url = `${this.constants.API_ENDPOINT}time/`;
+    const response = await firstValueFrom(this.http.get(url));
+    console.log(response);
+    return response as Times[];
+  }
+
+
+  public async setTime(times : number){
+    const url = `${this.constants.API_ENDPOINT}time/settimes?times=${times}`;
+    const response = await lastValueFrom(this.http.put(url, {}));
+    // console.log(response);
+    return response ;
+  }
+
+
 
 
 

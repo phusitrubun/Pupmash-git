@@ -13,8 +13,8 @@
       <li class="nav1 setting-dropdown" (click)="toggleSettingMenu()">
         <a>Setting</a>
         <div class="dropdown-content" [ngClass]="{ 'active': isSettingMenuActive }">
-          <input type="text" placeholder="times">
-          <button type="submit">Set Time</button>
+          <input type="text" placeholder="times" [(ngModel)]="secound">
+          <button type="submit" (click)="setTimes()">Set Time</button>
         </div>
       </li>
       <li class="nav1">
