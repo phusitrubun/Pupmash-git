@@ -14,7 +14,7 @@ export class MashImageService {
 
   // to random image
   public async random(){
-    const url = `${this.constants.API_ENDPOINT}mash/random`;
+    const url = `${this.constants.API_ENDPOINT}mash/random?userID=${localStorage.getItem('userID')}`;
     const response = await lastValueFrom(this.http.get(url));
 
     return response as ImageGetResponse[];
@@ -60,7 +60,7 @@ export class MashImageService {
   public async recordVote(data : any){
     const url = `${this.constants.API_ENDPOINT}vote`;
     const response = await lastValueFrom(this.http.post(url, data));
-    // console.log(response);
+    console.log(response);
     return response ;
   }
 
@@ -75,7 +75,7 @@ export class MashImageService {
   public async recordStat(data : any){
     const url = `${this.constants.API_ENDPOINT}vote/stat`;
     const response = await lastValueFrom(this.http.post(url, data));
-    // console.log(response);
+    console.log(response);
     return response;
   }
 
