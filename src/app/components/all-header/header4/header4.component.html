@@ -4,7 +4,7 @@
       <li class="nav1">
         <a>Home</a>
       </li>
-      <li class="nav1" routerLink="ranks">
+      <li class="nav1" routerLink="/ranks">
         <a>Rank</a>
       </li>
       <li class="nav1">
@@ -13,7 +13,7 @@
       <li class="nav1 setting-dropdown" (click)="toggleSettingMenu()">
         <a>Setting</a>
         <div class="dropdown-content" [ngClass]="{ 'active': isSettingMenuActive }">
-          <input type="text" placeholder="">
+          <input type="text" placeholder="times">
           <button type="submit">Set Time</button>
         </div>
       </li>
