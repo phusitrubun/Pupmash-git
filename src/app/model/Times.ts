@@ -1,4 +1,4 @@
 export interface Times {
-    times: number;
-    id:    number;
+    times: number,
+    id : number
 }
