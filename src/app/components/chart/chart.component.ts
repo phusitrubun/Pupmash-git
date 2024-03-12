@@ -4,11 +4,12 @@ import { NgChartsModule } from 'ng2-charts';
 import { ChartConfiguration, ChartOptions, PluginChartOptions } from 'chart.js';
 import { Header3Component } from '../all-header/header3/header3.component';
 import { MashImageService } from '../../services/api/mash-image.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-chart',
   standalone: true,
-  imports: [NgChartsModule, Header3Component],
+  imports: [NgChartsModule, Header3Component, DatePipe],
   templateUrl: './chart.component.html',
   styleUrls: ['./chart.component.scss'],
 })
@@ -17,6 +18,8 @@ export class ChartComponent implements OnInit {
   userId: any;
   id:number = 0;
   Images: any = '';
+  currentDate: Date = new Date();
+  
 
   constructor(private mashImageService: MashImageService){}
   ngOnInit(): void {
@@ -35,6 +38,11 @@ export class ChartComponent implements OnInit {
       this.dates.push(date.toDateString());
     }
     this.dates.push(new Date().toDateString());
+
+    // Update current date every second
+    setInterval(() => {
+      this.currentDate = new Date();
+    }, 1000);
   }
 
   getOrCreateTooltip = (chart: {
