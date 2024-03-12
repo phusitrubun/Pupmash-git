@@ -46,6 +46,8 @@
   margin-top: 1%;
   display: flex;
   flex-direction: row;
+  justify-content: center;
+  align-items: center;
   justify-content: space-between;
 }
 
@@ -76,7 +78,8 @@
     cursor: pointer;
     width: 3vw;
     height: 5.5vh;
-    margin-top: 2%;
+  margin: 0px 20px 0px 30px;
+
 }
 
 .score{
@@ -99,3 +102,17 @@
   font-weight: 700;
 
 }
+.count{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0px 20px 0px 30px;
+  font-weight: bold;
+
+}
+.scoreim{
+  position: relative;
+  top: -50px;
+  border: solid;
+}
+

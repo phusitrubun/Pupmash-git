@@ -63,30 +63,30 @@ export class MashComponent implements OnInit {
       }
     }
     console.log(this.images);
-    
+
   }
 
   votedImageIds: number[] = []; // สร้างอาร์เรย์เก็บรหัสรูปภาพที่ถูกโหวตไปแล้ว
   isVoted: boolean = false;
-  
+
   openWinnerDialog(winnerId: number, loserId: number) {
-     
+
    // เพิ่มรหัสรูปภาพที่โหวตไปแล้วลงในอาร์เรย์
     this.votedImageIds.push(winnerId);
-    
+
     const dialogRef = this.dialog.open(WinnerDialogComponent, {
       width: '40vw',
       height: '60vh',
       data: { winnerId: winnerId, loserId: loserId },
     });
-  
+
     dialogRef.afterClosed().subscribe(async (result) => {
       console.log('The dialog was closed');
       this.mashImageService.calculateElo(winnerId, loserId);
       this.record(winnerId, loserId);
-      this.isVoted = true; 
+      this.isVoted = true;
       console.log(this.isVoted);
-      
+
       if (this.isVoted) {
           // โหลดรูปใหม่หลังจากโหวตเสร็จสิ้น
         //   console.log(this.votedImageIds);
@@ -94,15 +94,15 @@ export class MashComponent implements OnInit {
       }else{
         this.getImage();
       }
-    
+
     });
   }
-  
+
   // โหลดรูปภาพยกเว้นรูปที่ถูกโหวตแล้ว
   async getImageecpect() {
-    this.images = await this.mashImageService.randomexcept(this.votedImageIds);
+    // this.images = await this.mashImageService.randomexcept(this.votedImageIds);
     console.log(this.votedImageIds);
-    
+
     if (this.images.length > 0) {
         this.image = this.images[0];
         if (this.images.length > 1) {
@@ -113,7 +113,7 @@ export class MashComponent implements OnInit {
       console.log(this.images[0].name , " " , this.images[1].name);
 
   }
-  
+
 
   //   record vote
   currentDate: string = new Date().toISOString().slice(0, 19).replace('T', ' ');
@@ -128,9 +128,9 @@ export class MashComponent implements OnInit {
     await this.mashImageService.recordVote(data);
   }
 
-  
 
- 
 
-  
+
+
+
 }

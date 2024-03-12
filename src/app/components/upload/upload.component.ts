@@ -8,7 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { UploadTableImage } from '../../services/api/upload-taimage.service';
 import { ImageGetResponse } from '../../model/ImageGetResponse';
 import { ImageService } from '../../services/api/image.service';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner'; 
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { UploadImageService } from '../../services/api/upload-image.service';
 
 @Component({
@@ -56,8 +56,8 @@ export class UploadComponent implements OnInit {
     }
     this.keepupload()
   console.log(guestID);
-  
-    
+
+
   }
 
   uploading: boolean = false;
@@ -83,13 +83,13 @@ export class UploadComponent implements OnInit {
 
         console.log(this.index);
         console.log(this.imagekeep.length + 1);
-        
+
         if (this.imagekeep.length + 1 <= 5) {
           // ส่งรูปภาพไปยัง Angular service เพื่ออัปโหลดลงใน Firebase Storage
           this.tableUploadImage.urlImage(file).then((url: string) => {
             this.someurl = url;
             console.log(this.someurl);
-            
+
           }).catch((error: any) => {
             console.error('Error uploading image:', error);
           });
@@ -101,11 +101,11 @@ export class UploadComponent implements OnInit {
         );
       }
 
-      
+
     }
   }
 
-  
+
 
 async uploadImage(index: number, name: HTMLInputElement) {
     if (confirm('คุณต้องการยืนยันการอัปโหลดหรือไม่?')) {
@@ -127,8 +127,8 @@ async uploadImage(index: number, name: HTMLInputElement) {
                 console.error('Error uploading image:', error);
                 // Handle error
                 alert('เกิดข้อผิดพลาดในการอัปโหลดไฟล์');
-            } 
-        } 
+            }
+        }
     } else {
         alert('การอัปโหลดไฟล์ถูกยกเลิก');
         this.uploading = false; // ปิดแถบความคืบหน้า
@@ -138,7 +138,7 @@ async uploadImage(index: number, name: HTMLInputElement) {
 async keepupload(){
   this.imagekeep = await this.tableUploadImage.keepupload();
   // console.log(this.imagekeep);
-  
+
   if (this.imagekeep.length > 0) {
     this.keep = this.imagekeep;
     console.log('Keep = >',this.keep);
@@ -155,14 +155,14 @@ async deleteImage(imageID: number) {
   if (!confirmed) {
     return; // If the user cancels, do nothing
   }
-  
+
   const imageIndex = this.imagekeep.findIndex(image => image.imageID === imageID);
   if (imageIndex !== -1) {
       const deletedImageUrl = this.imagekeep[imageIndex].url;
       this.imageUrls = this.imageUrls.filter(url => url !== deletedImageUrl);
-      
+
       this.imagekeep.splice(imageIndex, 1);
-      
+
       if (this.imageUrls.length === 0) {
           this.showUploadButton[this.index] = false; // If no new images are left, hide the button
       }
@@ -176,17 +176,17 @@ async editData(imageID: number) {
   console.log(imageID);
 
   const imageIndex = this.imagekeep.findIndex(image => image.imageID === imageID);
-  
+
   if (imageIndex !== -1 && imageIndex < this.nameEdit.length) {
     const editedName = this.nameEdit[imageIndex];
 
     const data = {
       name: editedName,
-      updateDate: this.currentDate, 
+      updateDate: this.currentDate,
       imageID: imageID
     };
 
-    
+
     console.log(data);
 
     await this.tableUploadImage.editData(data);
