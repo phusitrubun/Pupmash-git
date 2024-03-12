@@ -16,7 +16,7 @@ export class ImageService {
     public async getImage(id : any){
         const url = `${this.constants.API_ENDPOINT}user/image/${id}`;
         const response = await lastValueFrom(this.http.get(url));
-        console.log(response);
+        // console.log(response);
         return response;
       }
 
