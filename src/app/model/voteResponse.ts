@@ -12,3 +12,17 @@ export interface StatisticResponse {
     DateTime: string;
     imageID:  number;
 }
+
+export interface Rank {
+  currentRank: number;
+  currentScore: any;
+  imageID:         number;
+  url:             string;
+  name:            string;
+  score:           number;
+  userID:          number;
+  today_score:     number;
+  today_rank:      number;
+  yesterday_score: number;
+  yesterday_rank:  number;
+}

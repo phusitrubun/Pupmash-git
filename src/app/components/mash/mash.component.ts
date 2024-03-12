@@ -30,11 +30,11 @@ export class MashComponent implements OnInit {
   winnerId: number = 0;
   loserId: number = 0;
   userIdString: string = ''; // Define userIdString as a class property
- 
-  
+
+
   lastWinnerId: number = 0;
   lastWinnerTimestamp: number | undefined;
-  
+
   hidecalculate : boolean = true
   selectedImages : number[] = [];
 
@@ -43,15 +43,15 @@ export class MashComponent implements OnInit {
   player2: ImageGetResponse | undefined;
   Ra : number = 0;
   Rb : number = 0;
-  
+
   constructor(
     private mashImageService: MashImageService,
     private adminService: AdminService,
     public dialog: MatDialog
     ) {}
-    
+
     ngOnInit(): void {
-      
+
       this.getUserId(); // Call getUserId to retrieve or generate userIdString
       this.getImage();
     }
@@ -60,12 +60,12 @@ export class MashComponent implements OnInit {
     hideCalculation() {
       this.hidecalculate = true;
     }
-    
-    
+
+
   getUserId(): void {
     // Check LocalStorage
     this.userIdString = localStorage.getItem('userID') || '';
-    
+
     // If userID is not found in LocalStorage, generate a new one
     if (!this.userIdString) {
       const deviceUUID = new DeviceUUID();
@@ -78,11 +78,11 @@ export class MashComponent implements OnInit {
     this.picture = await this.mashImageService.getImage(id);
     // console.log(this.image);
   }
-  
-  
+
+
   async getImage() {
     this.images = await this.mashImageService.random();
-    
+
     if (this.images.length > 0) {
       if (this.images.length > 1) {
           this.imageLeft = this.images[0];
@@ -91,10 +91,10 @@ export class MashComponent implements OnInit {
     }
     console.log(this.images);
     console.log(this.selectedImages);
-    
+
 }
 
-  
+
   async openWinnerDialog(winnerId: number, loserId: number) {
     this.selectedImages.push(winnerId);
 
@@ -116,7 +116,7 @@ export class MashComponent implements OnInit {
       dialogRef.afterClosed().subscribe(async (result) => {
         console.log('The dialog was closed');
         this.mashImageService.calculateElo(winnerId, loserId);
-        
+
       });
     } else {
       // กรณีที่ไม่ต้องการเปิด dialog คุณอาจต้องเรียกฟังก์ชัน record() และ getImage() ตรงนี้เพื่อให้ทำงานต่อไป
@@ -129,7 +129,7 @@ export class MashComponent implements OnInit {
   async delay(ms: number) {
     return new Promise((resolve) => setTimeout(resolve, ms));
   }
-  
+
 
   //   record vote
   currentDate: string = new Date().toISOString().slice(0, 19).replace('T', ' ');
@@ -148,19 +148,19 @@ export class MashComponent implements OnInit {
   // record stat
   async recordStat(winnerId: number, loserId: number, Ra: number, Rb: number){
     // console.log(Ra, Rb);
-    
+
     let date = new Date();
     date.setHours(date.getHours() + 7);
     let updateDate = date.toISOString().slice(0, 19).replace('T', ' ');
-  
+
     const data1 = {
       score : Ra,
       DateTime : updateDate ,
       imageID : winnerId
     }
-  
+
     await this.mashImageService.recordStat(data1);
-  
+
     const data2 = {
       score : Rb,
       DateTime : updateDate ,
@@ -168,7 +168,7 @@ export class MashComponent implements OnInit {
     }
     await this.mashImageService.recordStat(data2);
   }
-  
+
 
 
 }

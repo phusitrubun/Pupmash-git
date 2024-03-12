@@ -1,37 +1,99 @@
 <app-header3></app-header3>
 <h3 style="text-align: end; margin-right: 15rem;"> {{ currentDate | date:'dd/MM/yyyy HH:mm:ss' }}</h3>
 <div class="row1">
-    <!-- Top 2 -->
-    <div class="imgrank">
-        <img class="crown2" src="../../../assets/crown/Group 88.svg" alt="cown1" width="100rem" style="position: absolute;  left: 31%; transform: translateX(-50%); margin-top: -3rem;">
-        <img class="Top" [routerLink]="['/profile/', Puppy[1].userID]" src="{{Puppy[1].url}}" alt="top2">
-        <span style="color: #1c7eff;">{{Puppy[1].score}}</span>
-    </div>
+  <!-- Top 2 -->
+  <div class="imgrank">
+    <img class="crown2" src="../../../assets/Puppy/2.svg" alt="cown1" width="100rem"
+      style="position: absolute;  left: 31%; transform: translateX(-50%); margin-top: -3rem;">
+    <img class="Top" [routerLink]="['/profile/', Puppy[1].userID]" src="{{Puppy[1].url}}" alt="top2">
+    <span style="color: #1c7eff;">{{Puppy[1].score}}</span>
+    <p class="scoreim">{{ Puppy[1].currentScore }}</p>
+    <p>
+      <ng-container *ngIf="Puppy[1].currentRank > 0; else downOrEqual">
+        <span style="color: green;">+{{ Puppy[1].currentRank }}</span>
+      </ng-container>
+      <ng-template #downOrEqual>
+        <ng-container *ngIf="Puppy[2].currentRank < 0; else equal">
+          <span style="color: red;">{{ Puppy[1].currentRank }}</span>
+        </ng-container>
+        <ng-template #equal>
+          ==
+        </ng-template>
+      </ng-template>
+    </p>
+  </div>
 
-    <!-- Top 1 -->
-    <div style="position: relative;" class="imgrank">
-        <img class="crown1" src="../../../assets/crown/Group 87.svg" alt="cown1" width="120rem" style="position: absolute; top: 0; left: 50%; z-index: 1; transform: translateX(-50%); margin-top: -5rem; ">
-        <img class="Top1" [routerLink]="['/profile/', Puppy[0].userID]" src="{{Puppy[0].url}}" alt="top1" style="position: relative; z-index: 0;">
-        <span style="color: #ff1c1c; font-size: 50px;">{{Puppy[0].score}}</span>
-    </div>
+  <!-- Top 1 -->
+  <div style="position: relative;" class="imgrank">
+    <img class="crown1" src="../../../assets/Puppy/1.svg" alt="cown1" width="120rem"
+      style="position: absolute; top: 0; left: 50%; z-index: 1; transform: translateX(-50%); margin-top: -5rem; ">
+    <img class="Top1" [routerLink]="['/profile/', Puppy[0].userID]" src="{{Puppy[0].url}}" alt="top1"
+      style="position: relative; z-index: 0;">
+    <span style="color: #ff1c1c; font-size: 50px;">{{Puppy[0].score}}</span>
+    <p class="scoreim">{{ Puppy[0].currentScore }}</p>
+    <p>
+      <ng-container *ngIf="Puppy[0].currentRank > 0; else downOrEqual">
+        <span style="color: green;">+{{ Puppy[0].currentRank }}</span>
+      </ng-container>
+      <ng-template #downOrEqual>
+        <ng-container *ngIf="Puppy[2].currentRank < 0; else equal">
+          <span style="color: red;">{{ Puppy[0].currentRank }}</span>
+        </ng-container>
+        <ng-template #equal>
+          ==
+        </ng-template>
+      </ng-template>
+    </p>
 
-    <!-- Top 3 -->
-    <div class="imgrank">
-        <img class="crown3" src="../../../assets/crown/Group 89.svg" alt="cown1" width="100rem" style="position: absolute;  left: 68%; transform: translateX(-50%); margin-top: -3rem;">
-        <img class="Top" [routerLink]="['/profile/', Puppy[2].userID]" src="{{Puppy[2].url}}" alt="top3">
-        <span style="color: #ffa41c;">{{Puppy[2].score}}</span>
-    </div>
+  </div>
+
+  <!-- Top 3 -->
+  <div class="imgrank">
+    <img class="crown3" src="../../../assets/Puppy/3.svg" alt="cown1" width="100rem"
+      style="position: absolute;  left: 68%; transform: translateX(-50%); margin-top: -3rem;">
+    <img class="Top" [routerLink]="['/profile/', Puppy[2].userID]" src="{{Puppy[2].url}}" alt="top3">
+    <span style="color: #ffa41c;">{{Puppy[2].score}}</span>
+    <p class="scoreim">{{ Puppy[2].currentScore }}</p>
+    <p>
+      <ng-container *ngIf="Puppy[2].currentRank > 0; else downOrEqual">
+        <span style="color: green;">+{{ Puppy[2].currentRank }}</span>
+      </ng-container>
+      <ng-template #downOrEqual>
+        <ng-container *ngIf="Puppy[2].currentRank < 0; else equal">
+          <span style="color: red;">{{ Puppy[2].currentRank }}</span>
+        </ng-container>
+        <ng-template #equal>
+          ==
+        </ng-template>
+      </ng-template>
+    </p>
+  </div>
 </div>
-<div style="height: 35vh; ; overflow-y: scroll;">
-    <div class="lists" *ngFor="let pup of Puppy | slice:3">
-        <div class="list">
-            <img class="profile" src="{{pup!.url}}" alt="picture">
-            <h2 class="name">{{pup?.name}}</h2>
-            <h2 class="score">{{pup?.score}}</h2>
-            <div style="width: 20%; margin-top: 0.5rem; margin-left: 2rem;">
-                <img [routerLink]="['/profile/', pup?.userID]" class="iconpng" src="../../../assets/user 6.png" alt="icon">
-            </div>
-        </div>
-    </div>
+<div style="height: 35vh; ; overflow-y: scroll; margin-top: -50px;">
+  <div class="lists" *ngFor="let pup of Puppy | slice:3; let i = index">
+    <div class="list">
+      <span class="count">{{ i + 4 }}</span>
+      <p>
+        <ng-container *ngIf="pup.currentRank > 0; else downOrEqual">
+          <span style="color: green;">+{{ pup.currentRank }}</span>
+        </ng-container>
+        <ng-template #downOrEqual>
+          <ng-container *ngIf="pup.currentRank < 0; else equal">
+            <span style="color: red;">{{ pup.currentRank }}</span>
+          </ng-container>
+          <ng-template #equal>
+            ==
+          </ng-template>
+        </ng-template>
+      </p>
+      <img class="profile" src="{{pup.url}}" alt="picture">
+      <h2 class="name">{{pup.name}}</h2>
+      <p>{{ pup.currentScore }}</p>
+      <h2 class="score">{{pup.score}}</h2>
+      <img style="object-fit: cover;" [routerLink]="['/profile/', pup.userID]" class="iconpng" src="../../../assets/user 6.png" alt="icon">
 
+
+
+    </div>
+  </div>
 </div>
