@@ -4,6 +4,7 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ImageGetResponse } from '../../../model/ImageGetResponse';
 import { MashImageService } from '../../../services/api/mash-image.service';
 import { CommonModule } from '@angular/common';
+import Elo from '@studimax/elo';
 
 @Component({
   selector: 'app-winner-dialog',
@@ -17,17 +18,17 @@ export class WinnerDialogComponent implements OnInit{
   player2: ImageGetResponse | undefined;
   image : ImageGetResponse | undefined;
   
-  Ra: number | undefined;
-  Rb: number | undefined;
 
   diff : number = 0;
   oldScore:number = 0;
+  Ra: number | undefined;
+  Rb: number | undefined;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, private mashImageService: MashImageService){}
 
 
   ngOnInit(): void {
-    this.calculate(this.data.winnerId, this.data.loserId, this.data.Ra, this.data.Rb);
+    this.calculate(this.data.winnerId, this.data.loserId);
     // console.log('thisthsths');
     // console.log( this.data.Ra, this.data.Rb);
     
@@ -40,11 +41,18 @@ export class WinnerDialogComponent implements OnInit{
     // console.log(this.image);
   }
   
-  async calculate(winnerId: number, loserId: number, Ra : number, Rb : number) {
+  async calculate(winnerId: number, loserId: number) {
    
 
     this.player1 = await this.mashImageService.getImage(winnerId);
     this.player2 = await this.mashImageService.getImage(loserId);
+
+    const elo = new Elo();
+    const {Ra, Rb} = elo.calculateRating(this.player1.score, this.player2.score, 1);
+
+    this.Ra = Ra;
+    this.Rb = Rb;
+
     
     // this.Ra = this.data.Ra; // กำหนดค่า Ra
     // this.Rb = this.data.Rb; // กำหนดค่า Rb

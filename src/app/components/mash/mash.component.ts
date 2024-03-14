@@ -35,7 +35,7 @@ export class MashComponent implements OnInit {
   lastWinnerId: number = 0;
   lastWinnerTimestamp: number | undefined;
 
-  hidecalculate : boolean = true
+  hidecalculate : boolean = false;
   selectedImages : number[] = [];
 
   picture : ImageGetResponse | undefined;
@@ -115,14 +115,12 @@ export class MashComponent implements OnInit {
       // this.selectedImages.push(winnerId);
       dialogRef.afterClosed().subscribe(async (result) => {
         console.log('The dialog was closed');
-
+        
       });
-    } else {
-      // กรณีที่ไม่ต้องการเปิด dialog คุณอาจต้องเรียกฟังก์ชัน record() และ getImage() ตรงนี้เพื่อให้ทำงานต่อไป
-      this.record(winnerId, loserId);
-      this.recordStat(winnerId, loserId, this.Ra, this.Rb)
-      this.getImage();
-    }
+    } 
+    this.record(winnerId, loserId);
+    this.recordStat(winnerId, loserId, this.Ra, this.Rb)
+    this.getImage();
   }
 
   async delay(ms: number) {
