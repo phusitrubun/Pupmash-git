@@ -66,6 +66,8 @@ export class UploadComponent implements OnInit {
     }
     this.keepupload()
     console.log(guestID);
+
+    this.updateCurrentDateInDB();
   }
 
   uploading: boolean = false;
@@ -111,7 +113,6 @@ export class UploadComponent implements OnInit {
       }
     }
   }
-
   async uploadImage(index: number, name: HTMLInputElement) {
     if (confirm('คุณต้องการยืนยันการอัปโหลดหรือไม่?')) {
       this.uploading = true; // เริ่มแสดงแถบความคืบหน้า
@@ -140,7 +141,12 @@ export class UploadComponent implements OnInit {
           };
 
           this.keep.push(imageGetResponse); // เพิ่มรูปภาพที่อัปโหลดเสร็จแล้วลงใน this.keep
+          this.nameEdit.push(uploadedImage.name); // เพิ่มชื่อรูปภาพลงใน this.nameEdit
           this.keepupload();
+
+          // อัปเดตเวลาหลังจากที่อัปโหลดไฟล์เสร็จเรียบร้อยแล้ว
+          await this.updateCurrentDateInDB();
+
         } catch (error) {
           console.error('Error uploading image:', error);
           // Handle error
@@ -152,6 +158,7 @@ export class UploadComponent implements OnInit {
       this.uploading = false; // ปิดแถบความคืบหน้า
     }
   }
+
 
   async keepupload() {
     this.imagekeep = await this.tableUploadImage.keepupload();
@@ -211,4 +218,12 @@ export class UploadComponent implements OnInit {
       console.error('Now Its current Data!');
     }
   }
+
+  async updateCurrentDateInDB() {
+    const currentDate = new Date().toISOString().slice(0, 19).replace('T', ' ');
+    // นำข้อมูลของวันที่ปัจจุบันมาอัปเดตในฐานข้อมูลของคุณที่นี่
+    // ตัวอย่าง: this.myDatabaseService.updateCurrentDate(currentDate);
+  }
+
+
 }
