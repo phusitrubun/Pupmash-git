@@ -5,6 +5,8 @@ import { ChartConfiguration, ChartOptions, PluginChartOptions } from 'chart.js';
 import { Header3Component } from '../all-header/header3/header3.component';
 import { MashImageService } from '../../services/api/mash-image.service';
 import { DatePipe } from '@angular/common';
+import { VoteService } from '../../services/api/vote.service';
+import { Rank } from '../../model/voteResponse';
 
 @Component({
   selector: 'app-chart',
@@ -19,15 +21,15 @@ export class ChartComponent implements OnInit {
   id:number = 0;
   Images: any = '';
   currentDate: Date = new Date();
-  
-
-  constructor(private mashImageService: MashImageService){}
+  currentScore: number = 0;
+  Puppy : Rank [] = [];
+  constructor(private mashImageService: MashImageService, private vote:VoteService){}
   ngOnInit(): void {
     const userIdString = localStorage.getItem('userID');
         if (userIdString) {
             this.id = parseInt(userIdString);
             console.log("User : ",this.id);
-    
+
         }
         this.getImgage();
 
@@ -87,10 +89,19 @@ export class ChartComponent implements OnInit {
       return;
     }
 
+    // Calculate current score for each puppy
+    if (this.Puppy && this.Puppy.length > 0) {
+      for (let i = 0; i < this.Puppy.length; i++) {
+        const item = this.Puppy[i];
+        item.currentScore = item.today_score - (item.yesterday_score || 0);
+        console.log(`Current score for ${item.name}: ${item.currentScore}`);
+      }
+    }
     // Set Text
     if (tooltip.body) {
       const titleLines = tooltip.title || [];
       const bodyLines = tooltip.body.map((b: { lines: any }) => b.lines);
+
 
       const tableHead = document.createElement('thead');
 
@@ -242,7 +253,7 @@ export class ChartComponent implements OnInit {
     img.src = src;
     return canvas;
   }
-  
+
   // Images: any[] = []; // Initialize Images with an empty array
 
   public scatterChartData: ChartConfiguration<'scatter'>['data'] | undefined;
@@ -250,23 +261,23 @@ export class ChartComponent implements OnInit {
   public async getImgage() {
     try {
       this.Images = await this.mashImageService.stattistic(this.id);
-      console.log(this.Images); 
-  
+      console.log(this.Images);
+
       this.updateScatterChartData();
     } catch (error) {
       console.error('Error fetching images:', error);
     }
   }
-  
+
  private updateScatterChartData() {
     const datasets: { data: { x: number; y: any; }[]; label: any; fill: boolean; tension: number; borderColor: string; backgroundColor: string; pointStyle: HTMLCanvasElement; pointRadius: number; pointHoverRadius: number; showLine: boolean; }[] = [];
-  
+
     this.Images.forEach((image: { ScoreArray: string; name: any; url: string;}) => {
       let scoreArray: number[] = JSON.parse(image.ScoreArray);
       // scoreArray.sort();
       // console.log(scoreArray.sort());
       // console.log(typeof(scoreArray));
-      
+
         if (scoreArray) {
           const data: { x: number; y: any; }[] = [];
           for (let index = 7; index >= 0; index--) {
@@ -275,7 +286,7 @@ export class ChartComponent implements OnInit {
                 data.push({ x: 7 - index, y: scoreArray[scoreIndex] });
             }
         }
-        
+
 
             const dataset = {
                 data: data,
@@ -289,16 +300,16 @@ export class ChartComponent implements OnInit {
                 pointHoverRadius: 30,
                 showLine: true,
             };
-            
+
             datasets.push(dataset); // Push the dataset object once after iterating through all scores
         } else {
             console.error('Invalid format for image score data:', image.name, image.ScoreArray);
             console.log(image);
         }
     });
-  
+
    console.log(datasets);
-   
+
     this.scatterChartData = { datasets: datasets };
 }
 

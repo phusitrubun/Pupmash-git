@@ -14,6 +14,10 @@ export interface StatisticResponse {
 }
 
 export interface Rank {
+isNewData: any;
+showScore: any;
+isSameRank: any;
+isNegative: any;
   currentRank: number;
   currentScore: any;
   imageID:         number;
