@@ -21,6 +21,7 @@ export class RanksComponent implements OnInit {
   currentScore: number = 0;
   currentRank: number = 0;
   userID:any;
+  Math: any;
   constructor(private mashImageService: MashImageService, private vote:VoteService){}
 
 
@@ -32,17 +33,20 @@ export class RanksComponent implements OnInit {
       this.currentDate = new Date();
     }, 1000);
   }
-
-  async getPuppy(){
+  async getPuppy() {
     this.Puppy = await this.vote.voteshow();
     console.log(this.Puppy);
     for (let i = 0; i < this.Puppy.length; i++) {
       const item = this.Puppy[i];
-      item.currentScore = item.today_score - item.yesterday_score;
+      item.currentScore = item.today_score - (item.yesterday_score || 0);
       console.log(`Current score for ${item.name}: ${item.currentScore}`);
 
-      item.currentRank = item.yesterday_rank - item.today_rank  ;
-      console.log(`Current rank for ${item.name}: ${item.currentRank}`);
+      const rankDiff = (item.yesterday_rank || 0) - item.today_rank;
+      item.currentRank = Math.abs(rankDiff);
+      item.isNegative = rankDiff < 0;
+      item.isSameRank = rankDiff === 0;
+      item.isNewData = item.yesterday_score === undefined; // เพิ่มคุณสมบัตินี้เพื่อบอกว่าเป็นข้อมูลใหม่หรือไม่
+      console.log(`Current rank for ${item.name}: ${item.currentRank} (${item.isNegative ? 'negative' : (item.isSameRank ? 'same' : 'positive')})`);
     }
   }
 
