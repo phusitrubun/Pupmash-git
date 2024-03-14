@@ -45,6 +45,7 @@ export class ChartComponent implements OnInit {
     setInterval(() => {
       this.currentDate = new Date();
     }, 1000);
+    
   }
 
   getOrCreateTooltip = (chart: {
@@ -90,13 +91,15 @@ export class ChartComponent implements OnInit {
     }
 
     // Calculate current score for each puppy
-    if (this.Puppy && this.Puppy.length > 0) {
-      for (let i = 0; i < this.Puppy.length; i++) {
-        const item = this.Puppy[i];
-        item.currentScore = item.today_score - (item.yesterday_score || 0);
-        console.log(`Current score for ${item.name}: ${item.currentScore}`);
-      }
-    }
+    
+    // if (this.Puppy && this.Puppy.length > 0) {
+    //   for (let i = 0; i < this.Puppy.length; i++) {
+    //     const item = this.Puppy[i];
+    //     item.currentScore = item.today_score - (item.yesterday_score || item.today_score);
+
+    //     console.log(`Current score for ${item.name}: ${item.currentScore}`);
+    //   }
+    // }
     // Set Text
     if (tooltip.body) {
       const titleLines = tooltip.title || [];
@@ -163,16 +166,18 @@ export class ChartComponent implements OnInit {
         span2.style.color = isIncrease ? '#4caf50' : '#f44336';
         span2.style.fontSize = '12px';
 
+
+        
         // new span value text position follow span2
         const spanValue = document.createElement('span');
-        spanValue.textContent = value;
+        // spanValue.textContent = currentScore.toString();
         spanValue.style.textAlign = 'right';
         spanValue.style.fontSize = '10px';
         spanValue.style.position = 'absolute';
         spanValue.style.top = `0px`;
         // Create a temporary span element to measure the width of the content
         const tempSpan = document.createElement('span');
-        tempSpan.textContent = value;
+        // tempSpan.textContent = value;
         tempSpan.style.visibility = 'hidden'; // Ensure it's not visible
 
         // Append the temporary span to the body to calculate its width
@@ -274,10 +279,6 @@ export class ChartComponent implements OnInit {
 
     this.Images.forEach((image: { ScoreArray: string; name: any; url: string;}) => {
       let scoreArray: number[] = JSON.parse(image.ScoreArray);
-      // scoreArray.sort();
-      // console.log(scoreArray.sort());
-      // console.log(typeof(scoreArray));
-
         if (scoreArray) {
           const data: { x: number; y: any; }[] = [];
           for (let index = 7; index >= 0; index--) {
