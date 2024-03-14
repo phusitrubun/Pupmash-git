@@ -38,7 +38,7 @@ export class RanksComponent implements OnInit {
     console.log(this.Puppy);
     for (let i = 0; i < this.Puppy.length; i++) {
       const item = this.Puppy[i];
-      item.currentScore = item.today_score - (item.yesterday_score || 0);
+      item.currentScore = item.today_score - (item.yesterday_score || item.today_score );
       console.log(`Current score for ${item.name}: ${item.currentScore}`);
 
       const rankDiff = (item.yesterday_rank || 0) - item.today_rank;
