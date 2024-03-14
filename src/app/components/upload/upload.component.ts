@@ -11,6 +11,16 @@ import { ImageService } from '../../services/api/image.service';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { UploadImageService } from '../../services/api/upload-image.service';
 
+interface UploadedImageResponse {
+  imageID: number;
+  url: string;
+  name: string;
+  score: number;
+  userID: number;
+  updateDate: string;
+  uploadDate: string;
+}
+
 @Component({
   selector: 'app-upload',
   standalone: true,
@@ -19,7 +29,7 @@ import { UploadImageService } from '../../services/api/upload-image.service';
   imports: [Header3Component, NgIf, CommonModule, FormsModule, RouterLink, MatProgressSpinnerModule],
 })
 export class UploadComponent implements OnInit {
-  imageUrls: (string | ArrayBuffer)[] = [];
+   imageUrls: (string | ArrayBuffer)[] = [];
   showPopup: boolean = false;
   showUploadButton: boolean[] = []; // เริ่มต้นปุ่มไม่แสดง
   index: number = -1;
@@ -27,17 +37,17 @@ export class UploadComponent implements OnInit {
   name: string = '';
   someurl: any;
   files: File[] = [];
-  keep: ImageGetResponse[]  = [];
+  keep: ImageGetResponse[] = [];
   imagekeep: ImageGetResponse[] = [];
-  id : number = 0;
+  id: number = 0;
   guestID: boolean = false;
-  imageID : number = 0;
-  nameEdit :string[] = [];
+  imageID: number = 0;
+  nameEdit: string[] = [];
 
   constructor(
     private router: Router,
     private tableUploadImage: UploadTableImage,
-    private imageservice : ImageService,
+    private imageservice: ImageService,
   ) { }
 
   ngOnInit(): void {
@@ -55,9 +65,7 @@ export class UploadComponent implements OnInit {
       }
     }
     this.keepupload()
-  console.log(guestID);
-
-
+    console.log(guestID);
   }
 
   uploading: boolean = false;
@@ -89,9 +97,10 @@ export class UploadComponent implements OnInit {
           this.tableUploadImage.urlImage(file).then((url: string) => {
             this.someurl = url;
             console.log(this.someurl);
-
+            this.uploading = false; // ซ่อน loading spinner เมื่อได้ลิงค์ไฟล์แล้ว
           }).catch((error: any) => {
             console.error('Error uploading image:', error);
+            this.uploading = false; // ซ่อน loading spinner เมื่อเกิดข้อผิดพลาด
           });
         }
       }
@@ -100,114 +109,106 @@ export class UploadComponent implements OnInit {
           'ไม่สามารถเพิ่มรูปภาพเพิ่มเติมได้ เนื่องจากคุณมีรูปภาพอยู่แล้วสูงสุด 5 รูป'
         );
       }
-
-
     }
   }
 
-
-
-async uploadImage(index: number, name: HTMLInputElement) {
+  async uploadImage(index: number, name: HTMLInputElement) {
     if (confirm('คุณต้องการยืนยันการอัปโหลดหรือไม่?')) {
-        this.uploading = true; // เริ่มแสดงแถบความคืบหน้า
-        if (this.someurl) {
-          this.uploading = false; // ปิดแถบความคืบหน้า
-            const data = {
-                url: this.someurl,
-                name: name.value,
-                score: 1000,
-                userID: this.id,
-            };
-            try {
-                await this.tableUploadImage.uploadDB(data);
-                alert('อัปโหลดไฟล์เรียบร้อยแล้ว');
-                this.showUploadButton[index] = false;
-                this.keepupload();
-            } catch (error) {
-                console.error('Error uploading image:', error);
-                // Handle error
-                alert('เกิดข้อผิดพลาดในการอัปโหลดไฟล์');
-            }
-        }
-    } else {
-        alert('การอัปโหลดไฟล์ถูกยกเลิก');
+      this.uploading = true; // เริ่มแสดงแถบความคืบหน้า
+      if (this.someurl) {
         this.uploading = false; // ปิดแถบความคืบหน้า
+        const data = {
+          url: this.someurl,
+          name: name.value,
+          score: 1000,
+          userID: this.id,
+        };
+        try {
+          const uploadedImage: any = await this.tableUploadImage.uploadDB(data);
+          alert('อัปโหลดไฟล์เรียบร้อยแล้ว');
+          this.showUploadButton[index] = false;
+          this.imageUrls.splice(index, 1); // ลบรูปภาพที่อัปโหลดเสร็จแล้วออกจาก this.imageUrls
+
+          const imageGetResponse: ImageGetResponse = {
+            imageID: uploadedImage.imageID,
+            url: uploadedImage.url,
+            name: uploadedImage.name,
+            score: uploadedImage.score,
+            userID: uploadedImage.userID,
+            updateDate: uploadedImage.updateDate,
+            uploadDate: uploadedImage.uploadDate
+          };
+
+          this.keep.push(imageGetResponse); // เพิ่มรูปภาพที่อัปโหลดเสร็จแล้วลงใน this.keep
+          this.keepupload();
+        } catch (error) {
+          console.error('Error uploading image:', error);
+          // Handle error
+          alert('เกิดข้อผิดพลาดในการอัปโหลดไฟล์');
+        }
+      }
+    } else {
+      alert('การอัปโหลดไฟล์ถูกยกเลิก');
+      this.uploading = false; // ปิดแถบความคืบหน้า
     }
-}
-
-async keepupload(){
-  this.imagekeep = await this.tableUploadImage.keepupload();
-  // console.log(this.imagekeep);
-
-  if (this.imagekeep.length > 0) {
-    this.keep = this.imagekeep;
-    console.log('Keep = >',this.keep);
-  }
-}
-
-
-async deleteImage(imageID: number) {
-  console.log('THisthis');
-  console.log(imageID);
-
-  // Ask for confirmation before deleting
-  const confirmed = confirm("ยืนยันการลบรูปภาพ?");
-  if (!confirmed) {
-    return; // If the user cancels, do nothing
   }
 
-  const imageIndex = this.imagekeep.findIndex(image => image.imageID === imageID);
-  if (imageIndex !== -1) {
+  async keepupload() {
+    this.imagekeep = await this.tableUploadImage.keepupload();
+    // console.log(this.imagekeep);
+
+    if (this.imagekeep.length > 0) {
+      this.keep = this.imagekeep;
+      console.log('Keep = >', this.keep);
+    }
+  }
+
+  async deleteImage(imageID: number) {
+    console.log('THisthis');
+    console.log(imageID);
+
+    // Ask for confirmation before deleting
+    const confirmed = confirm("ยืนยันการลบรูปภาพ?");
+    if (!confirmed) {
+      return; // If the user cancels, do nothing
+    }
+
+    const imageIndex = this.imagekeep.findIndex(image => image.imageID === imageID);
+    if (imageIndex !== -1) {
       const deletedImageUrl = this.imagekeep[imageIndex].url;
       this.imageUrls = this.imageUrls.filter(url => url !== deletedImageUrl);
 
       this.imagekeep.splice(imageIndex, 1);
 
       if (this.imageUrls.length === 0) {
-          this.showUploadButton[this.index] = false; // If no new images are left, hide the button
+        this.showUploadButton[this.index] = false; // If no new images are left, hide the button
       }
       await this.tableUploadImage.deleteImage(imageID);
       console.log('Image deleted successfully.'); // Log deletion success
+    }
+  }
+
+  currentDate: string = new Date().toISOString().slice(0, 19).replace('T', ' ');
+  async editData(imageID: number) {
+    console.log(imageID);
+
+    const imageIndex = this.imagekeep.findIndex(image => image.imageID === imageID);
+
+    if (imageIndex !== -1 && imageIndex < this.nameEdit.length) {
+      const editedName = this.nameEdit[imageIndex];
+
+      const data = {
+        name: editedName,
+        updateDate: this.currentDate,
+        imageID: imageID
+      };
+
+
+      console.log(data);
+
+      await this.tableUploadImage.editData(data);
+    } else {
+      console.error('Now Its current Data!');
+    }
   }
 }
-
-currentDate: string = new Date().toISOString().slice(0, 19).replace('T', ' ');
-async editData(imageID: number) {
-  console.log(imageID);
-
-  const imageIndex = this.imagekeep.findIndex(image => image.imageID === imageID);
-
-  if (imageIndex !== -1 && imageIndex < this.nameEdit.length) {
-    const editedName = this.nameEdit[imageIndex];
-
-    const data = {
-      name: editedName,
-      updateDate: this.currentDate,
-      imageID: imageID
-    };
-
-
-    console.log(data);
-
-    await this.tableUploadImage.editData(data);
-  } else {
-    console.error('Now Its current Data!');
-  }
-}
-
-
-}
-// confirmUpload(): void {
-//   // ทำการอัปโหลดรูปภาพต่อไป
-//   this.showPopup = false;
-//   this.showUploadButton[this.index] = false; // ซ่อนปุ่ม Upload Image
-// }
-
-// cancelUpload(): void {
-//   // ยกเลิกการอัปโหลดรูปภาพที่เพิ่งเลือก
-//   this.imageUrls.pop();
-//   if (this.imageUrls.length === 0) {
-//     this.showUploadButton[this.index] = false; // ถ้าไม่มีรูปใหม่แล้วให้ซ่อนปุ่ม
-//   }
-//   this.showPopup = false;
-// }
