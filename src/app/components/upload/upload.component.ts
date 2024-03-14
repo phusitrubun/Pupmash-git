@@ -11,15 +11,7 @@ import { ImageService } from '../../services/api/image.service';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { UploadImageService } from '../../services/api/upload-image.service';
 
-interface UploadedImageResponse {
-  imageID: number;
-  url: string;
-  name: string;
-  score: number;
-  userID: number;
-  updateDate: string;
-  uploadDate: string;
-}
+
 
 @Component({
   selector: 'app-upload',
@@ -66,6 +58,8 @@ export class UploadComponent implements OnInit {
     }
     this.keepupload()
     console.log(guestID);
+
+    // this.updateCurrentDateInDB();
   }
 
   uploading: boolean = false;
@@ -111,7 +105,6 @@ export class UploadComponent implements OnInit {
       }
     }
   }
-
   async uploadImage(index: number, name: HTMLInputElement) {
     if (confirm('คุณต้องการยืนยันการอัปโหลดหรือไม่?')) {
       this.uploading = true; // เริ่มแสดงแถบความคืบหน้า
@@ -123,7 +116,9 @@ export class UploadComponent implements OnInit {
           score: 1000,
           userID: this.id,
         };
+
         try {
+          // เปลี่ยนชนิดข้อมูล uploadedImage เป็น any ชั่วคราว
           const uploadedImage: any = await this.tableUploadImage.uploadDB(data);
           alert('อัปโหลดไฟล์เรียบร้อยแล้ว');
           this.showUploadButton[index] = false;
@@ -140,7 +135,12 @@ export class UploadComponent implements OnInit {
           };
 
           this.keep.push(imageGetResponse); // เพิ่มรูปภาพที่อัปโหลดเสร็จแล้วลงใน this.keep
+          this.nameEdit.push(uploadedImage.name); // เพิ่มชื่อรูปภาพลงใน this.nameEdit
           this.keepupload();
+
+          // อัปเดตเวลาหลังจากที่อัปโหลดไฟล์เสร็จเรียบร้อยแล้ว
+          // await this.updateCurrentDateInDB();
+
         } catch (error) {
           console.error('Error uploading image:', error);
           // Handle error
@@ -152,6 +152,8 @@ export class UploadComponent implements OnInit {
       this.uploading = false; // ปิดแถบความคืบหน้า
     }
   }
+
+
 
   async keepupload() {
     this.imagekeep = await this.tableUploadImage.keepupload();
@@ -211,4 +213,12 @@ export class UploadComponent implements OnInit {
       console.error('Now Its current Data!');
     }
   }
+
+  // async updateCurrentDateInDB() {
+  //   const currentDate = new Date().toISOString().slice(0, 19).replace('T', ' ');
+  //   // นำข้อมูลของวันที่ปัจจุบันมาอัปเดตในฐานข้อมูลของคุณที่นี่
+  //   // ตัวอย่าง: this.myDatabaseService.updateCurrentDate(currentDate);
+  // }
+
+
 }
