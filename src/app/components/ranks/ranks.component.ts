@@ -39,14 +39,14 @@ export class RanksComponent implements OnInit {
     for (let i = 0; i < this.Puppy.length; i++) {
       const item = this.Puppy[i];
       item.currentScore = item.today_score - (item.yesterday_score || item.today_score );
-      console.log(`Current score for ${item.name}: ${item.currentScore}`);
+      // console.log(`Current score for ${item.name}: ${item.currentScore}`);
 
       const rankDiff = (item.yesterday_rank || 0) - item.today_rank;
       item.currentRank = Math.abs(rankDiff);
       item.isNegative = rankDiff < 0;
       item.isSameRank = rankDiff === 0;
       item.isNewData = item.yesterday_score === undefined; // เพิ่มคุณสมบัตินี้เพื่อบอกว่าเป็นข้อมูลใหม่หรือไม่
-      console.log(`Current rank for ${item.name}: ${item.currentRank} (${item.isNegative ? 'negative' : (item.isSameRank ? 'same' : 'positive')})`);
+      // console.log(`Current rank for ${item.name}: ${item.currentRank} (${item.isNegative ? 'negative' : (item.isSameRank ? 'same' : 'positive')})`);
     }
   }
 

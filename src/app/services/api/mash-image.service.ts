@@ -60,7 +60,7 @@ export class MashImageService {
   public async recordVote(data : any){
     const url = `${this.constants.API_ENDPOINT}vote`;
     const response = await lastValueFrom(this.http.post(url, data));
-    console.log(response);
+    // console.log(response);
     return response ;
   }
 
@@ -75,7 +75,7 @@ export class MashImageService {
   public async recordStat(data : any){
     const url = `${this.constants.API_ENDPOINT}vote/stat`;
     const response = await lastValueFrom(this.http.post(url, data));
-    console.log(response);
+    // console.log(response);
     return response;
   }
 

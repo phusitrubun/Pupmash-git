@@ -305,11 +305,11 @@ export class ChartComponent implements OnInit {
             datasets.push(dataset); // Push the dataset object once after iterating through all scores
         } else {
             console.error('Invalid format for image score data:', image.name, image.ScoreArray);
-            console.log(image);
+            // console.log(image);
         }
     });
 
-   console.log(datasets);
+  //  console.log(datasets);
 
     this.scatterChartData = { datasets: datasets };
 }

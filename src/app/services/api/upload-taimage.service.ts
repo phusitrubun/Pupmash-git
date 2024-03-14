@@ -45,14 +45,14 @@ export class UploadTableImage {
   public async deleteImage(id : number){
     const url = `${this.constants.API_ENDPOINT}uploadimage/delete/${id}`;
     const response = await lastValueFrom(this.http.put(url, {}));
-    console.log(response);
+    // console.log(response);
     return response;
   }
 
   public async editData(data : any){
     const url = `${this.constants.API_ENDPOINT}uploadimage/edit`;
     const response = await lastValueFrom(this.http.put(url, data));
-    console.log(response);
+    // console.log(response);
     return response;
   }
 }

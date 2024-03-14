@@ -26,7 +26,7 @@ export class UserslistComponent implements OnInit {
         const userIdString = localStorage.getItem('userID');
         if (userIdString) {
             this.id = parseInt(userIdString);
-            console.log("User : ",this.id);
+            // console.log("User : ",this.id);
     
         }
         this.getUser(this.id);
@@ -42,7 +42,7 @@ export class UserslistComponent implements OnInit {
 
     async allUser(){
         this.users = await this.adminService.getAllUser();
-        console.log(this.users);
+        // console.log(this.users);
         
     }
 }

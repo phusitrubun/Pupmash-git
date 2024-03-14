@@ -28,8 +28,8 @@ export class WinnerDialogComponent implements OnInit{
 
   ngOnInit(): void {
     this.calculate(this.data.winnerId, this.data.loserId, this.data.Ra, this.data.Rb);
-    console.log('thisthsths');
-    console.log( this.data.Ra, this.data.Rb);
+    // console.log('thisthsths');
+    // console.log( this.data.Ra, this.data.Rb);
     
     
   }

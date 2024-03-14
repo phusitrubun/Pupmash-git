@@ -164,8 +164,8 @@ export class UploadComponent implements OnInit {
   }
 
   async deleteImage(imageID: number) {
-    console.log('THisthis');
-    console.log(imageID);
+    // console.log('THisthis');
+    // console.log(imageID);
 
     // Ask for confirmation before deleting
     const confirmed = confirm("ยืนยันการลบรูปภาพ?");

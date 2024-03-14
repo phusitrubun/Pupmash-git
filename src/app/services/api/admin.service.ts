@@ -30,7 +30,7 @@ export class AdminService {
   public async getTimeSetting(){
     const url = `${this.constants.API_ENDPOINT}time/`;
     const response = await firstValueFrom(this.http.get(url));
-    console.log(response);
+    // console.log(response);
     return response as Times[];
   }
 

@@ -88,8 +88,8 @@ export class MashComponent implements OnInit {
           this.imageRight = this.images[1];
       }
     }
-    console.log(this.images);
-    console.log(this.selectedImages);
+    // console.log(this.images);
+    // console.log(this.selectedImages);
 
 }
 
