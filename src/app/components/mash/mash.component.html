@@ -1,25 +1,28 @@
 <app-header3></app-header3>
-<div class="container" >
+<div class="container">
+  
+  
   <section class="example-section">
     <p>ปิดการคำนวน</p>
     <mat-slide-toggle class="example-margin" [(ngModel)]="hidecalculate">{{this.hidecalculate}}</mat-slide-toggle>
   </section>
+  
   <div class="detail" >
-    <div class="m2">
+    <div class="m2" *ngIf="!showSpinner">
       <div class="m1">
-        <!-- <img [src]="imageleft!.url" alt="imageLeft" (click)="openWinnerDialog(imageleft!.imageID, imageRight!.imageID)"> -->
         <img src="{{imageLeft?.url}}" alt="imageLeft" (click)="openWinnerDialog(imageLeft!.imageID, imageRight!.imageID)" >
       </div>
       <span>{{imageLeft?.name}}</span>
     </div>
+    <div *ngIf="showSpinner" class="spinner"></div>
 
-    <div class="or">
+    <div class="or" *ngIf="!showSpinner">
       <img src="../../../assets/or.svg" alt="">
     </div>
-    <div class="m2">
+    
+    <div class="m2" *ngIf="!showSpinner">
       <div class="m1">
-        <!-- <img [src]="imageRight!.url" alt="imageRight" (click)="openWinnerDialog(imageRight!.imageID, imageleft!.imageID)"> -->
-        <img src="{{imageRight?.url}}"  alt="imageRight" (click)="openWinnerDialog(imageRight!.imageID, imageLeft!.imageID)" >
+        <img src="{{imageRight?.url}}" alt="imageRight" (click)="openWinnerDialog(imageRight!.imageID, imageLeft!.imageID)" >
       </div>
       <span>{{imageRight?.name}}</span>
     </div>

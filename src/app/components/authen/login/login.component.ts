@@ -4,6 +4,8 @@ import { HeaderComponent } from "../../all-header/header/header.component";
 import { UserGetResponse } from '../../../model/UserGetResponse';
 import { AuthenService } from '../../../services/api/authen.service';
 import * as bcrypt from 'bcryptjs';
+import Swal from 'sweetalert2';
+
 
 @Component({
     selector: 'app-login',
@@ -21,7 +23,6 @@ export class LoginComponent {
         console.log(email);
         console.log(password);
         
-        
         if (email && password) {
             this.user = await this.authenService.checkUser(email);
             console.log(this.user);
@@ -29,18 +30,31 @@ export class LoginComponent {
             if (this.user) {
                 const hashPass = await bcrypt.compare(password, this.user.password);
                 if (hashPass) {
-                    // console.log(true);
                     const type = this.user.type; 
                     localStorage.setItem('userID', this.user.userID.toString());
                     
                     if(type == 1){
                         this.router.navigate(['mash']);
-                    }else{
+                    } else {
                         this.router.navigate(['userslist']);
                     }
+                    
+                    // Show Sweet Alert for successful login
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Login Successful',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
                 }
                 else{
-                    console.log(false);
+                    // Show Sweet Alert for login failed
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Login Failed',
+                        text: 'Invalid email or password',
+                        confirmButtonText: 'OK'
+                    });
                 }
             }
             else{
@@ -48,8 +62,14 @@ export class LoginComponent {
             }
         }
         else{
-            throw console.error();
+            // Show Sweet Alert for login failed
+            Swal.fire({
+                icon: 'error',
+                title: 'Login Failed',
+                text: 'Please provide email and password',
+                confirmButtonText: 'OK'
+            });
         }
     }
-
+    
 }

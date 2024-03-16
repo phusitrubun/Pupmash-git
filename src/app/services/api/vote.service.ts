@@ -17,4 +17,10 @@ export class VoteService {
     return response as Rank[];
   }
 
+  public async ranksadmin() {
+    const url = `${this.constants.API_ENDPOINT}vote/ranksadmin`
+    const response = await lastValueFrom(this.http.get(url));
+    return response as Rank[];
+  }
+
 }

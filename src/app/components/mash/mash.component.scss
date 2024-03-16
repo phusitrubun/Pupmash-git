@@ -53,3 +53,19 @@ span{
   font-weight: 800;
   color: #fede29;
 }
+
+.spinner {
+  position: absolute;
+  width: 32vw;
+  height: 32vw;
+
+  // background-image: url('../../../assets/spiner/output-onlinegiftools.gif'); /* เปลี่ยนชื่อไฟล์เป็นชื่อของไฟล์ GIF ของคุณ */
+  background-image: url('../../../assets/spiner/spinner.gif');
+  // background-image: url('../../../assets/spiner/giphy.gif');
+
+  background-size: cover; /* ปรับขนาดรูปภาพให้เต็มพื้นที่ของ Spinner */
+  border-radius: 50%;
+  left: 45%; /* ปรับตำแหน่งในแนวนอน (แกน x) */
+  top: 55%; /* จัดให้อยู่ตรงกลางตามแนวดิ่ง (แกน y) */
+  transform: translate(-50%, -50%); /* จัดให้ Spinner อยู่ตรงกลางของตัว container */
+}

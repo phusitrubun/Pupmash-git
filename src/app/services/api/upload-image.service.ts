@@ -21,10 +21,10 @@ export class UploadImageService {
       const response = await lastValueFrom(this.http.post(url, formData).pipe(catchError(error => {
         throw new Error(`Failed to upload image: ${error}`);
       })));
-      console.log(response);
+      // console.log(response);
       return response;
     } catch (error) {
-      console.error(error);
+      // console.error(error);
       throw new Error(`Failed to upload image: ${error}`);
     }
   }

@@ -34,7 +34,12 @@ export class RanksComponent implements OnInit {
     }, 1000);
   }
   async getPuppy() {
-    this.Puppy = await this.vote.voteshow();
+    if (localStorage.getItem('userID') === '1') {
+      this.Puppy = await this.vote.ranksadmin();
+  } else {
+      this.Puppy = await this.vote.voteshow();
+  }
+  
     console.log(this.Puppy);
     for (let i = 0; i < this.Puppy.length; i++) {
       const item = this.Puppy[i];
@@ -50,7 +55,4 @@ export class RanksComponent implements OnInit {
     }
   }
 
-  // async voteshow() {
-
-  // }
 }

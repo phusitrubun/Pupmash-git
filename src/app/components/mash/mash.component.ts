@@ -12,6 +12,7 @@ import { MatButtonModule } from '@angular/material/button';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { FormsModule } from '@angular/forms';
 import { AdminService } from '../../services/api/admin.service';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 
 @Component({
@@ -19,7 +20,7 @@ import { AdminService } from '../../services/api/admin.service';
   standalone: true,
   templateUrl: './mash.component.html',
   styleUrl: './mash.component.scss',
-  imports: [Header3Component, CommonModule, MatDialogModule, MatButtonModule,MatSlideToggleModule, FormsModule],
+  imports: [Header3Component, CommonModule, MatDialogModule, MatButtonModule,MatSlideToggleModule, FormsModule, MatProgressSpinnerModule],
 })
 export class MashComponent implements OnInit {
   images: ImageGetResponse[] = [];
@@ -43,6 +44,12 @@ export class MashComponent implements OnInit {
   player2: ImageGetResponse | undefined;
   Ra : number = 0;
   Rb : number = 0;
+
+  delayTime: number = 3000; // 5000 milliseconds = 5 seconds
+  showSpinner: boolean = false;
+
+  
+
 
   constructor(
     private mashImageService: MashImageService,
@@ -93,8 +100,12 @@ export class MashComponent implements OnInit {
 
 }
 
+
+
   async openWinnerDialog(winnerId: number, loserId: number) {
     this.selectedImages.push(winnerId);
+    this.showSpinner = true;
+
 
     this.player1 = await this.mashImageService.getImage(winnerId);
     this.player2 = await this.mashImageService.getImage(loserId);
@@ -119,7 +130,12 @@ export class MashComponent implements OnInit {
     }
     this.record(winnerId, loserId);
     this.recordStat(winnerId, loserId, this.Ra, this.Rb)
-    this.getImage();
+
+     // หน่วงเวลา 5 วินาทีก่อนที่จะแสดงรูปภาพใหม่
+     setTimeout(() => {   
+      this.showSpinner = false; 
+       this.getImage();
+  }, this.delayTime);
   }
 
   async delay(ms: number) {
