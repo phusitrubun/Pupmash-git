@@ -8,6 +8,9 @@
     providedIn: 'root'
   })
   export class AuthenService {
+    updateUser(id: number, updatedUser: any) {
+      throw new Error('Method not implemented.');
+    }
 
     constructor(private constants:Constants, private http:HttpClient) { }
 
