@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { Constants } from '../../confic/constansts';
 import { lastValueFrom } from 'rxjs';
 import { ImageGetResponse } from '../../model/ImageGetResponse';
-import { StatisticResponse } from '../../model/voteResponse';
 
 @Injectable({
   providedIn: 'root'

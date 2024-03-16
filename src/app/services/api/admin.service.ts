@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Constants } from '../../confic/constansts';
 import { HttpClient } from '@angular/common/http';
-import { first, firstValueFrom, lastValueFrom } from 'rxjs';
+import { firstValueFrom, lastValueFrom } from 'rxjs';
 import { UserGetResponse } from '../../model/UserGetResponse';
 import { ImageUserUpload } from '../../model/ImageGetResponse';
 import { Times } from '../../model/Times';

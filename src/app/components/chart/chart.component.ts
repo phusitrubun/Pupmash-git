@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { NgChartsModule } from 'ng2-charts';
-
 import { ChartConfiguration, ChartOptions, PluginChartOptions } from 'chart.js';
 import { Header3Component } from '../all-header/header3/header3.component';
 import { MashImageService } from '../../services/api/mash-image.service';
@@ -91,17 +90,6 @@ export class ChartComponent implements OnInit {
       tooltipEl.style.opacity = 0;
       return;
     }
-
-    // Calculate current score for each puppy
-    
-    // if (this.Puppy && this.Puppy.length > 0) {
-    //   for (let i = 0; i < this.Puppy.length; i++) {
-    //     const item = this.Puppy[i];
-    //     item.currentScore = item.today_score - (item.yesterday_score || item.today_score);
-
-    //     console.log(`Current score for ${item.name}: ${item.currentScore}`);
-    //   }
-    // }
     // Set Text
     if (tooltip.body) {
       const titleLines = tooltip.title || [];
@@ -168,31 +156,16 @@ export class ChartComponent implements OnInit {
         span2.style.color = isIncrease ? '#4caf50' : '#f44336';
         span2.style.fontSize = '12px';
 
-
-        
-        // new span value text position follow span2
-        const spanValue = document.createElement('span');
-        // spanValue.textContent = currentScore.toString();
-        spanValue.style.textAlign = 'right';
-        spanValue.style.fontSize = '10px';
-        spanValue.style.position = 'absolute';
-        spanValue.style.top = `0px`;
-        // Create a temporary span element to measure the width of the content
+        // // Create a temporary span element to measure the width of the content
         const tempSpan = document.createElement('span');
         // tempSpan.textContent = value;
         tempSpan.style.visibility = 'hidden'; // Ensure it's not visible
 
-        // Append the temporary span to the body to calculate its width
         document.body.appendChild(tempSpan);
-        const width = tempSpan.offsetWidth; // Get the calculated width
+        
 
         // Remove the temporary span from the DOM
         document.body.removeChild(tempSpan);
-
-        // Set the right property based on the calculated width
-        spanValue.style.right = `-${width / 2 - 9}px`;
-        spanValue.style.color = isIncrease ? '#4caf50' : '#f44336';
-
         // absolute increase value ^ , or decrease
         const tr2 = document.createElement('tr');
         tr2.style.backgroundColor = 'inherit';
@@ -202,7 +175,6 @@ export class ChartComponent implements OnInit {
         td2.style.borderWidth = '0';
 
         text2.appendChild(span2);
-        text3.appendChild(spanValue);
         text3.appendChild(text2);
         td2.appendChild(text3);
         tr2.appendChild(td2);
@@ -260,9 +232,6 @@ export class ChartComponent implements OnInit {
     img.src = src;
     return canvas;
   }
-
-  // Images: any[] = []; // Initialize Images with an empty array
-
   public scatterChartData: ChartConfiguration<'scatter'>['data'] | undefined;
 
   public async getImgage() {
