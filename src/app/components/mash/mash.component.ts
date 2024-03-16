@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Header3Component } from '../all-header/header3/header3.component';
 import { MashImageService } from '../../services/api/mash-image.service';
-import { ImageGetResponse, ImageUserUpload } from '../../model/ImageGetResponse';
+import { ImageGetResponse } from '../../model/ImageGetResponse';
 import { CommonModule } from '@angular/common';
 import Elo from '@studimax/elo';
-import { AuthenService } from '../../services/api/authen.service';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { WinnerDialogComponent } from './winner-dialog/winner-dialog.component';
 import { DeviceUUID } from 'device-uuid';
@@ -32,10 +31,6 @@ export class MashComponent implements OnInit {
   loserId: number = 0;
   userIdString: string = ''; // Define userIdString as a class property
 
-
-  lastWinnerId: number = 0;
-  lastWinnerTimestamp: number | undefined;
-
   hidecalculate : boolean = false;
   selectedImages : number[] = [];
 
@@ -47,9 +42,6 @@ export class MashComponent implements OnInit {
 
   delayTime: number = 3000; // 5000 milliseconds = 5 seconds
   showSpinner: boolean = false;
-
-  
-
 
   constructor(
     private mashImageService: MashImageService,
@@ -66,39 +58,31 @@ export class MashComponent implements OnInit {
     hideCalculation() {
       this.hidecalculate = true;
     }
+    getUserId(): void {
+      // Check LocalStorage
+      this.userIdString = localStorage.getItem('userID') || '';
 
-
-  getUserId(): void {
-    // Check LocalStorage
-    this.userIdString = localStorage.getItem('userID') || '';
-
-    // If userID is not found in LocalStorage, generate a new one
-    if (!this.userIdString) {
-      const deviceUUID = new DeviceUUID();
-      this.userIdString = deviceUUID.get();
-      localStorage.setItem('userID', this.userIdString);
-    }
-  }
-
-  async getImages(id : any){
-    this.picture = await this.mashImageService.getImage(id);
-    // console.log(this.image);
-  }
-
-
-  async getImage() {
-    this.images = await this.mashImageService.random();
-
-    if (this.images.length > 0) {
-      if (this.images.length > 1) {
-          this.imageLeft = this.images[0];
-          this.imageRight = this.images[1];
+      // If userID is not found in LocalStorage, generate a new one
+      if (!this.userIdString) {
+        const deviceUUID = new DeviceUUID();
+        this.userIdString = deviceUUID.get();
+        localStorage.setItem('userID', this.userIdString);
       }
     }
-    // console.log(this.images);
-    // console.log(this.selectedImages);
 
-}
+    async getImage() {
+      this.images = await this.mashImageService.random();
+
+      if (this.images.length > 0) {
+        if (this.images.length > 1) {
+            this.imageLeft = this.images[0];
+            this.imageRight = this.images[1];
+        }
+      }
+      // console.log(this.images);
+      // console.log(this.selectedImages);
+
+    }
 
 
 
@@ -120,9 +104,9 @@ export class MashComponent implements OnInit {
       const dialogRef = this.dialog.open(WinnerDialogComponent, {
         width: '40vw',
         height: '60vh',
-        data: { winnerId: winnerId, loserId: loserId, Ra : Ra, Rb: Rb },
+        data: { winnerId: winnerId, loserId: loserId },
       });
-      // this.selectedImages.push(winnerId);
+      
       dialogRef.afterClosed().subscribe(async (result) => {
         console.log('The dialog was closed');
 
@@ -137,12 +121,6 @@ export class MashComponent implements OnInit {
        this.getImage();
   }, this.delayTime);
   }
-
-  async delay(ms: number) {
-    return new Promise((resolve) => setTimeout(resolve, ms));
-  }
-
-
   //   record vote
   currentDate: string = new Date().toISOString().slice(0, 19).replace('T', ' ');
   async record(winnerId: number, loserId: number) {
