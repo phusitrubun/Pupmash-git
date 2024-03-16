@@ -93,7 +93,6 @@ export class MashComponent implements OnInit {
 
 }
 
-
   async openWinnerDialog(winnerId: number, loserId: number) {
     this.selectedImages.push(winnerId);
 
@@ -115,9 +114,9 @@ export class MashComponent implements OnInit {
       // this.selectedImages.push(winnerId);
       dialogRef.afterClosed().subscribe(async (result) => {
         console.log('The dialog was closed');
-        
+
       });
-    } 
+    }
     this.record(winnerId, loserId);
     this.recordStat(winnerId, loserId, this.Ra, this.Rb)
     this.getImage();
