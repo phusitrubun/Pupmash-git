@@ -10,6 +10,7 @@ import { ImageGetResponse } from '../../model/ImageGetResponse';
 import { ImageService } from '../../services/api/image.service';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { UploadImageService } from '../../services/api/upload-image.service';
+import Swal from 'sweetalert2';
 
 
 
@@ -99,60 +100,87 @@ export class UploadComponent implements OnInit {
         }
       }
       if (files.length > remainingSlots) {
-        alert(
-          'ไม่สามารถเพิ่มรูปภาพเพิ่มเติมได้ เนื่องจากคุณมีรูปภาพอยู่แล้วสูงสุด 5 รูป'
-        );
-      }
+        // Show SweetAlert instead of using alert
+        await Swal.fire({
+          icon: 'warning',
+          title: 'Warning',
+          text: 'You cannot add more images because you already have a maximum of 5 images',
+          confirmButtonText: 'OK'
+        });
+      }      
     }
   }
+
+
   async uploadImage(index: number, name: HTMLInputElement) {
-    if (confirm('คุณต้องการยืนยันการอัปโหลดหรือไม่?')) {
-      this.uploading = true; // เริ่มแสดงแถบความคืบหน้า
-      if (this.someurl) {
-        this.uploading = false; // ปิดแถบความคืบหน้า
-        const data = {
-          url: this.someurl,
-          name: name.value,
-          score: 1000,
-          userID: this.id,
+  const confirmation = await Swal.fire({
+    icon: 'question',
+    title: 'Confirm Upload',
+    text: 'Are you sure you want to upload this image?',
+    showCancelButton: true,
+    confirmButtonText: 'Yes',
+    cancelButtonText: 'No'
+  });
+
+  if (confirmation.isConfirmed) {
+    this.uploading = true; // Start showing progress bar
+
+    if (this.someurl) {
+      this.uploading = false; // Hide progress bar
+      const data = {
+        url: this.someurl,
+        name: name.value,
+        score: 1000,
+        userID: this.id,
+      };
+
+      try {
+        // Temporarily change uploadedImage data type to any
+        const uploadedImage: any = await this.tableUploadImage.uploadDB(data);
+        await Swal.fire({
+          icon: 'success',
+          title: 'Success',
+          text: 'File uploaded successfully!'
+        });
+        this.showUploadButton[index] = false;
+        this.imageUrls.splice(index, 1); // Remove uploaded image from this.imageUrls
+
+        const imageGetResponse: ImageGetResponse = {
+          imageID: uploadedImage.imageID,
+          url: uploadedImage.url,
+          name: uploadedImage.name,
+          score: uploadedImage.score,
+          userID: uploadedImage.userID,
+          updateDate: uploadedImage.updateDate,
+          uploadDate: uploadedImage.uploadDate
         };
 
-        try {
-          // เปลี่ยนชนิดข้อมูล uploadedImage เป็น any ชั่วคราว
-          const uploadedImage: any = await this.tableUploadImage.uploadDB(data);
-          alert('อัปโหลดไฟล์เรียบร้อยแล้ว');
-          this.showUploadButton[index] = false;
-          this.imageUrls.splice(index, 1); // ลบรูปภาพที่อัปโหลดเสร็จแล้วออกจาก this.imageUrls
+        this.keep.push(imageGetResponse); // Add uploaded image to this.keep
+        this.nameEdit.push(uploadedImage.name); // Add image name to this.nameEdit
+        this.keepupload();
 
-          const imageGetResponse: ImageGetResponse = {
-            imageID: uploadedImage.imageID,
-            url: uploadedImage.url,
-            name: uploadedImage.name,
-            score: uploadedImage.score,
-            userID: uploadedImage.userID,
-            updateDate: uploadedImage.updateDate,
-            uploadDate: uploadedImage.uploadDate
-          };
+        // Update time after file upload
+        // await this.updateCurrentDateInDB();
 
-          this.keep.push(imageGetResponse); // เพิ่มรูปภาพที่อัปโหลดเสร็จแล้วลงใน this.keep
-          this.nameEdit.push(uploadedImage.name); // เพิ่มชื่อรูปภาพลงใน this.nameEdit
-          this.keepupload();
-
-          // อัปเดตเวลาหลังจากที่อัปโหลดไฟล์เสร็จเรียบร้อยแล้ว
-          // await this.updateCurrentDateInDB();
-
-        } catch (error) {
-          console.error('Error uploading image:', error);
-          // Handle error
-          alert('เกิดข้อผิดพลาดในการอัปโหลดไฟล์');
-        }
+      } catch (error) {
+        console.error('Error uploading image:', error);
+        // Handle error
+        await Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'An error occurred while uploading the file'
+        });
       }
-    } else {
-      alert('การอัปโหลดไฟล์ถูกยกเลิก');
-      this.uploading = false; // ปิดแถบความคืบหน้า
     }
+  } else {
+    await Swal.fire({
+      icon: 'info',
+      title: 'Cancelled',
+      text: 'File upload cancelled'
+    });
+    this.uploading = false; // Hide progress bar
   }
-
+}
 
 
   async keepupload() {
@@ -165,30 +193,35 @@ export class UploadComponent implements OnInit {
     }
   }
 
-  async deleteImage(imageID: number) {
-    // console.log('THisthis');
-    // console.log(imageID);
+ 
+async deleteImage(imageID: number) {
+  const confirmation = await Swal.fire({
+    icon: 'question',
+    title: 'Confirm Deletion',
+    text: 'Are you sure you want to delete this image?',
+    showCancelButton: true,
+    confirmButtonText: 'Yes',
+    cancelButtonText: 'No'
+  });
 
-    // Ask for confirmation before deleting
-    const confirmed = confirm("ยืนยันการลบรูปภาพ?");
-    if (!confirmed) {
-      return; // If the user cancels, do nothing
-    }
-
-    const imageIndex = this.imagekeep.findIndex(image => image.imageID === imageID);
-    if (imageIndex !== -1) {
-      const deletedImageUrl = this.imagekeep[imageIndex].url;
-      this.imageUrls = this.imageUrls.filter(url => url !== deletedImageUrl);
-
-      this.imagekeep.splice(imageIndex, 1);
-
-      if (this.imageUrls.length === 0) {
-        this.showUploadButton[this.index] = false; // If no new images are left, hide the button
-      }
-      await this.tableUploadImage.deleteImage(imageID);
-      console.log('Image deleted successfully.'); // Log deletion success
-    }
+  if (!confirmation.isConfirmed) {
+    return; // If the user cancels, do nothing
   }
+
+  const imageIndex = this.imagekeep.findIndex(image => image.imageID === imageID);
+  if (imageIndex !== -1) {
+    const deletedImageUrl = this.imagekeep[imageIndex].url;
+    this.imageUrls = this.imageUrls.filter(url => url !== deletedImageUrl);
+
+    this.imagekeep.splice(imageIndex, 1);
+
+    if (this.imageUrls.length === 0) {
+      this.showUploadButton[this.index] = false; // If no new images are left, hide the button
+    }
+    await this.tableUploadImage.deleteImage(imageID);
+    console.log('Image deleted successfully.'); // Log deletion success
+  }
+}
 
   currentDate: string = new Date().toISOString().slice(0, 19).replace('T', ' ');
   async editData(imageID: number) {
@@ -204,21 +237,11 @@ export class UploadComponent implements OnInit {
         updateDate: this.currentDate,
         imageID: imageID
       };
-
-
-      console.log(data);
-
+      // console.log(data);
       await this.tableUploadImage.editData(data);
     } else {
       console.error('Now Its current Data!');
     }
   }
-
-  // async updateCurrentDateInDB() {
-  //   const currentDate = new Date().toISOString().slice(0, 19).replace('T', ' ');
-  //   // นำข้อมูลของวันที่ปัจจุบันมาอัปเดตในฐานข้อมูลของคุณที่นี่
-  //   // ตัวอย่าง: this.myDatabaseService.updateCurrentDate(currentDate);
-  // }
-
 
 }

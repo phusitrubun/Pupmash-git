@@ -4,12 +4,15 @@
       <li class="nav1">
         <a>Home</a>
       </li>
+      <li class="nav1"  routerLink="/mash"><a>Mash</a></li>
+
       <li class="nav1" routerLink="/ranks">
-        <a>Rank</a>
+        <a>All Rank</a>
       </li>
       <li class="nav1">
         <img src="../../../assets/Puppy/happy.png" alt="" />
       </li>
+      <li  class="nav1"  routerLink="/userslist"><a>Users List</a></li>
       <li class="nav1 setting-dropdown" (click)="toggleSettingMenu()">
         <a>Setting</a>
         <div class="dropdown-content" [ngClass]="{ 'active': isSettingMenuActive }">

@@ -4,14 +4,16 @@ import { NgChartsModule } from 'ng2-charts';
 import { ChartConfiguration, ChartOptions, PluginChartOptions } from 'chart.js';
 import { Header3Component } from '../all-header/header3/header3.component';
 import { MashImageService } from '../../services/api/mash-image.service';
-import { DatePipe } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { VoteService } from '../../services/api/vote.service';
 import { Rank } from '../../model/voteResponse';
+import { RouterLink } from '@angular/router';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-chart',
   standalone: true,
-  imports: [NgChartsModule, Header3Component, DatePipe],
+  imports: [NgChartsModule, Header3Component, DatePipe, CommonModule, RouterLink, MatButtonModule],
   templateUrl: './chart.component.html',
   styleUrls: ['./chart.component.scss'],
 })
@@ -274,45 +276,43 @@ export class ChartComponent implements OnInit {
     }
   }
 
- private updateScatterChartData() {
+  private updateScatterChartData() {
     const datasets: { data: { x: number; y: any; }[]; label: any; fill: boolean; tension: number; borderColor: string; backgroundColor: string; pointStyle: HTMLCanvasElement; pointRadius: number; pointHoverRadius: number; showLine: boolean; }[] = [];
 
     this.Images.forEach((image: { ScoreArray: string; name: any; url: string;}) => {
-      let scoreArray: number[] = JSON.parse(image.ScoreArray);
+        // Initialize data array inside the loop
+        const data: { x: number; y: any; }[] = [];
+
+        // แปลง ScoreArray ให้เป็นอาร์เรย์ของตัวเลข
+        const scoreArray = image.ScoreArray.split(',').map(Number);
         if (scoreArray) {
-          const data: { x: number; y: any; }[] = [];
-          for (let index = 7; index >= 0; index--) {
-            const scoreIndex = scoreArray.length - 1 - index; // Calculate the index of the scoreArray in reverse order
-            if (scoreIndex >= 0) {
-                data.push({ x: 7 - index, y: scoreArray[scoreIndex] });
+            for (let index = 7; index >= 0; index--) {
+                const scoreIndex = scoreArray.length - 1 - index;
+                if (scoreIndex >= 0) {
+                    data.push({ x: 7 - index, y: scoreArray[scoreIndex] });
+                }
             }
         }
 
+        const dataset = {
+            data: data,
+            label: image.name,
+            fill: false,
+            tension: 0.5,
+            borderColor: this.getRandomColor(),
+            backgroundColor: 'rgba(255,0,0,0.3)',
+            pointStyle: this.createCanvas(image.url),
+            pointRadius: 10,
+            pointHoverRadius: 30,
+            showLine: true,
+        };
 
-            const dataset = {
-                data: data,
-                label: image.name,
-                fill: false,
-                tension: 0.5,
-                borderColor: this.getRandomColor(),
-                backgroundColor: 'rgba(255,0,0,0.3)',
-                pointStyle: this.createCanvas( image.url),
-                pointRadius: 10,
-                pointHoverRadius: 30,
-                showLine: true,
-            };
-
-            datasets.push(dataset); // Push the dataset object once after iterating through all scores
-        } else {
-            console.error('Invalid format for image score data:', image.name, image.ScoreArray);
-            // console.log(image);
-        }
+        datasets.push(dataset); // Push the dataset object once after iterating through all scores
     });
-
-  //  console.log(datasets);
 
     this.scatterChartData = { datasets: datasets };
 }
+
 
   public scatterChartOptions: ChartOptions<'scatter'> = {
     responsive: true,
