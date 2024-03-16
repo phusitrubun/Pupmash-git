@@ -6,9 +6,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AuthenService } from '../../../services/api/authen.service';
 import * as bcrypt from "bcryptjs";
-import { UploadImageService } from '../../../services/api/upload-image.service';
-import { lastValueFrom } from 'rxjs';
 import Swal from 'sweetalert2';
+import { UploadTableImage } from '../../../services/api/upload-taimage.service';
 
 
 @Component({
@@ -34,7 +33,7 @@ export class SignupComponent implements OnInit {
   someurl: any;
   file!: File;
 
-  constructor(private authenService: AuthenService, private router : Router, private uploadimageService : UploadImageService) {}
+  constructor(private authenService: AuthenService, private router : Router, private upload : UploadTableImage) {}
 
   ngOnInit(): void {
 
@@ -71,7 +70,7 @@ export class SignupComponent implements OnInit {
                 }
             });
 
-            this.someurl = await this.uploadimageService.urlImage(this.file);
+            this.someurl = await this.upload.urlImageProfile(this.file);
             console.log(this.someurl.file);
 
             const hashedPassword = await bcrypt.hash(this.password, saltRound);

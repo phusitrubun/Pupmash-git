@@ -8,7 +8,6 @@ import { FormsModule } from '@angular/forms';
 import { UploadTableImage } from '../../services/api/upload-taimage.service';
 import { ImageGetResponse } from '../../model/ImageGetResponse';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import { UploadImageService } from '../../services/api/upload-image.service';
 import Swal from 'sweetalert2';
 
 
