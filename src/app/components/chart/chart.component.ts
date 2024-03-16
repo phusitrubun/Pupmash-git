@@ -279,8 +279,7 @@ export class ChartComponent implements OnInit {
   private updateScatterChartData() {
     const datasets: { data: { x: number; y: any; }[]; label: any; fill: boolean; tension: number; borderColor: string; backgroundColor: string; pointStyle: HTMLCanvasElement; pointRadius: number; pointHoverRadius: number; showLine: boolean; }[] = [];
 
-    this.Images.forEach((image: { ScoreArray: string; name: any; url: string;}) => {
-        // Initialize data array inside the loop
+    this.Images.forEach((image: { ScoreArray: string; name: any; url: string;}) => {        // Initialize data array inside the loop
         const data: { x: number; y: any; }[] = [];
 
         // แปลง ScoreArray ให้เป็นอาร์เรย์ของตัวเลข
