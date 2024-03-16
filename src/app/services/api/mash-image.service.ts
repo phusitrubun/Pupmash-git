@@ -20,13 +20,6 @@ export class MashImageService {
     return response as ImageGetResponse[];
   }
 
-  // public async randomexcept(id: any){
-  //   const url = `${this.constants.API_ENDPOINT}mash/random/:id`;
-  //   const response = await lastValueFrom(this.http.get(url));
-
-  //   return response as ImageGetResponse[];
-  // }
-
   // getImage
   public async getImage(id : number){
     const url = `${this.constants.API_ENDPOINT}mash/${id}`;

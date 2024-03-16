@@ -7,7 +7,6 @@ import { FormsModule } from '@angular/forms';
 // import { UploadImageService } from '../../services/api/upload-image.service';
 import { UploadTableImage } from '../../services/api/upload-taimage.service';
 import { ImageGetResponse } from '../../model/ImageGetResponse';
-import { ImageService } from '../../services/api/image.service';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { UploadImageService } from '../../services/api/upload-image.service';
 import Swal from 'sweetalert2';
@@ -40,7 +39,6 @@ export class UploadComponent implements OnInit {
   constructor(
     private router: Router,
     private tableUploadImage: UploadTableImage,
-    private imageservice: ImageService,
   ) { }
 
   ngOnInit(): void {
