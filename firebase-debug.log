@@ -62,3 +62,6 @@
 [debug] [2024-03-16T21:51:40.831Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/puppymash-7bf34/versions/31b8b4ab17f0af44/files/c42dff4817a6152b3f298e876cc8b4f86dfca17428a77902c7be960cd98cd341 [stream]
 [debug] [2024-03-16T21:51:47.812Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/puppymash-7bf34/versions/31b8b4ab17f0af44/files/4439f91a78302af48921c694840c4cda4c41021779710b8ecba5b8496e56bd27 200
 [debug] [2024-03-16T21:51:47.812Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/puppymash-7bf34/versions/31b8b4ab17f0af44/files/4439f91a78302af48921c694840c4cda4c41021779710b8ecba5b8496e56bd27 [stream]
+[debug] [2024-03-16T21:52:07.620Z] [uploadQueue] Retrying task 47722a98f0d5a8627d12930ca22afe5d2dfe1db6894bc0c62a134796c7b81187
+[debug] [2024-03-16T21:52:07.621Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/puppymash-7bf34/versions/31b8b4ab17f0af44/files/47722a98f0d5a8627d12930ca22afe5d2dfe1db6894bc0c62a134796c7b81187 [none]
+[debug] [2024-03-16T21:52:07.621Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/puppymash-7bf34/versions/31b8b4ab17f0af44/files/47722a98f0d5a8627d12930ca22afe5d2dfe1db6894bc0c62a134796c7b81187 [stream]
