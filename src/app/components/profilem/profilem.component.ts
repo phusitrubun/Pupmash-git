@@ -25,7 +25,7 @@ export class ProfilemComponent implements OnInit{
 
     }
     this.getUser(this.id);
-    
+
 }
 
 async getUser(id : number){
