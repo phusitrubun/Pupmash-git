@@ -184,3 +184,244 @@
   width: 25px;
   height: 10px;
 }
+@media (max-width: 992px) {
+  h3 {
+    margin-right: 2rem;
+    font-size: 14px;
+  }
+
+  .row1 {
+    width: 80%;
+  }
+
+  .Top {
+    width: 18vw;
+    height: 18vw;
+  }
+
+  .Top1 {
+    width: 22vw;
+    height: 22vw;
+  }
+
+  .lists {
+    width: 70%;
+  }
+
+  .list {
+    height: 6vh;
+  }
+
+  .name {
+    font-size: 14px;
+  }
+
+  .score {
+    font-size: 14px;
+  }
+
+  .iconpng {
+    width: 4vw;
+    height: 6vh;
+  }
+
+  .span {
+    font-size: 24px;
+    padding: 8px;
+  }
+
+  .crown2,
+  .crown3 {
+    width: 80px;
+  }
+
+  .count1 {
+    font-size: 30px;
+    top: -250px;
+  }
+
+  .count2 {
+    font-size: 40px;
+    top: -350px;
+  }
+
+  .rank {
+    top: -400px;
+    width: 30px;
+    height: 8px;
+    padding: 8px;
+  }
+
+  .ranks {
+    top: -300px;
+    width: 30px;
+    height: 8px;
+    padding: 8px;
+  }
+
+  .scores,
+  .scoresa {
+    top: -60px;
+    width: 20px;
+    height: 8px;
+    padding: 8px;
+  }
+}
+
+@media (max-width: 768px) {
+  h3 {
+    margin-right: 1rem;
+    font-size: 12px;
+  }
+
+  .row1 {
+    width: 90%;
+  }
+
+  .Top {
+    width: 22vw;
+    height: 22vw;
+  }
+
+  .Top1 {
+    width: 28vw;
+    height: 28vw;
+  }
+
+  .lists {
+    width: 80%;
+  }
+
+  .list {
+    height: 5vh;
+  }
+
+  .name {
+    font-size: 12px;
+  }
+
+  .score {
+    font-size: 12px;
+  }
+
+  .iconpng {
+    width: 5vw;
+    height: 7vh;
+  }
+
+  .span {
+    font-size: 20px;
+    padding: 6px;
+  }
+
+  .crown2,
+  .crown3 {
+    width: 60px;
+  }
+
+  .count1 {
+    font-size: 25px;
+    top: -200px;
+  }
+
+  .count2 {
+    font-size: 35px;
+    top: -300px;
+  }
+
+  .rank {
+    top: -350px;
+    width: 25px;
+    height: 6px;
+    padding: 6px;
+  }
+
+  .ranks {
+    top: -250px;
+    width: 25px;
+    height: 6px;
+    padding: 6px;
+  }
+
+  .scores,
+  .scoresa {
+    top: -50px;
+    width: 18px;
+    height: 6px;
+    padding: 6px;
+  }
+}
+
+@media (max-width: 576px) {
+  h3 {
+    margin-right: 0.5rem;
+    font-size: 10px;
+  }
+
+  .lists {
+    width: 90%;
+  }
+
+  .list {
+    height: 4vh;
+  }
+
+  .name {
+    font-size: 10px;
+  }
+
+  .score {
+    font-size: 10px;
+  }
+
+  .iconpng {
+    width: 6vw;
+    height: 8vh;
+  }
+
+  .span {
+    font-size: 16px;
+    padding: 4px;
+  }
+
+  .crown2,
+  .crown3 {
+    width: 40px;
+  }
+
+  .count,
+  .count1,
+  .count2 {
+    font-size: 20px;
+  }
+
+  .count1 {
+    top: -150px;
+  }
+
+  .count2 {
+    top: -250px;
+  }
+
+  .rank,
+  .ranks {
+    width: 20px;
+    height: 4px;
+    padding: 4px;
+  }
+
+  .rank {
+    top: -300px;
+  }
+
+  .ranks {
+    top: -200px;
+  }
+
+  .scores,
+  .scoresa {
+    width: 16px;
+    height: 4px;
+    padding: 4px;
+  }
+}

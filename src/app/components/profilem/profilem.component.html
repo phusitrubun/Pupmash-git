@@ -22,21 +22,22 @@
         </div>
       </div>
       <div class="man">
-        <textarea class="biode">
-          {{userprofile?.bio}}
+        <textarea class="biode" placeholder="{{userprofile?.bio}}"  [(ngModel)]="bio">
+
+
         </textarea>
       </div>
     </div>
     <div class="input" style="width: 50%; ">
       <div class="allinput">
         <input type="email" placeholder="{{userprofile?.email}}" />
-      <input type="name" placeholder="{{userprofile?.name}}" />
+      <input type="name" placeholder="{{userprofile?.name}}" [(ngModel)]="name"/>
       <div class="pass">
         <input type="text" placeholder="Password" />
         <input type="text" placeholder="Confirm Password" />
       </div>
       <div style="width: 35vw; display: flex; justify-content: flex-end;">
-        <button type="submit">Update</button>
+        <button type="submit" (click)="updateprofile()">Update</button>
       </div>
       </div>
 

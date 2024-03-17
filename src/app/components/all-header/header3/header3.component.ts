@@ -1,5 +1,5 @@
 import { CommonModule, NgClass, NgIf } from '@angular/common';
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, HostListener, Output } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { UserGetResponse } from '../../../model/UserGetResponse';
 import { AuthenService } from '../../../services/api/authen.service';
@@ -46,6 +46,12 @@ export class Header3Component {
     }
   }
 
+  isMenuOpen: boolean = false;
+
+  toggleMenu1() {
+    this.isMenuOpen = !this.isMenuOpen;
+  }
+
   async getUser(id: number) {
     this.userprofile = await this.authenService.getUser(id);
   }
@@ -54,4 +60,11 @@ export class Header3Component {
   detroyLocalStrorage() {
     localStorage.removeItem('userID');
   }
+
+  @HostListener('document:click', ['$event'])
+handleOutsideClick(event: any) {
+  if (!event.target.closest('.LO') && !event.target.closest('.hamburger') && !event.target.closest('.profile')) {
+    this.isMenuOpen = false;
+  }
+}
 }

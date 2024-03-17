@@ -167,3 +167,90 @@ button:hover{
     }
   }
 }
+@media (max-width: 1200px) {
+  .login {
+    width: 50vw;
+  }
+  .log {
+    font-size: 4vw;
+  }
+  input[type="email"],
+  input[type="password"] {
+    width: 20vw;
+  }
+  input[type="text"] {
+    width: 42vw;
+  }
+  button {
+    margin-left: 26vw;
+    width: 12vw;
+    font-size: 2vw;
+  }
+}
+
+@media (max-width: 992px) {
+  .login {
+    width: 60vw;
+  }
+  .log {
+    font-size: 5vw;
+  }
+  input[type="email"],
+  input[type="password"] {
+    width: 25vw;
+  }
+  input[type="text"] {
+    width: 52vw;
+  }
+  button {
+    margin-left: 31vw;
+    width: 14vw;
+    font-size: 2.5vw;
+  }
+}
+
+@media (max-width: 768px) {
+  .login {
+    width: 70vw;
+  }
+  .log {
+    font-size: 6vw;
+  }
+  input[type="email"],
+  input[type="password"] {
+    width: 30vw;
+  }
+  input[type="text"] {
+    width: 62vw;
+  }
+  button {
+    margin-left: 36vw;
+    width: 16vw;
+    font-size: 3vw;
+  }
+}
+
+@media (max-width: 576px) {
+  .login {
+    width: 80vw;
+    margin-left: 10vw;
+  }
+  .log {
+    font-size: 7vw;
+  }
+  .input {
+    flex-direction: column;
+    align-items: center;
+  }
+  input[type="email"],
+  input[type="password"],
+  input[type="text"] {
+    width: 60vw;
+    margin-right: 0;
+  }
+  button {
+    margin-left: 0;
+    width: 40vw;
+    font-size: 4vw;
+  }
+}

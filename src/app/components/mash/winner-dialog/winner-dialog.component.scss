@@ -1,0 +1,57 @@
+@media (max-width: 768px) {
+  img[alt="crown"] {
+    width: 30px;
+  }
+
+  h1 {
+    font-size: 18px;
+  }
+
+  img[alt="winner"] {
+    width: 30vw;
+    height: 30vw;
+  }
+
+  h3 {
+    font-size: 14px;
+  }
+
+  hr {
+    width: 90%;
+  }
+
+  h2 {
+    font-size: 16px;
+  }
+
+  p {
+    font-size: 12px;
+  }
+
+  img[alt="elo1"] {
+    width: 80%;
+  }
+
+  img[alt="ra"] {
+    width: 40%;
+  }
+}
+
+@media (max-width: 480px) {
+  img[alt="winner"] {
+    width: 40vw;
+    height: 40vw;
+  }
+
+  h3 {
+    font-size: 12px;
+  }
+
+  h2 {
+    font-size: 14px;
+  }
+
+  p {
+    font-size: 10px;
+  }
+}

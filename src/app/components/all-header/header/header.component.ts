@@ -40,4 +40,6 @@ userId: any;
   async getUser(id: number) {
     this.userprofile = await this.authenService.getUser(id);
   }
+
+  
 }

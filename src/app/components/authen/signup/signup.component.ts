@@ -8,20 +8,22 @@ import { AuthenService } from '../../../services/api/authen.service';
 import * as bcrypt from "bcryptjs";
 import Swal from 'sweetalert2';
 import { UploadTableImage } from '../../../services/api/upload-taimage.service';
+import { Header3Component } from "../../all-header/header3/header3.component";
 
 
 @Component({
-  selector: 'app-signup',
-  standalone: true,
-  templateUrl: './signup.component.html',
-  styleUrl: './signup.component.scss',
-  imports: [
-    HeaderComponent,
-    Header2Component,
-    RouterLink,
-    CommonModule,
-    FormsModule,
-  ],
+    selector: 'app-signup',
+    standalone: true,
+    templateUrl: './signup.component.html',
+    styleUrl: './signup.component.scss',
+    imports: [
+        HeaderComponent,
+        Header2Component,
+        RouterLink,
+        CommonModule,
+        FormsModule,
+        Header3Component
+    ]
 })
 export class SignupComponent implements OnInit {
   imageUrl: string = '../../../assets/Puppy/happy.png';

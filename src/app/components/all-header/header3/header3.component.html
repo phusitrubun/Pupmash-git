@@ -1,31 +1,34 @@
 <div class="container">
   <div class="nav">
-    <div class="LO">
+    <div class="hamburger" (click)="toggleMenu1()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <div class="LO" [ngClass]="{ 'show-menu': isMenuOpen }">
       <li class="nav1" routerLink="/"><a>Home</a></li>
-      <li class="nav1"  routerLink="/mash"><a>Mash</a></li>
+      <li class="nav1" routerLink="/mash"><a>Mash</a></li>
       <li class="nav1" *ngIf="id != 1; else admin1" routerLink="/ranks"><a>Rank</a></li>
       <ng-template #admin1>
         <li class="nav1" routerLink="/ranks"><a>All Rank</a></li>
-        </ng-template>
+      </ng-template>
       <li class="nav1" routerLink="/"><img src="../../../assets/Puppy/happy.png" alt="" /></li>
       <li class="nav1" *ngIf="id != 1; else admin" routerLink="/chart"><a>Graph</a></li>
       <ng-template #admin>
-      <li  class="nav1"  routerLink="/userslist"><a>Users List</a></li>
+        <li class="nav1" routerLink="/userslist"><a>Users List</a></li>
       </ng-template>
       <li class="nav1" routerLink="/upload"><a>Upload</a></li>
-
       <li class="nav1" routerLink="" *ngIf="id" (click)="detroyLocalStrorage()"><a>Log Out</a></li>
-    <li class="nav1" *ngIf="!id" routerLink="/signup"><a>Sign Up</a></li>
+      <li class="nav1" *ngIf="!id" routerLink="/signup"><a>Sign Up</a></li>
     </div>
-    <div class="action"  *ngIf="id && !gurstID">
+    <div class="action" *ngIf="id && !gurstID">
       <div class="profile" (click)="toggleMenu()">
         <img src="{{userprofile?.image}}" alt="" />
       </div>
-      <div class="menu" [ngClass]="{ 'active': isMenuActive }">
+      <div class="menu" style="z-index: 2;" [ngClass]="{ 'active': isMenuActive }">
         <h3>PUPPY <br> <span>Profile</span></h3>
         <ul style="display: flex; flex-direction: column; justify-content: flex-start;width: -40px;">
-          <li routerLink="/profile2/{{userprofile?.userID}}" style="cursor: pointer;"><img src="../../../assets/user (1).png"
-              alt="" /><span>{{userprofile?.name}}</span></li>
+          <li routerLink="/profile2/{{userprofile?.userID}}" style="cursor: pointer;"><img src="../../../assets/user (1).png" alt="" /><span>{{userprofile?.name}}</span></li>
           <li><img src="../../../assets/email.png" alt="" /><span>{{userprofile?.email}}</span></li>
         </ul>
       </div>

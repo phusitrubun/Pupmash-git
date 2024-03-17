@@ -66,21 +66,23 @@ img{
   height: 100%;
   object-fit: cover;
 }
-.action .menu{
+.action .menu {
+  display: none; /* ซ่อนเมนูไว้ก่อนเริ่มต้น */
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
-  position: absolute;
+  position: relative;
   top: 80px;
   right: -10px;
   padding: 10px 20px;
   background: #fff;
   width: 200px;
-  box-sizing: 0 5px 25px rgba(0,0,0,0.1);
+  box-sizing: 0 5px 25px rgba(0, 0, 0, 0.1);
   border-radius: 15px;
   transition: 0.5s;
   opacity: 0;
 }
-.action .menu.active{
-  visibility: visible;
+
+.action .menu.active {
+  display: block; /* แสดงเมนูเมื่อมีคลาส 'active' ถูกเพิ่ม */
   opacity: 1;
 }
 .action .menu::before{
