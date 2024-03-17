@@ -1,25 +1,47 @@
-[debug] [2024-03-16T22:38:24.994Z] ----------------------------------------------------------------------
-[debug] [2024-03-16T22:38:24.996Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\lenovo\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
-[debug] [2024-03-16T22:38:24.996Z] CLI Version:   13.5.1
-[debug] [2024-03-16T22:38:24.997Z] Platform:      win32
-[debug] [2024-03-16T22:38:24.997Z] Node Version:  v20.10.0
-[debug] [2024-03-16T22:38:24.997Z] Time:          Sun Mar 17 2024 05:38:24 GMT+0700 (เวลาอินโดจีน)
-[debug] [2024-03-16T22:38:24.997Z] ----------------------------------------------------------------------
+[debug] [2024-03-17T20:42:21.461Z] ----------------------------------------------------------------------
+[debug] [2024-03-17T20:42:21.463Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\PhusitRubun\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js init
+[debug] [2024-03-17T20:42:21.463Z] CLI Version:   13.5.1
+[debug] [2024-03-17T20:42:21.464Z] Platform:      win32
+[debug] [2024-03-17T20:42:21.464Z] Node Version:  v20.8.0
+[debug] [2024-03-17T20:42:21.464Z] Time:          Mon Mar 18 2024 03:42:21 GMT+0700 (Indochina Time)
+[debug] [2024-03-17T20:42:21.464Z] ----------------------------------------------------------------------
 [debug] 
-[debug] [2024-03-16T22:38:25.058Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
-[debug] [2024-03-16T22:38:25.058Z] > authorizing via signed-in user (65011212076@msu.ac.th)
-[debug] [2024-03-16T22:38:25.058Z] [iam] checking project puppymash-7bf34 for permissions ["firebase.projects.get","firebasehosting.sites.update"]
-[debug] [2024-03-16T22:38:25.059Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/puppymash-7bf34:testIamPermissions [none]
-[debug] [2024-03-16T22:38:25.060Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/puppymash-7bf34:testIamPermissions x-goog-quota-user=projects/puppymash-7bf34
-[debug] [2024-03-16T22:38:25.060Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/puppymash-7bf34:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
-[debug] [2024-03-16T22:38:26.318Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/puppymash-7bf34:testIamPermissions 200
-[debug] [2024-03-16T22:38:26.318Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/puppymash-7bf34:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
-[debug] [2024-03-16T22:38:26.318Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/puppymash-7bf34 [none]
-[debug] [2024-03-16T22:38:26.939Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/puppymash-7bf34 200
-[debug] [2024-03-16T22:38:26.940Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/puppymash-7bf34 {"projectId":"puppymash-7bf34","projectNumber":"359241118737","displayName":"Puppymash","name":"projects/puppymash-7bf34","resources":{"hostingSite":"puppymash-7bf34","storageBucket":"puppymash-7bf34.appspot.com","locationId":"us-central"},"state":"ACTIVE","etag":"1_ddf65e18-f8fe-4fb3-a278-0cd26a3b3ea5"}
+[debug] [2024-03-17T20:42:21.531Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2024-03-17T20:42:21.532Z] > authorizing via signed-in user (65011212027@msu.ac.th)
 [info] 
-[info] === Deploying to 'puppymash-7bf34'...
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  D:\Pupmash-git
+
+Before we get started, keep in mind:
+
+  * You are initializing within an existing Firebase project directory
+
 [info] 
-[info] i  deploying hosting 
-[debug] [2024-03-16T22:38:26.944Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/puppymash-7bf34/versions [none]
-[debug] [2024-03-16T22:38:26.944Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/puppymash-7bf34/versions {"status":"CREATED","labels":{"deployment-tool":"cli-firebase"}}
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
+[debug] [2024-03-17T20:42:29.408Z] Using project from CLI flag: puppymash-7bf34
+[debug] [2024-03-17T20:42:29.410Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/puppymash-7bf34 [none]
+[debug] [2024-03-17T20:42:30.053Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/puppymash-7bf34 200
+[debug] [2024-03-17T20:42:30.053Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/puppymash-7bf34 {"projectId":"puppymash-7bf34","projectNumber":"359241118737","displayName":"Puppymash","name":"projects/puppymash-7bf34","resources":{"hostingSite":"puppymash-7bf34","storageBucket":"puppymash-7bf34.appspot.com","locationId":"us-central"},"state":"ACTIVE","etag":"1_ddf65e18-f8fe-4fb3-a278-0cd26a3b3ea5"}
+[info] i  Using project puppymash-7bf34 (Puppymash) 
+[info] 
+=== Hosting Setup
+[debug] [2024-03-17T20:42:30.064Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/puppymash-7bf34 [none]
+[debug] [2024-03-17T20:42:30.548Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/puppymash-7bf34 200
+[debug] [2024-03-17T20:42:30.549Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/puppymash-7bf34 {"projectId":"puppymash-7bf34","projectNumber":"359241118737","displayName":"Puppymash","name":"projects/puppymash-7bf34","resources":{"hostingSite":"puppymash-7bf34","storageBucket":"puppymash-7bf34.appspot.com","locationId":"us-central"},"state":"ACTIVE","etag":"1_ddf65e18-f8fe-4fb3-a278-0cd26a3b3ea5"}
+[info] 
+[info] Your public directory is the folder (relative to your project directory) that
+[info] will contain Hosting assets to be uploaded with firebase deploy. If you
+[info] have a build process for your assets, use your build's output directory.
+[info] 
