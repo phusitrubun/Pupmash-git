@@ -1,57 +1,58 @@
 <div>
-    <div style="display: flex; flex-direction: row; justify-content: center;">
-        <img src="../../../../assets/crown/Group 87.svg" alt="crown" width="50" style="margin-right: 1rem;">
-        <h1>Winner is </h1>
-        <h1 style="color: yellow; margin-left: 1rem">{{player1?.name}}</h1>
+  <div style="display: flex; flex-direction: row; justify-content: center;">
+    <img src="../../../../assets/crown/Group 87.svg" alt="crown" width="50" style="margin-right: 1rem;">
+    <h1>Winner is </h1>
+    <h1 style="color: yellow; margin-left: 1rem">{{player1?.name}}</h1>
+  </div>
+  <div style="display: grid; place-items: center;">
+    <img src="{{player1?.url}}" alt="winner"
+      style="border-radius: 50rem; width: 15vw; height: 15vw; object-fit: cover; ">
+  </div>
+  <div style="display: grid; place-items: center; margin-top: 0%; flex-direction: column;">
+    <h3 style="margin: 0%;">Old Score : {{player1?.score}}</h3>
+    <div style="display: flex; flex-direction: row;" *ngIf="diff <= oldScore; else minus">
+      <h3 style="margin: 0%; display: inline;">New Score : {{Ra}}</h3>
+      <h3 style="margin: 0%; display: inline; color: greenyellow; margin-left: 1rem;"> + {{diff}}</h3>
     </div>
-    <div  style="display: grid; place-items: center;">
-        <img src="{{player1?.url}}" alt="winner" style="border-radius: 50rem; width: 15vw; height: 15vw; object-fit: cover; ">
-    </div>
-    <div  style="display: grid; place-items: center; margin-top: 0%; flex-direction: column;">
-        <h3 style="margin: 0%;">Old Score : {{player1?.score}}</h3>
-        <div style="display: flex; flex-direction: row;" *ngIf="diff <= oldScore; else minus">
-            <h3 style="margin: 0%; display: inline;">New Score : {{Ra}}</h3>
-            <h3 style="margin: 0%; display: inline; color: greenyellow; margin-left: 1rem;"> + {{diff}}</h3>
+    <ng-template #minus>
+      <div style="display: flex; flex-direction: row;">
+        <h3 style="margin: 0%; display: inline;">New Score : {{Ra}}</h3>
+        <h3 style="margin: 0%; display: inline; color: red;">{{diff}}</h3>
+      </div>
+    </ng-template>
+
+
+
+  </div>
+  <div>
+    <hr style="width: 80%;">
+    <div style="margin-left: 2rem; margin-right: auto;">
+      <h1>Elo Rating</h1>
+      <div>
+        <h2>คำนวณ rating ของแต่ละ player</h2>
+        <div style="display: grid; place-items: center;">
+          <img src="../../../../assets/elo1.png" alt="elo1" width="50%">
         </div>
-        <ng-template #minus >
-            <div style="display: flex; flex-direction: row;">
-                <h3 style="margin: 0%; display: inline;">New Score : {{Ra}}</h3>
-                <h3 style="margin: 0%; display: inline; color: red;">{{diff}}</h3>
-            </div>
-        </ng-template>
-        
-        
-               
-    </div>
-    <div>
-        <hr style="width: 80%;">
-        <div style="margin-left: 2rem; margin-right: auto;">
-            <h1>Elo Rating</h1>
-            <div>
-                <h2>คำนวณ rating ของแต่ละ player</h2>
-                <div style="display: grid; place-items: center;">
-                    <img src="../../../../assets/elo1.png" alt="elo1" width="50%" >
-                </div>
-                <div style="margin-left: 2rem;">
-                    <p>Ea = 1 / 1+10^({{Rb}} - {{Ra}})/400 = {{Ea}} </p>
-                    <p>Eb = 1 / 1+10^({{Ra}} - {{Rb}})/400 = {{Eb}}</p>
-                </div>
-            </div>
-            <div>
-                <h2>คำนวณคะแนนใหม่ของแต่ละ player</h2>
-                <div style="display: grid; place-items: center;">
-                    <img src="../../../../assets/ra1.png" alt="ra" width="20%">
-                </div>
-                
-            </div>
-            <div style="margin-left: 2rem; display: flex; flex-direction: row;">
-                <p>Winner Score: {{player1?.score}} + 32(1 - {{Ea}})  = {{ Ra }}   </p>
-                <p style="font-weight: bold;">(New Rating !)</p>
-            </div>
-            <div style="margin-left: 2rem; display: flex; flex-direction: row;">
-                <p>Loser Score: {{player2?.score}} + 32(0 - {{Eb}}) =  {{ Rb }} </p>
-                <p style="font-weight: bold;">(New Rating !)</p>   
-            </div>
+        <div style="margin-left: 2rem;">
+          <p>Ea = 1 / 1+10^({{Rb}} - {{Ra}})/400 = {{Ea}} </p>
+          <p>Eb = 1 / 1+10^({{Ra}} - {{Rb}})/400 = {{Eb}}</p>
         </div>
+      </div>
+      <div>
+        <h2>คำนวณคะแนนใหม่ของแต่ละ player</h2>
+        <div style="display: grid; place-items: center;">
+          <img src="../../../../assets/ra1.png" alt="ra" width="20%">
+        </div>
+
+      </div>
+      <div style="margin-left: 2rem; display: flex; flex-direction: row;">
+        <p>Winner Score: {{player1?.score}} + 32(1 - {{Ea}}) = {{ Ra }} </p>
+        <p style="font-weight: bold;">(New Rating !)</p>
+      </div>
+      <div style="margin-left: 2rem; display: flex; flex-direction: row;">
+        <p>Loser Score: {{player2?.score}} + 32(0 - {{Eb}}) = {{ Rb }} </p>
+        <p style="font-weight: bold;">(New Rating !)</p>
+      </div>
     </div>
+  </div>
 </div>
