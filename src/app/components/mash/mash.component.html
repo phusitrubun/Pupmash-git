@@ -1,12 +1,12 @@
 <app-header3></app-header3>
 <div class="container">
-  
-  
+
+
   <section class="example-section">
     <p>ปิดการคำนวน</p>
     <mat-slide-toggle class="example-margin" [(ngModel)]="hidecalculate">{{this.hidecalculate}}</mat-slide-toggle>
   </section>
-  
+
   <div class="detail" >
     <div class="m2" *ngIf="!showSpinner">
       <div class="m1">
@@ -19,7 +19,7 @@
     <div class="or" *ngIf="!showSpinner">
       <img src="../../../assets/or.svg" alt="">
     </div>
-    
+
     <div class="m2" *ngIf="!showSpinner">
       <div class="m1">
         <img src="{{imageRight?.url}}" alt="imageRight" (click)="openWinnerDialog(imageRight!.imageID, imageLeft!.imageID)" >

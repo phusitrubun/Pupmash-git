@@ -70,7 +70,6 @@ async getUser(id : number){
         bio:this.bio,
         userID:this.id
       }
-
       this.updatepro.updateprofile(body);
       console.log(body);
     } else {
