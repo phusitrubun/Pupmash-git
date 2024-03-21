@@ -19,3 +19,63 @@
   .button:hover {
     background-color: white;
   }
+
+
+/* Default styles for larger screens */
+h3 {
+  margin-right: 15rem;
+  font-size: 16px;
+}
+
+.button {
+  width: 400px;
+  height: 60px;
+  font-size: 30px;
+}
+
+h1 {
+  font-size: 32px;
+}
+
+@media (max-width: 992px) {
+  h3 {
+    margin-right: 2rem;
+    font-size: 14px;
+  }
+
+  .button {
+    width: 300px;
+    height: 50px;
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  h3 {
+    margin-right: 1rem;
+    font-size: 12px;
+  }
+
+  .button {
+    width: 250px;
+    height: 40px;
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 576px) {
+  h3 {
+    margin-right: 0.5rem;
+    font-size: 10px;
+  }
+
+  .button {
+    width: 200px;
+    height: 35px;
+    font-size: 16px;
+  }
+
+  h1 {
+    font-size: 24px;
+  }
+}

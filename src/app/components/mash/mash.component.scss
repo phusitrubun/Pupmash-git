@@ -1,55 +1,58 @@
 .container {
-  // border: solid red 1px;
-  width: 95%;
+  width: 95vw;
   margin: 0 auto;
   height: 80vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  // background-color: #fede29;
+  padding-top: 5vh; /* เพิ่ม padding-top 5% ของความสูงหน้าจอ */
 }
+
 .detail {
-  margin-top: 30px;
-  // border: solid black 1px;
-  width: 90%;
+  margin-top: 3vh;
+  width: 90vw;
   background-color: rgba(255, 255, 255, 0.484);
-  height: 750px;
-  border-radius: 20px;
+  height: 75vh;
+  border-radius: 2vh;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
 }
-.m1{
+
+.m1 {
   border-radius: 60% 40% 70% 30% / 30% 30% 70% 70%;
-  width: 500px;
-  height: 350px;
+  width: 35vw;
+  height: 40vh;
   object-fit: cover;
   background-color: black;
-  box-shadow: 3px 6px 5px 0px rgba(0, 0, 0, 0.418);
-  margin-bottom: 20px;
+  box-shadow: 0.3vw 0.6vw 0.5vw 0vw rgba(0, 0, 0, 0.418);
+  margin-bottom: 2vh;
   cursor: pointer;
 }
-.or{
-  margin: 0px 50px 0px 50px ;
-  filter:drop-shadow(10px 7px 10px rgba(0, 0, 0, 0.418));
+
+.or {
+  margin: 0 5vw;
+  filter: drop-shadow(1vw 0.7vw 1vw rgba(0, 0, 0, 0.418));
 }
-img{
+
+img {
   object-fit: cover;
   border-radius: 60% 40% 70% 30% / 30% 30% 70% 70%;
   width: 100%;
   height: 100%;
+}
 
+.m2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
-.m2{
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-}
-span{
-  font-size: 45px;
+
+span {
+  font-size: 4.5vh;
   font-weight: 800;
   color: #fede29;
 }
@@ -58,14 +61,67 @@ span{
   position: absolute;
   width: 32vw;
   height: 32vw;
-
-  // background-image: url('../../../assets/spiner/output-onlinegiftools.gif'); /* เปลี่ยนชื่อไฟล์เป็นชื่อของไฟล์ GIF ของคุณ */
   background-image: url('../../../assets/spiner/spinner.gif');
-  // background-image: url('../../../assets/spiner/giphy.gif');
-
-  background-size: cover; /* ปรับขนาดรูปภาพให้เต็มพื้นที่ของ Spinner */
+  background-size: cover;
   border-radius: 50%;
-  left: 45%; /* ปรับตำแหน่งในแนวนอน (แกน x) */
-  top: 55%; /* จัดให้อยู่ตรงกลางตามแนวดิ่ง (แกน y) */
-  transform: translate(-50%, -50%); /* จัดให้ Spinner อยู่ตรงกลางของตัว container */
+  left: 50vw;
+  top: 50vh;
+  transform: translate(-50%, -50%);
+}
+
+/* Media Queries */
+
+/* สำหรับหน้าจอขนาดเล็ก (มือถือ) */
+@media (max-width: 767px) {
+  .container {
+    height: 100vh;
+    padding-top: 5vh; /* เพิ่ม padding-top 10% ของความสูงหน้าจอบนมือถือ */
+  }
+
+  .detail {
+    flex-direction: column;
+    height: auto;
+    margin-top: 2vh;
+  }
+
+  .m1 {
+    width: 70vw;
+    height: 30vh;
+    margin-bottom: 3vh;
+  }
+
+  .or {
+    margin: 3vh 0;
+    font-size: 3vh;
+    width: 10vw;
+  }
+
+  span {
+    font-size: 5vh;
+  }
+}
+
+/* สำหรับหน้าจอขนาดกลาง (แท็บเล็ต) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .container {
+    padding-top: 8vh; /* เพิ่ม padding-top 8% ของความสูงหน้าจอบนแท็บเล็ต */
+  }
+
+  .detail {
+    height: 60vh;
+  }
+
+  .m1 {
+    width: 25vw;
+    height: 25vh;
+  }
+
+  span {
+    font-size: 3vh;
+  }
+}
+
+/* สำหรับหน้าจอขนาดใหญ่ (คอมพิวเตอร์) */
+@media (min-width: 1024px) {
+  /* ไม่ต้องปรับค่าใดๆ เนื่องจากค่าเริ่มต้นเหมาะสมสำหรับหน้าจอขนาดใหญ่แล้ว */
 }

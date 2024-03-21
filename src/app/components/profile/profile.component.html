@@ -1,35 +1,34 @@
 <app-header3></app-header3>
-<div style="display: flex; margin-left: auto; margin-right: auto; width: 70%;">
-  <div style="background-color: #FFEA77; width: 100%; border-radius: 1.5rem; margin-top: 15%;  height: 60vh">
-    <div style="display: flex; flex-direction: row;">
-      <div class="btbk" (click)="goBack()" style="margin-left: 2.5rem; cursor: pointer;  height: 65px;">
-        <span class="material-symbols-outlined" style="font-size: 5vw;"><img  src="../../../assets/arrow-left.svg" alt=""></span>
+<div class="container">
+  <div class="profile-container1">
+    <div class="profile-container">
+      <div class="back-button">
+        <span class="material-symbols-outlined" (click)="goBack()" style="cursor: pointer;">
+          <img src="../../../assets/arrow-left.svg" alt="">
+        </span>
       </div>
-      <div style="margin-top: -7rem;">
-        <img src="{{userprofile?.image}}" alt="avater"
-          class="profileimg">
-          <!-- <img src="{{userprofile?.image}}" alt="avater"
-          style="width: 15vw;" class="profileimg"> -->
+      <div class="profile-image">
+        <img src="{{userprofile?.image}}" alt="avatar" class="profileimg">
       </div>
-      <div style="margin-left: 1rem; margin-top: 3.5rem;">
-        <div class="namefiled" style="display: flex; align-items: center; text-align: center; justify-content: center;">
+      <div class="profile-details">
+        <div class="name-field">
           <h1>{{userprofile?.name}}</h1>
         </div>
-        <div style="background-color: white; width: 40vw; height: 10rem; border-radius: 1.25rem; display: flex; align-items: center; text-align: center; justify-content: center; margin-top: 5%;">
+        <div class="bio-container">
           <h3 class="descibe">{{userprofile?.bio}}</h3>
         </div>
       </div>
     </div>
-    <div
-      style="display: flex; justify-content: center; flex-direction: row; width: 80%; margin-top: 1rem; margin-left: 9rem;">
-      <div *ngFor="let userImage of userImages" style="margin-right: 4.5rem;">
+    <div class="image-grid">
+      <div *ngFor="let userImage of userImages" class="image-container">
         <img class="uploadimage" src="{{userImage.url}}" alt="picupload">
-        <div style="display: flex; flex-direction: row; justify-content: space-between;">
-          <p style="font-weight: bold;">{{userImage.name}}</p>
+        <div class="image-details">
+          <p>{{userImage.name}}</p>
           <p>{{userImage.score}} px</p>
         </div>
       </div>
-      
     </div>
   </div>
+
+
 </div>

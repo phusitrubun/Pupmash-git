@@ -5,6 +5,7 @@ import { UserGetResponse } from '../../../model/UserGetResponse';
 import { AuthenService } from '../../../services/api/authen.service';
 import * as bcrypt from 'bcryptjs';
 import Swal from 'sweetalert2';
+import { Header3Component } from "../../all-header/header3/header3.component";
 
 
 @Component({
@@ -12,7 +13,7 @@ import Swal from 'sweetalert2';
     standalone: true,
     templateUrl: './login.component.html',
     styleUrl: './login.component.scss',
-    imports: [RouterLink, RouterOutlet, HeaderComponent]
+    imports: [RouterLink, RouterOutlet, HeaderComponent, Header3Component]
 })
 export class LoginComponent {
     user: UserGetResponse | undefined;
@@ -22,23 +23,23 @@ export class LoginComponent {
     async userLogin(email: string, password: string){
         console.log(email);
         console.log(password);
-        
+
         if (email && password) {
             this.user = await this.authenService.checkUser(email);
             console.log(this.user);
-            
+
             if (this.user) {
                 const hashPass = await bcrypt.compare(password, this.user.password);
                 if (hashPass) {
-                    const type = this.user.type; 
+                    const type = this.user.type;
                     localStorage.setItem('userID', this.user.userID.toString());
-                    
+
                     if(type == 1){
                         this.router.navigate(['mash']);
                     } else {
                         this.router.navigate(['userslist']);
                     }
-                    
+
                     // Show Sweet Alert for successful login
                     Swal.fire({
                         icon: 'success',
@@ -71,5 +72,5 @@ export class LoginComponent {
             });
         }
     }
-    
+
 }

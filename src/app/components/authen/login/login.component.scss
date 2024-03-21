@@ -6,6 +6,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   margin-top: 5vw;
 
 }
@@ -16,10 +17,9 @@
   justify-content: center;
   align-items: center;
   border-radius: 20px;
-  width: 30vw;
-  height: 70vh;
+  width: 40vw; /* เปลี่ยนจาก 30vw เป็น 40vw */
+  height: 80vh; /* เปลี่ยนจาก 70vh เป็น 80vh */
   background-color: rgba(254, 250, 169, 0.553);
-  margin-left: 15vw;
 }
 .log{
   font-size: 3.5vw;
@@ -44,16 +44,16 @@ font-weight: 600;
 margin-top: 20px;
 margin-bottom: 10px;
 }
-button{
-  width: 10vw;
-  height: 5vh;
+button {
+  width: 15vw; /* เปลี่ยนจาก 10vw เป็น 15vw */
+  height: 7vh; /* เปลี่ยนจาก 5vh เป็น 7vh */
   border-radius: 50px;
   border: none;
-  font-size: 1.5vw;
+  font-size: 2vw; /* เปลี่ยนจาก 1.5vw เป็น 2vw */
   font-weight: 600;
   margin-top: 20px;
   background-color: #ffffff;
-  color:#ffe344;
+  color: #ffe344;
   transform: 0.3s;
   cursor: pointer;
   outline: #ffdf27;
@@ -81,4 +81,71 @@ button:hover{
   font-weight: 700;
   text-decoration: underline;
   cursor: pointer;
+}
+/* Styles for screens smaller than 768px (e.g., mobile devices) */
+@media (max-width: 767px) {
+  .login {
+    width: 80%;
+    height: auto;
+    margin-left: 0;
+    padding: 20px;
+  }
+
+  .log {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+
+  input[type="email"],
+  input[type="password"] {
+    width: 100%;
+    height: 40px;
+    font-size: 16px;
+    text-indent: 10px;
+  }
+
+  button {
+    width: 50%;
+    height: 40px;
+    font-size: 16px;
+  }
+
+  .span {
+    margin-top: 20px;
+    font-size: 14px;
+  }
+}
+
+/* Styles for screens larger than 768px (e.g., tablets and desktops) */
+@media (min-width: 768px) {
+  .login {
+    width: 400px;
+    height: 500px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .log {
+    font-size: 28px;
+    margin-bottom: 30px;
+  }
+
+  input[type="email"],
+  input[type="password"] {
+    width: 300px;
+    height: 40px;
+    font-size: 16px;
+    text-indent: 20px;
+  }
+
+  button {
+    width: 150px;
+    height: 40px;
+    font-size: 18px;
+  }
+
+  .span {
+    margin-top: 30px;
+    font-size: 16px;
+  }
 }
