@@ -10,6 +10,8 @@ import { ChartComponent } from './components/chart/chart.component';
 import { ProfilemComponent } from './components/profilem/profilem.component';
 import { UploadComponent } from './components/upload/upload.component';
 import { MashComponent } from './components/mash/mash.component';
+import { Chart } from 'chart.js';
+import { ChartImageComponent } from './components/chart-image/chart-image.component';
 
 export const routes: Routes = [
   { path: '', component: Main2Component },
@@ -18,6 +20,7 @@ export const routes: Routes = [
   { path: 'profile/:id', component: ProfileComponent },
   { path: 'ranks', component: RanksComponent },
   { path: 'chart', component: ChartComponent },
+  { path: 'chart/:id' , component: ChartImageComponent},
   { path: 'profile2/:userid', component: ProfilemComponent },
   { path: 'userslist', component: UserslistComponent },
   { path: 'upload', component: UploadComponent },
