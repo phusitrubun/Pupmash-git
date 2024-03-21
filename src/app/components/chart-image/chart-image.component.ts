@@ -1,37 +1,36 @@
-import { Component, OnInit } from '@angular/core';
-import { NgChartsModule } from 'ng2-charts';
-import { ChartConfiguration, ChartOptions, PluginChartOptions } from 'chart.js';
-import { Header3Component } from '../all-header/header3/header3.component';
+import { Component } from '@angular/core';
+import { ChartConfiguration, ChartOptions } from 'chart.js';
 import { MashImageService } from '../../services/api/mash-image.service';
-import { CommonModule, DatePipe } from '@angular/common';
 import { VoteService } from '../../services/api/vote.service';
 import { Rank } from '../../model/voteResponse';
-import { RouterLink } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
+import { ActivatedRoute, RouterLink } from '@angular/router';
+import { CommonModule, DatePipe } from '@angular/common';
+import { Header3Component } from '../all-header/header3/header3.component';
+import { NgChartsModule } from 'ng2-charts';
 
 @Component({
-  selector: 'app-chart',
+  selector: 'app-chart-image',
   standalone: true,
   imports: [NgChartsModule, Header3Component, DatePipe, CommonModule, RouterLink, MatButtonModule],
-  templateUrl: './chart.component.html',
-  styleUrls: ['./chart.component.scss'],
+  templateUrl: './chart-image.component.html',
+  styleUrl: './chart-image.component.scss'
 })
-export class ChartComponent implements OnInit {
+export class ChartImageComponent {
   dates: string[] = [];
   userId: any;
-  id:number = 0;
+  id : any;
   Images: any = '';
   currentDate: Date = new Date();
   currentScore: number = 0;
   Puppy : Rank [] = [];
-  constructor(private mashImageService: MashImageService, private vote: VoteService){}
+  constructor(private mashImageService: MashImageService, private vote: VoteService, private activeatedRoute: ActivatedRoute){}
   ngOnInit(): void {
-    const userIdString = localStorage.getItem('userID');
-    if (userIdString) {
-      this.id = parseInt(userIdString);
-      console.log("User : ", this.id);
-    }
-  
+    this.id = this.activeatedRoute.snapshot.paramMap.get('id') || '';  
+    console.log(this.id);
+    
+
+
     // get the last 7 days
     for (let i = 7; i >= 1; i--) {
       const date = new Date();
@@ -236,9 +235,11 @@ export class ChartComponent implements OnInit {
 
   public scatterChartData: ChartConfiguration<'scatter'>['data'] | undefined;
 
+
+  
   public async getImgage() {
-    try {
-      this.Images = await this.vote.stattistic(this.id);
+    try {      
+      this.Images = await this.vote.chart_image(this.id);
       console.log(this.Images);
 
       this.updateScatterChartData();
@@ -323,7 +324,7 @@ export class ChartComponent implements OnInit {
     plugins: {
       title: {
         display: true,
-        text: 'Score vs Date',
+        text: '',
         color: '#000',
         font: {
           size: 20,
