@@ -1,0 +1,52 @@
+<app-header3></app-header3>
+<h3 style="text-align: end; margin-right: 15rem">
+  {{ currentDate | date : "dd/MM/yyyy HH:mm:ss" }}
+</h3>
+<div style="display: flex; flex-direction: row;">
+    <div *ngFor="let item of Images" style="margin-left: 10%; margin-top: 2%;"> 
+        <img src="{{item.url}}" alt="image" width="300px" style="border-radius: 30px;">
+        <h2 style="text-align: center;">{{item.name}}</h2>
+    </div>
+  <div
+    style="
+      width: 60%;
+      height: 60%;
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: 2%;
+      justify-content: center;
+    "
+  >
+    <canvas
+      baseChart
+      [type]="'scatter'"
+      [data]="scatterChartData"
+      [options]="scatterChartOptions"
+      [legend]="scatterChartLegend"
+      [plugins]="scatterChartPlugins ? scatterChartPlugins : []"
+    >
+    </canvas>
+  </div>
+</div>
+
+<ng-template #forguest>
+  <div
+    style="
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 80vh;
+    "
+  >
+    <div>
+      <h1 style="text-align: center">Please login !</h1>
+      <button class="button" [routerLink]="['/login']">Login</button>
+      <div style="display: flex; flex-direction: row">
+        <h3>If you don't have an account,</h3>
+        <h3 style="margin-left: 1rem">
+          <a routerLink="/signup">click here</a>
+        </h3>
+      </div>
+    </div>
+  </div>
+</ng-template>

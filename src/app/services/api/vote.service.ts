@@ -23,4 +23,24 @@ export class VoteService {
     return response as Rank[];
   }
 
+  
+  
+  // ข้อมูลทั้งหมดของ user นั้น ที่ใส่ในกราฟ
+  public async stattistic(id : number){
+    const url = `${this.constants.API_ENDPOINT}vote/stat/${id}`;
+    const response = await lastValueFrom(this.http.get(url));
+    // console.log(response);
+    return response;
+  }
+
+
+  // ขอ้มูลของรูปภาพรูปเดียว
+  public async chart_image(id : any){
+    const url = `${this.constants.API_ENDPOINT}vote/stat/image/${id}`;
+    const response = await lastValueFrom(this.http.get(url));
+    console.log(response);
+    return response;
+  }
+
+
 }

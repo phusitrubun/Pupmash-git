@@ -19,7 +19,7 @@
       </ng-template>
       <li class="nav1" routerLink="/upload"><a>Upload</a></li>
       <li class="nav1" routerLink="" *ngIf="id" (click)="detroyLocalStrorage()"><a>Log Out</a></li>
-      <li class="nav1" *ngIf="!id" routerLink="/signup"><a>Sign Up</a></li>
+      <li class="nav1" *ngIf="!id" routerLink="signup"><a>Sign Up</a></li>
     </div>
     <div class="action" *ngIf="id && !gurstID">
       <div class="profile" (click)="toggleMenu()">

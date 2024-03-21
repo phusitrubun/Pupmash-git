@@ -32,7 +32,7 @@
       <div class="menu" [ngClass]="{ 'active': isMenuActive }">
         <h3>PUPPY <br> <span>Profile</span></h3>
         <ul style="display: flex; flex-direction: column; justify-content: flex-start;width: -40px;">
-          <li routerLink="/profile2" style="cursor: pointer;">
+          <li routerLink="/profile2/:{{userprofile?.userID}}" style="cursor: pointer;">
             <img src="{../../../assets/user (1).png}" alt="" />
             <span routerLink="/profile2/{{userprofile?.userID}}">{{userprofile?.name}}</span>
           </li>
