@@ -58,7 +58,7 @@ export class ProfilemComponent implements OnInit{
       const reader = new FileReader();
       reader.onload = (e: any) => {
           this.imageUrl = e.target.result;
-          console.log(this.imageUrl);
+        //   console.log(this.imageUrl);
       };
       reader.readAsDataURL(file);
   }
@@ -84,14 +84,18 @@ export class ProfilemComponent implements OnInit{
 
           if (this.file) {
               const uploadedImage = await this.upload.urlImageProfile(this.file); // Upload new image
-              imageUrl = uploadedImage.file; // Use URL of the newly uploaded image
+              console.log(uploadedImage);
+              
+              imageUrl = uploadedImage.file; // Use URL of the newly uploaded image'
+              console.log(imageUrl);
+              
           }
 
           const body = {
               name: this.name,
               bio: this.bio,
-              Image: imageUrl,
               password: hashedPassword,
+              image: imageUrl,
               userID: this.id
           };
 
