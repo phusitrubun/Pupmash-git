@@ -24,7 +24,7 @@
         <a routerLink="" (click)="detroyLocalStrorage()">Log out</a>
       </li>
     </div>
-    
+
     <div class="action">
       <div class="profile" (click)="toggleMenu()">
         <img src="{{userprofile?.image}}" alt="" />
@@ -34,7 +34,7 @@
         <ul style="display: flex; flex-direction: column; justify-content: flex-start;width: -40px;">
           <li routerLink="/profile2" style="cursor: pointer;">
             <img src="{../../../assets/user (1).png}" alt="" />
-            <span>{{userprofile?.name}}</span>
+            <span routerLink="/profile2/{{userprofile?.userID}}">{{userprofile?.name}}</span>
           </li>
           <li>
             <img src="../../../assets/email.png" alt="" />
