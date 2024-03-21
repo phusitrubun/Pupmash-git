@@ -58,7 +58,7 @@ export class SignupComponent implements OnInit {
     reader.readAsDataURL(file);
   }
 
-  async signUp() {
+  async signUp() {  
     const dbemail = await this.authenService.checkUser(this.email);
     if (!dbemail) {
         const saltRound = 10;
@@ -85,10 +85,8 @@ export class SignupComponent implements OnInit {
             };
 
             await this.authenService.InsertUser(data);
-
             // Close the SweetAlert when the operation is complete
             Swal.close();
-
             // Show Sweet Alert for successful signup
             Swal.fire({
                 icon: 'success',

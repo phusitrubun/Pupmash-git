@@ -33,11 +33,11 @@
         <input type="email" placeholder="{{userprofile?.email}}" />
       <input type="name" placeholder="{{userprofile?.name}}" [(ngModel)]="name"/>
       <div class="pass">
-        <input type="text" placeholder="Password" />
-        <input type="text" placeholder="Confirm Password" />
+        <input type="text" placeholder="Password" [(ngModel)]="password" />
+        <input type="text" placeholder="Confirm Password" [(ngModel)]="confirmPassword" />
       </div>
       <div style="width: 35vw; display: flex; justify-content: flex-end;">
-        <button type="submit" (click)="updateprofile()">Update</button>
+        <button type="submit"(click)="updateprofile()">Update</button>
       </div>
       </div>
 
