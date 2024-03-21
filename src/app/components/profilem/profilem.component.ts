@@ -8,6 +8,7 @@ import { CommonModule } from '@angular/common';
 import { UpdateService } from '../../services/api/update.service';
 import Swal from 'sweetalert2';
 import * as bcrypt from 'bcryptjs';
+import { UploadTableImage } from '../../services/api/upload-taimage.service';
 
 @Component({
     selector: 'app-profilem',
@@ -24,8 +25,13 @@ export class ProfilemComponent implements OnInit{
   bio: string = "";
   password: string = "";
   confirmPassword: string = "";
+  file!: File;
 
-  constructor(private authenService: AuthenService, private updatepro: UpdateService) { }
+  constructor(
+      private authenService: AuthenService,
+      private updatepro: UpdateService,
+      private upload: UploadTableImage // Injected UploadTableImage service
+  ) { }
 
   ngOnInit(): void {
       const userIdString = localStorage.getItem('userID');
@@ -42,9 +48,9 @@ export class ProfilemComponent implements OnInit{
   }
 
   onFileSelected(event: any) {
-      const file = event.target.files[0];
-      if (file) {
-          this.readURL(file);
+      this.file = event.target.files[0];
+      if (this.file) {
+          this.readURL(this.file);
       }
   }
 
@@ -52,59 +58,60 @@ export class ProfilemComponent implements OnInit{
       const reader = new FileReader();
       reader.onload = (e: any) => {
           this.imageUrl = e.target.result;
+          console.log(this.imageUrl);
       };
       reader.readAsDataURL(file);
   }
 
   async updateprofile() {
-    if (this.name || this.bio || this.password) {
-      if (!this.name) {
-          this.name = this.userprofile?.name as string;
-      }
-      if (!this.bio) {
-          this.bio = this.userprofile?.bio as string;
-      }
+      if (this.name || this.bio || this.password || this.file) {
+          if (!this.name) {
+              this.name = this.userprofile?.name as string;
+          }
+          if (!this.bio) {
+              this.bio = this.userprofile?.bio as string;
+          }
 
-      if (this.password !== this.confirmPassword) {
-          Swal.fire('Error', 'Passwords do not match', 'error');
-          return;
-      }
+          if (this.password !== this.confirmPassword) {
+              Swal.fire('Error', 'Passwords do not match', 'error');
+              return;
+          }
 
-      // Hash the password using bcryptjs
-      const salt = await bcrypt.genSalt(10);
-      const hashedPassword = await bcrypt.hash(this.password, salt);
+          const salt = await bcrypt.genSalt(10);
+          const hashedPassword = await bcrypt.hash(this.password, salt);
 
-      const body = {
-          name: this.name,
-          bio: this.bio,
-          password: hashedPassword, // Use the hashed password
-          userID: this.id
-      }
+          let imageUrl = this.userprofile?.image;
 
-      const originalName = this.userprofile?.name;
-      const originalBio = this.userprofile?.bio;
-      if (body.name === originalName && body.bio === originalBio && !body.password) {
-          Swal.fire('Info', 'No changes were made to your profile', 'info').then(() => {
-              location.reload();
-          });
-      } else {
+          if (this.file) {
+              const uploadedImage = await this.upload.urlImageProfile(this.file); // Upload new image
+              imageUrl = uploadedImage.file; // Use URL of the newly uploaded image
+          }
+
+          const body = {
+              name: this.name,
+              bio: this.bio,
+              Image: imageUrl,
+              password: hashedPassword,
+              userID: this.id
+          };
+
           try {
               await this.updatepro.updateprofile(body);
               Swal.fire('Success', 'Profile updated successfully', 'success').then(() => {
-                  location.reload();
+                  // location.reload();
               });
           } catch (error) {
               Swal.fire('Error', 'Failed to update profile', 'error').then(() => {
-                  location.reload();
+                  // location.reload();
               });
           }
+
+          console.log(body);
+      } else {
+          Swal.fire('Info', 'No data found to update', 'info').then(() => {
+              // location.reload();
+          });
+          console.log("Not Found Data to update");
       }
-      console.log(body);
-  } else {
-      Swal.fire('Info', 'No data found to update', 'info').then(() => {
-          location.reload();
-      });
-      console.log("Not Found Data to update");
   }
-}
 }
