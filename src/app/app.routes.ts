@@ -17,7 +17,6 @@ export const routes: Routes = [
   { path: '', component: Main2Component },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
-
   { path: 'profile/:id', component: ProfileComponent },
   { path: 'ranks', component: RanksComponent },
   { path: 'chart', component: ChartComponent },
