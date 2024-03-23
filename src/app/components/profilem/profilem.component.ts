@@ -85,10 +85,10 @@ export class ProfilemComponent implements OnInit{
           if (this.file) {
               const uploadedImage = await this.upload.urlImageProfile(this.file); // Upload new image
               console.log(uploadedImage);
-              
+
               imageUrl = uploadedImage.file; // Use URL of the newly uploaded image'
               console.log(imageUrl);
-              
+
           }
 
           const body = {
@@ -102,18 +102,18 @@ export class ProfilemComponent implements OnInit{
           try {
               await this.updatepro.updateprofile(body);
               Swal.fire('Success', 'Profile updated successfully', 'success').then(() => {
-                  // location.reload();
+                  location.reload();
               });
           } catch (error) {
               Swal.fire('Error', 'Failed to update profile', 'error').then(() => {
-                  // location.reload();
+                  location.reload();
               });
           }
 
           console.log(body);
       } else {
           Swal.fire('Info', 'No data found to update', 'info').then(() => {
-              // location.reload();
+              location.reload();
           });
           console.log("Not Found Data to update");
       }
