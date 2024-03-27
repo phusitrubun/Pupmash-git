@@ -34,6 +34,8 @@ $Pupmash-git-theme: mat.define-light-theme((
 
 @import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@300&display=swap');
 
+
+
 /* You can add global styles to this file, and also import other style files */
 
 html, body {
@@ -42,8 +44,9 @@ html, body {
     font-family: Roboto, "Helvetica Neue", sans-serif;
     background-image: url(assets/MAIN\ \(1\).svg);
     user-select: none;
-
 }
+
+
 img {
   user-drag: none;
   user-select: none;
