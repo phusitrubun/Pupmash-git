@@ -5,7 +5,7 @@ import { Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { UploadTableImage } from '../../services/api/upload-taimage.service';
 import { ImageGetResponse } from '../../model/ImageGetResponse';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import Swal from 'sweetalert2';
 
 
@@ -18,7 +18,7 @@ import Swal from 'sweetalert2';
   imports: [Header3Component, NgIf, CommonModule, FormsModule, RouterLink, MatProgressSpinnerModule],
 })
 export class UploadComponent implements OnInit {
-   imageUrls: (string | ArrayBuffer)[] = [];
+  imageUrls: (string | ArrayBuffer)[] = [];
   showPopup: boolean = false;
   showUploadButton: boolean[] = []; // เริ่มต้นปุ่มไม่แสดง
   index: number = -1;
@@ -102,80 +102,80 @@ export class UploadComponent implements OnInit {
           text: 'You cannot add more images because you already have a maximum of 5 images',
           confirmButtonText: 'OK'
         });
-      }      
+      }
     }
   }
 
 
   async uploadImage(index: number, name: HTMLInputElement) {
-  const confirmation = await Swal.fire({
-    icon: 'question',
-    title: 'Confirm Upload',
-    text: 'Are you sure you want to upload this image?',
-    showCancelButton: true,
-    confirmButtonText: 'Yes',
-    cancelButtonText: 'No'
-  });
+    const confirmation = await Swal.fire({
+      icon: 'question',
+      title: 'Confirm Upload',
+      text: 'Are you sure you want to upload this image?',
+      showCancelButton: true,
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'No'
+    });
 
-  if (confirmation.isConfirmed) {
-    this.uploading = true; // Start showing progress bar
+    if (confirmation.isConfirmed) {
+      this.uploading = true; // Start showing progress bar
 
-    if (this.someurl) {
-      this.uploading = false; // Hide progress bar
-      const data = {
-        url: this.someurl,
-        name: name.value,
-        score: 1000,
-        userID: this.id,
-      };
-
-      try {
-        // Temporarily change uploadedImage data type to any
-        const uploadedImage: any = await this.tableUploadImage.uploadDB(data);
-        await Swal.fire({
-          icon: 'success',
-          title: 'Success',
-          text: 'File uploaded successfully!'
-        });
-        this.showUploadButton[index] = false;
-        this.imageUrls.splice(index, 1); // Remove uploaded image from this.imageUrls
-
-        const imageGetResponse: ImageGetResponse = {
-          imageID: uploadedImage.imageID,
-          url: uploadedImage.url,
-          name: uploadedImage.name,
-          score: uploadedImage.score,
-          userID: uploadedImage.userID,
-          updateDate: uploadedImage.updateDate,
-          uploadDate: uploadedImage.uploadDate
+      if (this.someurl) {
+        this.uploading = false; // Hide progress bar
+        const data = {
+          url: this.someurl,
+          name: name.value,
+          score: 1000,
+          userID: this.id,
         };
 
-        this.keep.push(imageGetResponse); // Add uploaded image to this.keep
-        this.nameEdit.push(uploadedImage.name); // Add image name to this.nameEdit
-        this.keepupload();
+        try {
+          // Temporarily change uploadedImage data type to any
+          const uploadedImage: any = await this.tableUploadImage.uploadDB(data);
+          await Swal.fire({
+            icon: 'success',
+            title: 'Success',
+            text: 'File uploaded successfully!'
+          });
+          this.showUploadButton[index] = false;
+          this.imageUrls.splice(index, 1); // Remove uploaded image from this.imageUrls
 
-        // Update time after file upload
-        // await this.updateCurrentDateInDB();
+          const imageGetResponse: ImageGetResponse = {
+            imageID: uploadedImage.imageID,
+            url: uploadedImage.url,
+            name: uploadedImage.name,
+            score: uploadedImage.score,
+            userID: uploadedImage.userID,
+            updateDate: uploadedImage.updateDate,
+            uploadDate: uploadedImage.uploadDate
+          };
 
-      } catch (error) {
-        console.error('Error uploading image:', error);
-        // Handle error
-        await Swal.fire({
-          icon: 'error',
-          title: 'Error',
-          text: 'An error occurred while uploading the file'
-        });
+          this.keep.push(imageGetResponse); // Add uploaded image to this.keep
+          this.nameEdit.push(uploadedImage.name); // Add image name to this.nameEdit
+          this.keepupload();
+
+          // Update time after file upload
+          // await this.updateCurrentDateInDB();
+
+        } catch (error) {
+          console.error('Error uploading image:', error);
+          // Handle error
+          await Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'An error occurred while uploading the file'
+          });
+        }
       }
+    } else {
+      await Swal.fire({
+        icon: 'info',
+        title: 'Cancelled',
+        text: 'File upload cancelled'
+      });
+      this.uploading = false; // Hide progress bar
     }
-  } else {
-    await Swal.fire({
-      icon: 'info',
-      title: 'Cancelled',
-      text: 'File upload cancelled'
-    });
-    this.uploading = false; // Hide progress bar
   }
-}
 
 
   async keepupload() {
@@ -188,35 +188,35 @@ export class UploadComponent implements OnInit {
     }
   }
 
- 
-async deleteImage(imageID: number) {
-  const confirmation = await Swal.fire({
-    icon: 'question',
-    title: 'Confirm Deletion',
-    text: 'Are you sure you want to delete this image?',
-    showCancelButton: true,
-    confirmButtonText: 'Yes',
-    cancelButtonText: 'No'
-  });
 
-  if (!confirmation.isConfirmed) {
-    return; // If the user cancels, do nothing
-  }
+  async deleteImage(imageID: number) {
+    const confirmation = await Swal.fire({
+      icon: 'question',
+      title: 'Confirm Deletion',
+      text: 'Are you sure you want to delete this image?',
+      showCancelButton: true,
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'No'
+    });
 
-  const imageIndex = this.imagekeep.findIndex(image => image.imageID === imageID);
-  if (imageIndex !== -1) {
-    const deletedImageUrl = this.imagekeep[imageIndex].url;
-    this.imageUrls = this.imageUrls.filter(url => url !== deletedImageUrl);
-
-    this.imagekeep.splice(imageIndex, 1);
-
-    if (this.imageUrls.length === 0) {
-      this.showUploadButton[this.index] = false; // If no new images are left, hide the button
+    if (!confirmation.isConfirmed) {
+      return; // If the user cancels, do nothing
     }
-    await this.tableUploadImage.deleteImage(imageID);
-    console.log('Image deleted successfully.'); // Log deletion success
+
+    const imageIndex = this.imagekeep.findIndex(image => image.imageID === imageID);
+    if (imageIndex !== -1) {
+      const deletedImageUrl = this.imagekeep[imageIndex].url;
+      this.imageUrls = this.imageUrls.filter(url => url !== deletedImageUrl);
+
+      this.imagekeep.splice(imageIndex, 1);
+
+      if (this.imageUrls.length === 0) {
+        this.showUploadButton[this.index] = false; // If no new images are left, hide the button
+      }
+      await this.tableUploadImage.deleteImage(imageID);
+      console.log('Image deleted successfully.'); // Log deletion success
+    }
   }
-}
 
   currentDate: string = new Date().toISOString().slice(0, 19).replace('T', ' ');
   async editData(imageID: number) {

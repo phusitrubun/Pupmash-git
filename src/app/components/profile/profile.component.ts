@@ -28,6 +28,8 @@ export class ProfileComponent implements OnInit {
         this.useruserID = this.activeatedRoute.snapshot.paramMap.get('id') || '';
         this.getUser(this.useruserID);
         this.getImageUserUpload(this.useruserID);
+        console.log(this.useruserID);
+
     }
 
     goBack() {
@@ -39,12 +41,12 @@ export class ProfileComponent implements OnInit {
         this.userprofile = await this.authenService.getUser(id);
         // console.log(this.userprofile);
     }
-    
+
     async getImageUserUpload(id : any){
         this.userImages = await this.adminServeice.getImageUser(id);
-        // console.log(this.userImages);
-        
+        console.log(this.userImages);
+
     }
 
-   
+
 }

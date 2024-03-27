@@ -45,6 +45,7 @@ export class Header3Component {
       }
     }
   }
+  
 
   isMenuOpen: boolean = false;
 
