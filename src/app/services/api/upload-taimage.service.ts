@@ -52,7 +52,7 @@ export class UploadTableImage {
     console.log(response);
 
     return response;
-  }
+  } 
 
   public async keepupload(){
     const url =`${this.constants.API_ENDPOINT}uploadimage/${localStorage.getItem("userID")}`;

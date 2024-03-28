@@ -1,14 +1,17 @@
-// @import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@300&display=swap');
-// *{
-//   font-family: 'M PLUS Rounded 1c', sans-serif;
-// }
+/* @import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@300&display=swap'); */
+*{
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
 .container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   margin-top: 5vw;
-
+  height: 70vh;
 }
 
 .login {
@@ -17,39 +20,42 @@
   justify-content: center;
   align-items: center;
   border-radius: 20px;
-  width: 40vw; /* เปลี่ยนจาก 30vw เป็น 40vw */
-  height: 80vh; /* เปลี่ยนจาก 70vh เป็น 80vh */
+  width: 30vw;
+  height: 70vh;
   background-color: rgba(254, 250, 169, 0.553);
 }
+
 .log{
-  font-size: 3.5vw;
+  font-size: 2.5vw;
   margin-bottom: 30px;
 }
+
 .input{
   display: flex;
   flex-direction: column;
 }
-input[type="email"],
-input[type="password"]{
-width: 20vw;
-height: 5vh;
-border-radius: 50px;
-border: none;
-outline: none;
-border: #ffe344 solid 2px;
-text-indent: 30px;
-caret-color: #ffe344;
-color: #000000;
-font-weight: 600;
-margin-top: 20px;
-margin-bottom: 10px;
-}
-button {
-  width: 15vw; /* เปลี่ยนจาก 10vw เป็น 15vw */
-  height: 7vh; /* เปลี่ยนจาก 5vh เป็น 7vh */
+
+input[type="email"], input[type="password"]{
+  width: 20vw;
+  height: 5vh;
   border-radius: 50px;
   border: none;
-  font-size: 2vw; /* เปลี่ยนจาก 1.5vw เป็น 2vw */
+  outline: none;
+  border: #ffe344 solid 2px;
+  text-indent: 30px;
+  caret-color: #ffe344;
+  color: #000000;
+  font-weight: 600;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+button {
+  width: 10vw;
+  height: 5vh;
+  border-radius: 50px;
+  border: none;
+  font-size: 1.5vw;
   font-weight: 600;
   margin-top: 20px;
   background-color: #ffffff;
@@ -59,93 +65,112 @@ button {
   outline: #ffdf27;
   border: #ffe344 solid 2px;
 }
+
 button:hover{
   border: #ffe344 solid 2px;
   background-color: #ffe344;
   color: #ffffff;
 }
+
 ::placeholder{
   color: #ffe344;
 }
+
 .span{
   display: flex;
   flex-direction: row;
   margin-top: 30px;
 }
+
 .s1{
   font-weight: 500;
   margin-right: 8px;
 }
+
 .s2{
   color: #f8d200;
   font-weight: 700;
   text-decoration: underline;
   cursor: pointer;
 }
-/* Styles for screens smaller than 768px (e.g., mobile devices) */
-@media (max-width: 767px) {
+
+/* Media queries for responsive design */
+@media screen and (max-width: 1200px) {
   .login {
-    width: 80%;
-    height: auto;
-    margin-left: 0;
-    padding: 20px;
+    width: 40vw;
+    height: 80vh;
   }
 
   .log {
-    font-size: 24px;
-    margin-bottom: 20px;
-  }
-
-  input[type="email"],
-  input[type="password"] {
-    width: 100%;
-    height: 40px;
-    font-size: 16px;
-    text-indent: 10px;
+    font-size: 3vw;
   }
 
   button {
-    width: 50%;
-    height: 40px;
-    font-size: 16px;
-  }
-
-  .span {
-    margin-top: 20px;
-    font-size: 14px;
+    width: 12vw;
+    height: 6vh;
+    font-size: 1.8vw;
   }
 }
 
-/* Styles for screens larger than 768px (e.g., tablets and desktops) */
-@media (min-width: 768px) {
+@media screen and (max-width: 992px) {
   .login {
-    width: 400px;
-    height: 500px;
-    margin-left: auto;
-    margin-right: auto;
+    width: 50vw;
+    height: 85vh;
   }
 
   .log {
-    font-size: 28px;
-    margin-bottom: 30px;
+    font-size: 3.5vw;
   }
 
-  input[type="email"],
-  input[type="password"] {
-    width: 300px;
-    height: 40px;
-    font-size: 16px;
-    text-indent: 20px;
+  input[type="email"], input[type="password"] {
+    width: 25vw;
   }
 
   button {
-    width: 150px;
-    height: 40px;
-    font-size: 18px;
+    width: 15vw;
+    height: 7vh;
+    font-size: 2vw;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .login {
+    width: 60vw;
+    height: 90vh;
   }
 
-  .span {
-    margin-top: 30px;
-    font-size: 16px;
+  .log {
+    font-size: 4vw;
+  }
+
+  input[type="email"], input[type="password"] {
+    width: 30vw;
+  }
+
+  button {
+    width: 18vw;
+    height: 8vh;
+    font-size: 2.5vw;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .login {
+    width: 70vw;
+    height: 95vh;
+  }
+
+  .log {
+    font-size: 5vw;
+  }
+
+  input[type="email"], input[type="password"] {
+    width: 35vw;
+  }
+
+  button {
+    width: 20vw;
+    height: 9vh;
+    font-size: 3vw;
   }
 }
