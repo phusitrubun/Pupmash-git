@@ -14,6 +14,7 @@ import Elo from '@studimax/elo';
   styleUrl: './winner-dialog.component.scss'
 })
 export class WinnerDialogComponent implements OnInit{
+[x: string]: any;
   player1: ImageGetResponse | undefined;
   player2: ImageGetResponse | undefined;
   image : ImageGetResponse | undefined;
@@ -46,11 +47,12 @@ export class WinnerDialogComponent implements OnInit{
     const elo = new Elo();
     const {Ra, Rb} = elo.calculateRating(this.player1.score, this.player2.score, 1);
 
-    this.Ra = Ra;
-    this.Rb = Rb;
+    this.Ra = Math.floor(Ra);
+    this.Rb = Math.floor(Rb);
 
     this.diff = Math.floor(Ra - this.player1.score);
-    this.oldScore = this.player1.score;
+    this.oldScore = Math.floor(this.player1.score);
+
     
     this.rating(Ra,Rb);
 
@@ -60,8 +62,9 @@ export class WinnerDialogComponent implements OnInit{
   Eb: number = 0;
   
   async rating(Ra: number, Rb: number) {
-    this.Ea = 1 / (1 + Math.pow(10, (Rb - Ra) / 400));
-    this.Eb = 1 / (0 + Math.pow(10, (Ra - Rb) / 400));
+    this.Ea = +(1 / (1 + Math.pow(10, (Rb - Ra) / 400))).toFixed(4);
+    this.Eb = +(1 / (0 + Math.pow(10, (Ra - Rb) / 400))).toFixed(4);
+
     
 
   }
