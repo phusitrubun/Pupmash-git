@@ -106,7 +106,7 @@ export class MashComponent implements OnInit {
         height: '60vh',
         data: { winnerId: winnerId, loserId: loserId },
       });
-      
+
       dialogRef.afterClosed().subscribe(async (result) => {
         console.log('The dialog was closed');
 
@@ -116,8 +116,8 @@ export class MashComponent implements OnInit {
     this.recordStat(winnerId, loserId, this.Ra, this.Rb)
 
      // หน่วงเวลา 5 วินาทีก่อนที่จะแสดงรูปภาพใหม่
-     setTimeout(() => {   
-      this.showSpinner = false; 
+     setTimeout(() => {
+      this.showSpinner = false;
        this.getImage();
   }, this.delayTime);
   }
